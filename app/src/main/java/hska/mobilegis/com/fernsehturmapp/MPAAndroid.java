@@ -24,15 +24,28 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class MPAAndroid extends DemoBase implements OnChartValueSelectedListener {
     private LineChart chart;
     FinPolygonVisualizationAsync activity = new FinPolygonVisualizationAsync();
-    String valuea = activity.values();
+    //String valuea = activity.values();
+    List<Number> valuea = activity.listValue();
 
-    List valueLists = activity.listValue();
+    List<Number> valueLists = new ArrayList();
+    public String dateTime,time;
+    SimpleDateFormat sdf_date, sdf_time;
+    List<Number> values1 = new ArrayList();
+
+
+
+//    List <Number> valueLists = activity.listValue();
+//    Log.d("number is", valueLists);
 
 
     @Override
@@ -42,8 +55,14 @@ public class MPAAndroid extends DemoBase implements OnChartValueSelectedListener
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_linechart_noseekbar);
 
+        //On screen date and time
+        sdf_date = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMANY); //dd-MM-yyyy
+        sdf_date.setTimeZone(TimeZone.getTimeZone("Europe/Berlin"));
+        dateTime = sdf_date.format(new Date());
 
 
+        valueLists = activity.listValue();
+       System.out.println("The out is"+valueLists);
 
         setTitle("DynamicalAddingActivity");
 
@@ -59,6 +78,20 @@ public class MPAAndroid extends DemoBase implements OnChartValueSelectedListener
 //        chart.getXAxis().setDrawGridLines(false);
 
         chart.invalidate();
+    }
+
+    public void valueLists(List<Number> values1) {
+        this.valueLists = values1;
+    }
+
+    public void finFileDataRecordReader() {
+        String day, month, year, fileName;
+        day = this.dateTime.substring(0,2);
+        month = this.dateTime.substring(3,5);
+        year = this.dateTime.substring(8);
+        fileName = year+month+day+".fin";
+        //System.out.println("date time: "+fileName);
+        new FinPolygonVisualizationAsync(this).execute(fileName);
     }
 
     private final int[] colors = ColorTemplate.VORDIPLOM_COLORS;
@@ -83,12 +116,16 @@ public class MPAAndroid extends DemoBase implements OnChartValueSelectedListener
         // choose a random dataSet
 
 //        List<Number> value1 = activity.yList;
-//        List<Number> value2 = activity.xList;
+        List<Number> value2 = activity.listValue();
+        System.out.println("The out is"+value2);
 
 //        String valuea = activity.values();
         Log.d("list is", String.valueOf(valueLists));
 
-        Log.d("Value 3 is",valuea);
+        Log.d("Value 3 is", String.valueOf(activity.listValue()));
+        //finFileDataRecordReader();
+
+
 
 
         //TODO getting the list until the length of the list and import it into the randomDataSetIndex

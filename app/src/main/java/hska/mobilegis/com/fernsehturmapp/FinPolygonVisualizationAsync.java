@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.androidplot.ui.Insets;
 import com.androidplot.xy.CatmullRomInterpolator;
@@ -32,6 +33,7 @@ public class FinPolygonVisualizationAsync extends AsyncTask<String, Void, List<X
 
     String sHrs, sMins, sSecs;
     String eHrs, eMins, eSecs;
+    private MPAAndroid activityMP;
     private FinPolygonVisualization activity;
     public ProgressDialog dialog;
 
@@ -40,8 +42,14 @@ public class FinPolygonVisualizationAsync extends AsyncTask<String, Void, List<X
 
 
 
+
+
     public FinPolygonVisualizationAsync(FinPolygonVisualization activity) {
         this.activity = activity;
+    }
+
+    public FinPolygonVisualizationAsync(MPAAndroid activityMP) {
+        this.activityMP = activityMP;
     }
 
     public FinPolygonVisualizationAsync() {
@@ -65,7 +73,7 @@ public class FinPolygonVisualizationAsync extends AsyncTask<String, Void, List<X
         String line = "";
         String object = null;
         InputStream inStream = null;
-        List<XyTimePlot> xyTimePlots = new ArrayList<>();
+        List<XyTimePlot> xyTimePlots = new ArrayList<>();  //note
 
         try {
             ftpClient.connect("212.9.161.90", 21);
@@ -166,6 +174,8 @@ public class FinPolygonVisualizationAsync extends AsyncTask<String, Void, List<X
         }else if(str.size()!=0){
             activity.setList(str);
             finFileDataRecord(str);
+//            activityMP.valueLists(xList);
+
         }
     }
 
@@ -241,6 +251,7 @@ String minsec=activity.outData();
                 }
                 */
                 activity.series1 = new SimpleXYSeries(xList, yList, " ");
+
             }
         }else {
 
@@ -299,6 +310,11 @@ String minsec=activity.outData();
             activity.minsec = null;
             activity.endTime = null;
         }
+        System.out.println("The value of x list"+xList);
+        activityMP.valueLists(xList);
+
+
+
 
         LineAndPointFormatter series1Format = new LineAndPointFormatter(activity, R.xml.point_formatter);
 
@@ -318,7 +334,11 @@ String minsec=activity.outData();
         return "hello";
     }
 
-    public List listValue(){
+
+
+    public List <Number> listValue(){
         return xList;
+
     }
+
 }

@@ -62,10 +62,10 @@ public class FinPolygonVisualization extends AppCompatActivity {
     PanZoomCustomization panZoom1;
     FinPolygonVisualizationAsync finPolygonVisualizationAsync;
     private Object a;
-    MPAAndroid activita = new MPAAndroid();
-    public FinPolygonVisualization() {
-        this.activita = activita;
-    }
+    //MPAAndroid activita = new MPAAndroid();
+//    public FinPolygonVisualization() {
+//        this.activita = activita;
+//    }
 
 
     @Override
@@ -287,7 +287,7 @@ String outData(String minsecout){
             @Override
             public void onClick(View view) {
                 finFileDataRecordReader();
-               // activita.addEntry();
+              // activita.addEntry();
                //TODO also execute addEntry on Update Graph
             }
         });
