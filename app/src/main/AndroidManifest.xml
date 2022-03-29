@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="hska.mobilegis.com.fernsehturmapp"
+    android:targetSandboxVersion="1">
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-feature
+        android:name="android.hardware.location.gps"
+        android:required="false" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher_tvtower"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:roundIcon="@mipmap/ic_launcher_tvtower_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+
+        <activity
+            android:name=".FinPolygonVisualization"
+            android:screenOrientation="portrait" />
+        <activity android:name=".FinTimeSeries" />
+        <activity android:name=".SplashScreen">
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.MAIN"
+                    android:configChanges="locale|orientation" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".SplashActivity" />
+        <activity android:name=".MPAAndroid"/>
+        <activity android:name=".MainActivity">
+
+
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.MAIN"
+                    android:configChanges="locale|orientation" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".weather.WeatherMainActivity" />
+        <activity android:name=".AboutProject" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
+        <activity
+            android:name=".weather.GraphActivity"
+            android:label="@string/action_graphs" />
+        <activity android:name=".weather.MapActivity" />
+        <activity android:name=".weather.SettingsActivity" />
+
+        <service android:name=".weather.DashClockWeatherExtension" />
+        <service android:name="org.eclipse.paho.android.service.MqttService" />
+
+        <provider
+            android:name=".weather.StubContentProvider"
+            android:authorities="hska.mobilegis.com.fernsehturmapp.authority"
+            android:exported="true" />
+    </application>
+
+</manifest>

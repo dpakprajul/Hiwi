@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ap="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_dateSelection"
+        android:text = "@string/date_selection"
+        android:layout_marginTop="1dp"
+        android:layout_marginLeft="2dp"
+        android:textColor="#009688"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:typeface="sans"/>
+
+
+    <TextView
+        android:id="@+id/time_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="300dp"
+        android:layout_marginLeft="300dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:text="Start Time"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/start_time_input"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_dateSelection"
+        android:layout_marginTop="1dp"
+        android:ems="10"
+        android:fontFamily="@font/coda"
+        android:hint="Start Time hh:mm:ss"
+        android:inputType="time"
+        android:typeface="sans" />
+
+
+    <EditText
+        android:id="@+id/end_time_input"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_dateSelection"
+        android:layout_marginStart="-187dp"
+        android:layout_marginLeft="-187dp"
+        android:layout_marginTop="4dp"
+        android:layout_toEndOf="@+id/start_time_input"
+        android:layout_toRightOf="@+id/start_time_input"
+        android:ems="10"
+        android:fontFamily="@font/coda"
+        android:hint="End Time hh:mm:ss"
+        android:inputType="time"
+        android:typeface="sans" />
+
+    <TextView
+        android:id="@+id/tv_objectSelection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/start_time_input"
+        android:layout_marginTop="1dp"
+        android:layout_marginRight="5dp"
+        android:gravity="left"
+        android:text="@string/object_selection"
+        android:textColor="#009688"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:typeface="sans" />
+
+    <Spinner
+        android:id="@+id/objects_filter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_objectSelection"
+        android:layout_marginLeft="50dp"/>
+
+    <Button
+        android:id="@+id/load_file_from_server"
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/objects_filter"
+        android:layout_marginLeft="2dp"
+        android:fontFamily="@font/coda"
+        android:text="@string/read_text_file_from_assets_folder"
+        android:textAllCaps="false"
+        android:textColor="#009688"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:typeface="sans" />
+
+
+    <EditText
+        android:id="@+id/et_currentDateTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/start_time_input"
+        android:layout_alignBaseline="@id/load_file_from_server"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="3dp"
+        android:layout_marginRight="3dp"
+        android:background="@android:color/transparent"
+        android:cursorVisible="false"
+        android:gravity="right"
+        android:textColor="#009688"
+        android:inputType="datetime"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:typeface="sans"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/load_file_from_server">
+
+        <TextView
+            android:id="@+id/tv_graphTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/graphplot_title"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:typeface="sans" />
+
+        <com.androidplot.xy.XYPlot
+            style="@style/APDefacto.Light"
+            android:id="@+id/plot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:typeface="sans"
+            android:fontFamily="@font/coda"
+            android:layout_below="@+id/tv_graphTitle"
+            ap:domainTitle="East (m)"
+            ap:rangeTitle="North (m)"
+            ap:lineLabels="right|top"
+            ap:paddingBottom="2dp"
+            ap:paddingLeft="2dp"
+            ap:paddingRight="2dp"
+            ap:rangeTitleTextSize="14sp"
+            ap:domainTitleTextSize="14sp"
+            ap:lineLabelTextColorBottom="@color/ap_transparent"
+            ap:lineLabelTextColorLeft="@color/ap_transparent"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

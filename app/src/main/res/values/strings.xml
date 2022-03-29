@@ -1,0 +1,314 @@
+<resources>
+    <string name="app_name">   Stuttgart TV Tower Monitoring App   </string>
+    <string name="welcome_text">Welcome to the Stuttgart TV Tower Monitoring App</string>
+    <string name="select_option">Select From Options</string>
+    <string name="starttime_hint">Start Time hh:mm:ss</string>
+    <string name="endtime_hint">End Time hh:mm:ss</string>
+    <string name="spectral_visualization">Position Time Series</string>
+
+    <string name="graphview_title">Position Time Series(E/N)_T</string>
+    <string name="graphplot_title">Graph of Tower Motion(N,E)_T</string>
+
+    <string name="circular_motion_of_tower">Graph of Tower Motion</string>
+    <string name="weather_condition">Check Weather</string>
+    <string name="maps">Map</string>
+    <string name="about_project">About Project</string>
+    <string name="btn_en">EN</string>
+    <string name="btn_de">DE</string>
+    <string name="date_selection">Enter any Time Interval</string>
+    <string name="object_selection">Select Object Point</string>
+    <string name="series_selection">Select Time Series</string>
+    <string name="series_eastern">East</string>
+    <string name="series_northing">North</string>
+    <string name="progress_dialog">Please wait...</string>
+    <string name="response_dialog">Ok</string>
+    <string name="file_not_found_title">No Data Found!</string>
+    <string name="file_not_found">No monitoring data is available for today!</string>
+    <string name="file_not_found_Turm">No monitoring data is available today for Turm!</string>
+    <string name="file_not_found_Turm_Ubx">No monitoring data is available today for Turm_ubx!</string>
+
+    <string name="no_datapoints_title"> No Data Points!</string>
+    <string name="no_datapoints"> No data point is available for Turm in this time interval.
+        Please select another time interval(Start time should be less than actual time
+        and End time should be less than/equal to actual time. The actual time is GPS time
+        (on screen time)!</string>
+    <string name="no_datapoints_Turm"> No data point is available for Turm in this time interval.
+        Please select another time interval(Start time should be less than actual time
+        and End time should be less than/equal to actual time. The actual time is GPS time
+        (on screen time)!</string>
+
+    <string name="no_datapoints_Turm_Ubx"> No data point is available for Turm_ubx in this time interval.
+        Please select another time interval(Start time should be less than actual time
+        and End time should be less than/equal to actual time. The actual time is GPS time
+        (on screen time)!</string>
+
+    <string name="no_datapointsDefault_Turm"> No fix solution is available for Turm in the
+        default time interval. Please try again later or select any time interval less than actual time(Start time should be
+        less than end time). The actual time is GPS time(on screen time)!</string>
+
+    <string name="no_datapointsDefault_Turm_Ubx"> No fix solution is available for Turm_ubx in the default
+        time interval. Please try again later or select any time interval less than actual time(Start time should be
+        less than end time). The actual time is GPS time(on screen time)!</string>
+
+    <string name="current_date_time">Current Date Time</string>
+    <string name="start_time">Start Time hh: mm: ss</string>
+    <string name="end_time">End Time hh: mm: ss</string>
+
+    <string-array name="activities_user_options">
+        <item>ReadFinData From FTP Server</item>
+        <item>Position Time Series</item>
+        <item>Graph of Tower Motion</item>
+        <item>Weather</item>
+        <item>Map</item>
+        <item>About</item>
+    </string-array>
+
+    <string-array name="dates">
+        <item>13.11.2014</item> <!-- initially 1 for 13.11.2014 -->
+        <item>14.11.2014</item>
+        <item>15.11.2014</item>
+        <item>16.11.2014</item>
+        <item>17.11.2014</item>
+        <item>18.11.2014</item>
+        <item>10.02.2020</item>
+    </string-array>
+
+    <string-array name="objects">
+        <item>Turm</item>
+        <item>Turm_ubx</item>
+    </string-array>
+
+    <string name="read_text_file_from_assets_folder">Update Graph</string>
+
+    <string name="action_search">Search</string>
+    <string name="action_refresh">Refresh</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_about">About</string>
+
+    <string name="today">Today</string>
+    <string name="tomorrow">Tomorrow</string>
+    <string name="later">Later</string>
+
+    <string name="wind">Wind</string>
+    <string name="pressure">Pressure</string>
+    <string name="humidity">Humidity</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="sunset">Sunset</string>
+
+    <string name="last_update">Last update:\n%s</string>
+    <string name="last_update_widget">\nLast update: %s</string>
+
+    <string name="search_title">Search for city</string>
+
+    <string name="downloading_data">Downloading your data ...</string>
+    <string name="getting_location">Getting your location ...</string>
+
+    <string name="error_dateFormat">DATE FORMAT ERROR</string>
+
+    <string name="setting_dateFormat">Date Format</string>
+    <string name="setting_dateFormatCustom">Custom Date Format</string>
+    <string name="setting_dateFormatCustom_summary">Provide the custom SimpleDateFormat string to be used</string>
+    <string name="setting_lengthUnits">Length units</string>
+    <string name="setting_speedUnits">Speed units</string>
+    <string name="setting_tempUnits">Temperature units</string>
+    <string name="setting_showTempAsInteger">Show temperature only as an integer</string>
+    <string name="setting_pressureUnits">Pressure units</string>
+    <string name="setting_theme">Theme</string>
+    <string name="setting_auto_detect_location">Detect Location</string>
+    <string name="setting_differentiateDaysByTint">Differentiate Days with Color</string>
+    <string name="setting_refreshInterval">Background refresh interval</string>
+    <string name="setting_unit_mps">Meters per second (m/s)</string>
+    <string name="setting_unit_kph">Kilometers per hour (kph)</string>
+    <string name="setting_unit_mph">Miles per hour (mph)</string>
+
+    <string name="setting_unit_kn">Knots (kn)</string>
+    <string name="setting_wind_direction_format">Wind direction format</string>
+    <string name="settings_none">None</string>
+    <string name="setting_apiKey">API key</string>
+    <string name="setting_apiKey_summary">Custom API key for OpenWeatherMap queries</string>
+
+    <string name="setting_unit_Celsuis">Celsius</string>
+    <string name="setting_unit_Fahrenheit">Fahrenheit</string>
+    <string name="setting_unit_Kelvin">Kelvin</string>
+
+    <string name="setting_unit_mm">Millimeters (mm)</string>
+    <string name="setting_unit_in">Inches (in)</string>
+
+    <string name="setting_unit_hpa">hPa</string>
+    <string name="setting_unit_kpa">kPa</string>
+    <string name="setting_unit_mmhg">mm Hg</string>
+    <string name="setting_unit_bft">Beaufort wind scale (bft)</string>
+    <string name="setting_unit_inhg">in Hg</string>
+
+    <string name="rain">Rain</string>
+    <string name="temperature">Temperature</string>
+    <string name="location_settings">Location Settings</string>
+    <string name="location_settings_message">Location is not enabled. Do you wish to go to the settings menu?</string>
+    <string name="location_settings_button">Settings</string>
+
+    <string name="speed_unit_mps">m/s</string>
+    <string name="speed_unit_kph">kph</string>
+    <string name="speed_unit_mph">mph</string>
+    <string name="speed_unit_kn">kn</string>
+
+    <string name="wind_direction_format_none">No indication</string>
+    <string name="wind_direction_format_arrows">Arrows</string>
+    <string name="wind_direction_format_abbreviations">Abbreviations</string>
+
+    <string name="pressure_unit_hpa">hPa</string>
+    <string name="pressure_unit_kpa">kPa</string>
+    <string name="pressure_unit_mmhg">mm Hg</string>
+
+    <string name="setting_theme_fresh">Fresh</string>
+    <string name="setting_theme_classic">Classic</string>
+    <string name="setting_theme_dark">Fresh Dark</string>
+    <string name="setting_theme_classic_dark">Classic Dark</string>
+
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Cancel</string>
+
+    <string name="msg_err_parsing_json">Error parsing JSON.</string>
+    <string name="msg_connection_problem">There is a problem with your internet connection.</string>
+    <string name="msg_connection_not_available">Connection not available.</string>
+    <string name="msg_city_not_found">Specified city is not found.</string>
+
+    <string name="weather_sunny" translatable="false">&#xf00d;</string>
+    <string name="weather_clear_night" translatable="false">&#xf02e;</string>
+    <string name="weather_foggy" translatable="false">&#xf014;</string>
+    <string name="weather_cloudy" translatable="false">&#xf013;</string>
+    <string name="weather_rainy" translatable="false">&#xf019;</string>
+    <string name="weather_snowy" translatable="false">&#xf01b;</string>
+    <string name="weather_thunder" translatable="false">&#xf01e;</string>
+    <string name="weather_drizzle" translatable="false">&#xf01c;</string>
+
+    <string name="wind_direction_north">N</string>
+    <string name="wind_direction_north_north_east">NNE</string>
+    <string name="wind_direction_north_east">NE</string>
+    <string name="wind_direction_east_north_east">ENE</string>
+    <string name="wind_direction_east">E</string>
+    <string name="wind_direction_east_south_east">ESE</string>
+    <string name="wind_direction_south_east">SE</string>
+    <string name="wind_direction_south_south_east">SSE</string>
+    <string name="wind_direction_south">S</string>
+    <string name="wind_direction_south_south_west">SSW</string>
+    <string name="wind_direction_south_west">SW</string>
+    <string name="wind_direction_west_south_west">WSW</string>
+    <string name="wind_direction_west">W</string>
+    <string name="wind_direction_west_north_west">WNW</string>
+    <string name="wind_direction_north_west">NW</string>
+    <string name="wind_direction_north_north_west">NNW</string>
+    <string name="msg_too_many_requests">Too many requests. Please try again.</string>
+
+    <!-- 1: temperature; 2: unit -->
+    <string name="dash_clock_status">%1$s%2$s</string>
+    <!-- 1: temperature; 2: unit; 3: weather description -->
+    <string name="dash_clock_expanded_title">%1$s%2$s - %3$s</string>
+    <!-- 1: city; 2: country; 3: wind; 4: speed units; 5: pressure; 6: pressure units; 7: humidity -->
+    <string name="dash_clock_expanded_body">%1$s, %2$s\nWind: %3$s %4$s\nPressure: %5$s %6$s\nHumidity: %7$s %%\n</string>
+    <string name="settings_title_units">Units</string>
+    <string name="settings_title_display">Display</string>
+    <string name="settings_title_data">Data</string>
+    <string name="setting_displayDecimalZeroes">Display decimal zeroes</string>
+    <string name="settings_title_location">Location</string>
+    <string name="setting_update_location_automatically">Update location in background</string>
+
+    <string name="action_weather_map">Weather Map</string>
+
+    <string name="action_graphs">Graphs</string>
+
+    <string name="wind_speed">Wind Speed</string>
+    <string name="date">date</string>
+    <string name="pick_date">pick date</string>
+    <string name="time">time</string>
+    <string name="pick_time">pick time</string>
+
+    <string name="project_architecture">Project Architecture</string>
+    <string name="btn_readmore">Read More</string>
+    <string name="about_monitoring_app">This R and D project is developing by Naznin Akter based on the thesis work of Mr. Sylvester Tabi Kyei-Amponsah is realized as part of the GOCA and NAVKA projects of the Laboratory for GNSS
+and Navigation at the Hochschule Karlsruhe, also in conjunction with the Ingenieurbüro für
+Angewandte Geodäsie, Photogrammetrie und Geoinformatik E. Messmer, SWR B.W. (BadenWürttemberg) as the owner of the television tower, the Landesamt für Geobasisinformation
+und Landentwicklung (LGL) Karlsruhe as service provider for spatial reference via SAPOS GNSS
+corrections as well as the B.W. IT service provider LF .NET.</string>
+
+
+    <string name="uvindex">UV Index</string>
+    <string name="loading_data">Loading...</string>
+    <string name="setting_transparent_widget">Make widget transparent</string>
+
+
+    <string name="settings_15min">15 min</string>
+    <string name="settings_30min">30 min</string>
+    <string name="settings_1hour">1 h</string>
+    <string name="settings_2hour">2 h</string>
+    <string name="settings_6hour">6 h</string>
+    <string name="settings_12hour">12 h</string>
+    <string name="settings_24hour">24 h</string>
+    <string name="setting_theme_black">Fresh Black</string>
+    <string name="setting_theme_classic_black">Classic Black</string>
+
+
+    <string name="weather_cloudy_gusts" translatable="false">&#xf011;</string>
+    <string name="weather_day_cloudy" translatable="false">&#xf002;</string>
+    <string name="weather_day_haze" translatable="false">&#xf0b6;</string>
+    <string name="weather_day_sunny" translatable="false">&#xf00d;</string>
+    <string name="weather_dust" translatable="false">&#xf063;</string>
+    <string name="weather_fog" translatable="false">&#xf014;</string>
+    <string name="weather_hail" translatable="false">&#xf015;</string>
+    <string name="weather_hot" translatable="false">&#xf072;</string>
+    <string name="weather_hurricane" translatable="false">&#xf073;</string>
+    <string name="weather_lightning" translatable="false">&#xf016;</string>
+    <string name="weather_night_alt_cloudy" translatable="false">&#xf086;</string>
+    <string name="weather_night_clear" translatable="false">&#xf02e;</string>
+    <string name="weather_rain" translatable="false">&#xf019;</string>
+    <string name="weather_rain_mix" translatable="false">&#xf017;</string>
+    <string name="weather_sandstorm" translatable="false">&#xf082;</string>
+    <string name="weather_showers" translatable="false">&#xf01a;</string>
+    <string name="weather_sleet" translatable="false">&#xf0b5;</string>
+    <string name="weather_smoke" translatable="false">&#xf062;</string>
+    <string name="weather_snow" translatable="false">&#xf01b;</string>
+    <string name="weather_snowflake_cold" translatable="false">&#xf076;</string>
+    <string name="weather_sprinkle" translatable="false">&#xf01c;</string>
+    <string name="weather_storm_showers" translatable="false">&#xf01d;</string>
+    <string name="weather_strong_wind" translatable="false">&#xf050;</string>
+    <string name="weather_thunderstorm" translatable="false">&#xf01e;</string>
+    <string name="weather_tornado" translatable="false">&#xf056;</string>
+    <string name="weather_windy" translatable="false">&#xf021;</string>
+
+    <string name="beaufort_calm">Calm</string>
+    <string name="beaufort_light_air">Light air</string>
+    <string name="beaufort_light_breeze">Light breeze</string>
+    <string name="beaufort_gentle_breeze">Gentle breeze</string>
+    <string name="beaufort_moderate_breeze">Moderate breeze</string>
+    <string name="beaufort_fresh_breeze">Fresh breeze</string>
+    <string name="beaufort_strong_breeze">Strong breeze</string>
+    <string name="beaufort_high_wind">High wind</string>
+    <string name="beaufort_gale">Gale</string>
+    <string name="beaufort_strong_gale">Strong gale</string>
+    <string name="beaufort_storm">Storm</string>
+    <string name="beaufort_violent_storm">Violent storm</string>
+    <string name="beaufort_hurricane">Hurricane</string>
+
+    <string name="uvi_no_info">No Info</string>
+    <string name="uvi_low">Low</string>
+    <string name="uvi_moderate">Moderate</string>
+    <string name="uvi_high">High</string>
+    <string name="uvi_very_high">Very High</string>
+    <string name="uvi_extreme">Extreme</string>
+
+
+    <string name="clouds">Clouds</string>
+    <string name="about_unknown">Could not get version name</string>
+    <string name="about_description">A lightweight, Free Software weather app, released under the GPL3 licence.</string>
+
+    <string name="about_developers">Developed by <a href='mailto:t.martykan@gmail.com'>Tomáš Martykán</a> and <a href='https://github.com/martykan/forecastie/graphs/contributors'>others</a>, with assistance from <a href='https://github.com/martykan/forecastie/issues?utf8=✓;q=is%3Aissue'>many more</a>.</string>
+    <string name="about_src">Code is available at <a href='https://github.com/martykan/forecastie'>Github</a>.</string>
+    <string name="about_issues">Bugs and enhancements can be posted on our <a href='https://github.com/martykan/forecastie/issues'>Github issues page</a>.</string>
+    <string name="about_data">Data provided by <a href='https://openweathermap.org/'>OpenWeatherMap</a>, under the <a href='http://creativecommons.org/licenses/by-sa/2.0/'>Creative Commons CC-BY-SA licence</a>.</string>
+    <string name="about_icons">Icons are <a href='https://erikflowers.github.io/weather-icons/'>Weather Icons</a>, by <a href='http://www.twitter.com/artill'>Lukas Bischoff</a> and <a href='http://www.twitter.com/Erik_UX'>Erik Flowers</a>, under the <a href='http://scripts.sil.org/OFL'>SIL OFL 1.1</a> licence.</string>
+
+    <string name="widget_label_extensive">Forecastie Extensive</string>
+    <string name="widget_label_time">Forecastie Time</string>
+    <string name="widget_label_simple">Forecastie Simple</string>
+    <string name="widget_label_classic">Forecastie Classic</string>
+
+</resources>
