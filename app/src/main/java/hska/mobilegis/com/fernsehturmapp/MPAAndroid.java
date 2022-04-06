@@ -283,7 +283,7 @@ public class MPAAndroid extends DemoBase implements OnChartValueSelectedListener
         return yLists;
     }
 
-    private final int[] colors = ColorTemplate.VORDIPLOM_COLORS;
+    private final int[] colors = ColorTemplate.COLORFUL_COLORS;
 
     public void addEntry() {
 
@@ -320,7 +320,7 @@ public class MPAAndroid extends DemoBase implements OnChartValueSelectedListener
         // let the chart know it's data has changed
         chart.notifyDataSetChanged();
 
-        chart.setVisibleXRangeMaximum(6);
+        chart.setVisibleXRangeMaximum(15);
         //chart.setVisibleYRangeMaximum(15, AxisDependency.LEFT);
 //
 //            // this automatically refreshes the chart (calls invalidate())
