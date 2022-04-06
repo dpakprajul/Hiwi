@@ -4,13 +4,11 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
-import android.util.Log;
 
-import com.androidplot.ui.Insets;
-import com.androidplot.xy.CatmullRomInterpolator;
-import com.androidplot.xy.LineAndPointFormatter;
-import com.androidplot.xy.SimpleXYSeries;
-import com.androidplot.xy.XYGraphWidget;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
@@ -29,12 +27,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
-public class FinPolygonVisualizationAsync extends AsyncTask<String, Void, List<XyTimePlot>>{
+public class MPAAndroidAsync extends AsyncTask<String, Void, List<XyTimePlot>> {
 
     String sHrs, sMins, sSecs;
     String eHrs, eMins, eSecs;
-    private MPAAndroid activityMP;
-    private FinPolygonVisualization activity;
+
+    private MPAAndroid activity;
     public ProgressDialog dialog;
 
     List<Number> xList = new ArrayList<>();
@@ -42,18 +40,8 @@ public class FinPolygonVisualizationAsync extends AsyncTask<String, Void, List<X
 
 
 
-
-
-    public FinPolygonVisualizationAsync(FinPolygonVisualization activity) {
+    public MPAAndroidAsync(MPAAndroid activity) {
         this.activity = activity;
-    }
-
-    public FinPolygonVisualizationAsync(MPAAndroid activityMP) {
-        this.activityMP = activityMP;
-    }
-
-    public FinPolygonVisualizationAsync() {
-        this.activity=activity;
     }
 
     @Override
@@ -147,8 +135,8 @@ public class FinPolygonVisualizationAsync extends AsyncTask<String, Void, List<X
         }
         super.onPostExecute(str);
         if(str==null || str.size()==0){
-            activity.plot.clear();
-            activity.plot.redraw();
+            //activity.plot.clear();
+            //activity.plot.redraw();
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this.activity);
             builder.setCancelable(false);
@@ -172,10 +160,7 @@ public class FinPolygonVisualizationAsync extends AsyncTask<String, Void, List<X
             AlertDialog alert = builder.create();
             alert.show();
         }else if(str.size()!=0){
-            activity.setList(str);
             finFileDataRecord(str);
-//            activityMP.valueLists(xList);
-
         }
     }
 
@@ -184,7 +169,7 @@ public class FinPolygonVisualizationAsync extends AsyncTask<String, Void, List<X
 
         String checkValue=activity.objectType;
 
-        String minsec=activity.outData();
+        String minsec = activity.minsec;
 
         if ((minsec != null && !minsec.isEmpty())
                 && (activity.endTime != null && !activity.endTime.isEmpty())) {
@@ -212,9 +197,8 @@ public class FinPolygonVisualizationAsync extends AsyncTask<String, Void, List<X
 
             }
 
-
             if(xList.size()<=2 || yList.size()<=2){
-                activity.series1 = new SimpleXYSeries(xList, yList, " ");
+                //activity.series1 = new SimpleXYSeries(xList, yList, " ");
                 AlertDialog.Builder builder = new AlertDialog.Builder(this.activity);
                 builder.setCancelable(false);
                 builder.setTitle(R.string.no_datapoints_title);
@@ -250,7 +234,9 @@ public class FinPolygonVisualizationAsync extends AsyncTask<String, Void, List<X
                     activity.series1 = new SimpleXYSeries(xList, yList, " ");
                 }
                 */
-                activity.series1 = new SimpleXYSeries(xList, yList, " ");
+                //#################################################################################################
+                //Add code to make the input of your line chart
+                // Use xList and yList data to make a your entry list
 
             }
         }else {
@@ -278,13 +264,11 @@ public class FinPolygonVisualizationAsync extends AsyncTask<String, Void, List<X
                 if((Double.valueOf(xyT.getTime())>=startT) && (Double.valueOf(xyT.getTime())<=endT)){
                     xList.add(Double.valueOf(xyT.getX()));
                     yList.add(Double.valueOf(xyT.getY()));
-                    //activityMP.valueLists(xList);
                 }
-
             }
 
             if(xList.size()<=2 || yList.size()<=2){
-                activity.series1 = new SimpleXYSeries(xList, yList, " ");
+                //activity.series1 = new SimpleXYSeries(xList, yList, " ");
                 AlertDialog.Builder builder = new AlertDialog.Builder(this.activity);
                 builder.setCancelable(false);
                 builder.setTitle(R.string.file_not_found_title);
@@ -307,40 +291,108 @@ public class FinPolygonVisualizationAsync extends AsyncTask<String, Void, List<X
                 AlertDialog alert = builder.create();
                 alert.show();
             }else{
-                activity.series1 = new SimpleXYSeries(xList, yList, "");
+
+                //#################################################################################################
+                //Add code to make the input of your line chart
+                // Use xList(Easting) and yList(Northing) data to make a your entry list
+                LineDataSet data1 = new LineDataSet(xValues(),"");
+                //LineDataSet data2 = new LineDataSet(yValues(),"");
+                ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+                dataSets.add(data1);
+                //dataSets.add(data2);
+                LineData data = new LineData(dataSets);
+                activity.chart.setData(data);
+                activity.chart.invalidate();
             }
             activity.minsec = null;
             activity.endTime = null;
         }
-        System.out.println("The value of x list"+xList);
-       // activityMP.valueLists(xList);
-
-
-
-
-        LineAndPointFormatter series1Format = new LineAndPointFormatter(activity, R.xml.point_formatter);
-
-        series1Format.setInterpolationParams(
-                new CatmullRomInterpolator.Params(20, CatmullRomInterpolator.Type.Centripetal)); // configure interpolation on the formatter, for line smoothening
-
-        activity.plot.getGraph().getLineLabelStyle(XYGraphWidget.Edge.TOP).setFormat(new DecimalFormat("#.##"));
-        activity.plot.getGraph().getLineLabelStyle(XYGraphWidget.Edge.RIGHT).setFormat(new DecimalFormat("#.##"));
-
-        activity.plot.clear();
-        activity.plot.addSeries(activity.series1, series1Format);
-        activity.plot.getGraph().setGridInsets(new Insets(20, 20, 20, 20)); //new Insets(120, 120, 120, 120) 25, 25, 25, 25
-        activity.plot.redraw();
     }
 
-    public String values() {
-        return "hello";
+    private ArrayList<Entry> xValues(){
+        ArrayList<Entry> xEntryList = new ArrayList<Entry>();
+
+        //for (Number a : xList) {
+        //getXList();
+
+        for(int i=0; i<5; i++){
+            String format;
+
+                String pattern = "#.##########";
+                DecimalFormat decimalFormat = new DecimalFormat(pattern);
+                format = decimalFormat.format(xList.get(i));
+            String subString= format.substring(6,14);
+            float f=Float.parseFloat(subString);
+
+                xEntryList.add(new Entry(i, f));
+           // xEntryList.add(new Entry(a.floatValue(), i));
+//            xEntryList.add(new Entry((float) 2.0, (float) getXList()+1));
+//            xEntryList.add(new Entry((float) 3.0, (float) getXList()+2));
+       }
+   // }
+//        xEntryList.add(new Entry((float) 1.0, (float) 20.0004));
+//        xEntryList.add(new Entry((float) 2.0, (float) 20.0084));
+//        xEntryList.add(new Entry((float) 3.0, (float) 20.0074));
+//        xEntryList.add(new Entry((float) 4.0, (float) 20.0052));
+//        xEntryList.add(new Entry((float) 5.0, (float) 20.0041));
+//        xEntryList.add(new Entry((float) 6.0, (float) 20.0092));
+
+        return xEntryList;
     }
 
+    public float getXList() {
+        String format = null;
+        for (Number i : xList) {
+            String pattern = "#.#####";
+            DecimalFormat decimalFormat = new DecimalFormat(pattern);
 
-
-    public List <Number> listValue(){
-        return xList;
+            format = decimalFormat.format(i);
+            System.out.println(format);
+        }
+        return Float.parseFloat(format);
 
     }
+//    public double getXList() {
+//        Number[] c = null;
+//        String stringValue = null;
+//        double xListFinal = 0;
+//        int i = 0;
+//        if (i < 10) {
+//            xListFinal = (double) xList.get(i);
+//        }
+//
+//        return (double) xList.get(i);
+//    }
 
+//        for (Number a : xList) {
+//            c = a;     //copied the value of a to c
+//            // stringValue= c.toString();     //convert c to string
+//            // c =Double.parseDouble(new DecimalFormat(".####").format(c));
+//            //String.format("%000000.000f", c);
+//            // String.format("%.0f", b);
+//            // String ab=stringValue.substring(8, 14);  //clipping data to just show in the axis  //
+//            // double abc = Double.parseDouble(ab);     //not important
+//            //System.out.println(abc);
+//            return c.doubleValue();
+//
+//
+//        }
+//        return c.doubleValue();
+
+
+
+
+
+    private ArrayList<Entry> yValues(){
+        ArrayList<Entry> yEntryList = new ArrayList<Entry>();
+        //for
+        yEntryList.add(new Entry((float) 1.0, (float) 20.0401));
+   yEntryList.add(new Entry((float) 2.0, (float) 20.0062));
+        yEntryList.add(new Entry((float) 3.0, (float) 20.0043));
+        yEntryList.add(new Entry((float) 4.0, (float) 20.0094));
+        yEntryList.add(new Entry((float) 5.0, (float) 20.0021));
+        yEntryList.add(new Entry((float) 6.0, (float) 20.0013));
+
+        return yEntryList;
+    }
 }

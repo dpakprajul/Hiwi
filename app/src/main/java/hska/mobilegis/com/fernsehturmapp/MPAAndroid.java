@@ -2,16 +2,29 @@ package hska.mobilegis.com.fernsehturmapp;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.NumberPicker;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -32,21 +45,19 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 public class MPAAndroid extends DemoBase implements OnChartValueSelectedListener {
-    private LineChart chart;
-    FinPolygonVisualizationAsync activity = new FinPolygonVisualizationAsync();
-    //String valuea = activity.values();
-    List<Number> valuea = activity.listValue();
+    public LineChart chart;
+    public List<Number> xLists;
+    public List<Number> yLists;
 
-    List<Number> valueLists = new ArrayList();
+    public String objectType;
+    public String startTime;
+    public String endTime;
     public String dateTime,time;
+    public String minsec;
     SimpleDateFormat sdf_date, sdf_time;
-    List<Number> values1 = new ArrayList();
-
-
-
-//    List <Number> valueLists = activity.listValue();
-//    Log.d("number is", valueLists);
-
+    Button load_file_from_server;
+    EditText current_time;
+    private MPAAndroid activityMP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,19 +66,168 @@ public class MPAAndroid extends DemoBase implements OnChartValueSelectedListener
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_linechart_noseekbar);
 
+        load_file_from_server = (Button) findViewById(R.id.load_file_from_server);
+        current_time = findViewById(R.id.et_currentDateTime);
+        EditText startTime = findViewById(R.id.start_time_input);
+        EditText endTime = findViewById(R.id.end_time_input);
+
+        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        final TextView timeTV = findViewById(R.id.time_text_view);
+        timeTV.setOnClickListener(new View.OnClickListener() {
+            private String minsecout;
+
+            @Override
+            public void onClick(View v) {
+                View view = View.inflate(MPAAndroid.this, R.layout.timedialog, null);
+                final NumberPicker numberPickerHour = view.findViewById(R.id.numpicker_hours);
+
+                numberPickerHour.setMaxValue(23);
+                numberPickerHour.setValue(sharedPreferences.getInt("Hours", 0));
+                final NumberPicker numberPickerMinutes = view.findViewById(R.id.numpicker_minutes);
+                numberPickerMinutes.setMaxValue(59);
+                numberPickerMinutes.setValue(sharedPreferences.getInt("Minutes", 0));
+                final NumberPicker numberPickerSeconds = view.findViewById(R.id.numpicker_seconds);
+                numberPickerSeconds.setMaxValue(59);
+                numberPickerSeconds.setValue(sharedPreferences.getInt("Seconds", 0));
+                Button cancel = view.findViewById(R.id.cancel);
+                Button ok = view.findViewById(R.id.ok);
+                minsec = String.format("%1$02d:%2$02d:%3$02d",numberPickerHour.getValue(),numberPickerMinutes.getValue(),numberPickerSeconds.getValue());
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(MPAAndroid.this);
+                builder.setView(view);
+                final AlertDialog alertDialog = builder.create();
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+                    }
+                });
+                ok.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        timeTV.setText(numberPickerHour.getValue() + ":" + numberPickerMinutes.getValue() + ":" + numberPickerSeconds.getValue());
+                        timeTV.setText(String.format("%1$02d:%2$02d:%3$02d", numberPickerHour.getValue(), numberPickerMinutes.getValue(), numberPickerSeconds.getValue()));
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putInt("Hours", numberPickerHour.getValue());
+                        editor.putInt("Minutes", numberPickerMinutes.getValue());
+                        editor.putInt("Seconds", numberPickerSeconds.getValue());
+                        editor.apply();
+                        alertDialog.dismiss();
+                    }
+                });
+                Log.d("output", minsec);
+
+
+                alertDialog.show();
+
+            }
+
+        });
+//Log.d("output1",minsec);
+
+        //Object Type Spinner
+        Spinner objectSpinner = (Spinner) findViewById(R.id.objects_filter);
+
+        //apply font
+        ArrayAdapter<String> objectAdapter= new ArrayAdapter<String>(MPAAndroid.this, //adapter
+                R.layout.simple_expandable_list_item_1, getResources().getStringArray(R.array.objects)) {
+        };
+
+        objectAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        objectSpinner.setAdapter(objectAdapter);
+
+        objectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                doSomething(objectSpinner.getItemAtPosition(position));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+            }
+        });
+
+        //Start Time
+        startTime.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                handleTimeInput(startTime, startTime.getText());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        //End Time
+        endTime.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                handleTimeInput(endTime, endTime.getText());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
         //On screen date and time
         sdf_date = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMANY); //dd-MM-yyyy
         sdf_date.setTimeZone(TimeZone.getTimeZone("Europe/Berlin"));
         dateTime = sdf_date.format(new Date());
 
+        sdf_time = new SimpleDateFormat("dd.MM.yyyy  HH:mm:ss", Locale.GERMANY); //hh:mm:ss
+        sdf_time.setTimeZone(TimeZone.getTimeZone("Europe/Berlin"));
+        time = sdf_time.format(new Date());
+        //current_date.setText(dateTime);
+        current_time.setText(time);
 
-        valueLists = activity.listValue();
-       System.out.println("The out is"+valueLists);
+        //Updating Time and Date continuously
+        Thread t = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    while (!isInterrupted()) {
+                        Thread.sleep(1000);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                updateScreenDateAndTime();
+                            }
+                        });
+                    }
+                } catch (InterruptedException e) {
+                }
+            }
+        };
+        t.start();
+
+        //Button onClickListener
+        load_file_from_server.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finFileDataRecordReader();
+                // activita.addEntry();
+                //TODO also execute addEntry on Update Graph
+            }
+        });
+
+
 
         setTitle("DynamicalAddingActivity");
-
-
-
         chart = findViewById(R.id.chart1);
         chart.setOnChartValueSelectedListener(this);
         chart.setDrawGridBackground(false);
@@ -77,11 +237,29 @@ public class MPAAndroid extends DemoBase implements OnChartValueSelectedListener
 //        chart.getXAxis().setDrawLabels(false);
 //        chart.getXAxis().setDrawGridLines(false);
 
-        chart.invalidate();
     }
 
-    public void valueLists(List<Number> values1) {
-        this.valueLists = values1;
+    String outData(String minsecout){
+        return minsec;
+    }
+
+    private void updateScreenDateAndTime(){
+        sdf_time = new SimpleDateFormat("dd.MM.yyyy  HH:mm:ss", Locale.GERMANY); //hh:mm:ss
+        sdf_time.setTimeZone(TimeZone.getTimeZone("Europe/Berlin"));
+        time = sdf_time.format(new Date());
+        current_time.setText(time);
+    }
+
+    private void doSomething(Object o) {
+        this.objectType = (String) o;
+    }
+
+    private void handleTimeInput(EditText iField, Editable text) {
+        if (iField.getHint().toString().equals("Start Time hh:mm:ss")) {
+            this.minsec = text.toString();
+        } else if (iField.getHint().toString().equals("End Time hh:mm:ss")) {
+            this.endTime = text.toString();
+        }
     }
 
     public void finFileDataRecordReader() {
@@ -91,7 +269,18 @@ public class MPAAndroid extends DemoBase implements OnChartValueSelectedListener
         year = this.dateTime.substring(8);
         fileName = year+month+day+".fin";
         //System.out.println("date time: "+fileName);
-        new FinPolygonVisualizationAsync(this).execute(fileName);
+        new MPAAndroidAsync(this).execute(fileName);
+    }
+
+    public List<Number> setXValueLists(List<Number> xValues) {
+        xLists = xValues;
+        System.out.println("X List values inside finVisualize " +xLists.size());
+        return xLists;
+    }
+    public List<Number> setYValueLists(List<Number> yValues) {
+        yLists = yValues;
+        System.out.println("Y List values inside finVisualize " +yLists.size());
+        return yLists;
     }
 
     private final int[] colors = ColorTemplate.VORDIPLOM_COLORS;
@@ -114,19 +303,8 @@ public class MPAAndroid extends DemoBase implements OnChartValueSelectedListener
         }
 
         // choose a random dataSet
-
-//        List<Number> value1 = activity.yList;
-        List<Number> value2 = activity.listValue();
-        System.out.println("The out is"+value2);
-
-//        String valuea = activity.values();
-        Log.d("list is", String.valueOf(valueLists));
-
-        Log.d("Value 3 is", String.valueOf(activity.listValue()));
-        //finFileDataRecordReader();
-
-
-
+        System.out.println("X List values" +xLists);
+        System.out.println("Y List values" +yLists);
 
         //TODO getting the list until the length of the list and import it into the randomDataSetIndex
 
