@@ -335,8 +335,7 @@ public class MPAAndroidAsync extends AsyncTask<String, Void, List<XyTimePlot>> {
     private ArrayList<Entry> xValues(){
         ArrayList<Entry> xEntryList = new ArrayList<Entry>();
 
-        //for (Number a : xList) {
-        //getXList();
+
 int listsize= xList.size();
         for(int i=0; i<listsize; i++){
             String format;
