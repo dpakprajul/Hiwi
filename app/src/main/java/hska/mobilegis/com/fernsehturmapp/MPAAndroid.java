@@ -320,7 +320,7 @@ public class MPAAndroid extends DemoBase implements OnChartValueSelectedListener
         // let the chart know it's data has changed
         chart.notifyDataSetChanged();
 
-        chart.setVisibleXRangeMaximum(15);
+        chart.setVisibleXRangeMaximum(2);
         //chart.setVisibleYRangeMaximum(15, AxisDependency.LEFT);
 //
 //            // this automatically refreshes the chart (calls invalidate())

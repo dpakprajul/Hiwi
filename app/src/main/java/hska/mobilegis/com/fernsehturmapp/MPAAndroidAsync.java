@@ -194,6 +194,17 @@ public class MPAAndroidAsync extends AsyncTask<String, Void, List<XyTimePlot>> {
                     yList.add(Double.valueOf(xyT.getY()));
                 }
                 //activity.series1 = new SimpleXYSeries(xList, yList, " ");
+                LineDataSet data1 = new LineDataSet(xValues(),"");
+                //LineDataSet data2 = new LineDataSet(yValues(),"");
+                ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+                data1.setLineWidth(3);
+                dataSets.add(data1);
+                //dataSets.add(data2);
+                LineData data = new LineData(dataSets);
+
+                activity.chart.setDrawBorders(true);
+                activity.chart.setData(data);
+                activity.chart.invalidate();
 
             }
 
@@ -243,6 +254,7 @@ public class MPAAndroidAsync extends AsyncTask<String, Void, List<XyTimePlot>> {
                 //dataSets.add(data2);
                 LineData data = new LineData(dataSets);
                 activity.chart.setData(data);
+                activity.chart.setDrawBorders(true);
                 activity.chart.invalidate();
 
 
@@ -306,9 +318,12 @@ public class MPAAndroidAsync extends AsyncTask<String, Void, List<XyTimePlot>> {
                 LineDataSet data1 = new LineDataSet(xValues(),"");
                 //LineDataSet data2 = new LineDataSet(yValues(),"");
                 ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+                data1.setLineWidth(3);
                 dataSets.add(data1);
                 //dataSets.add(data2);
                 LineData data = new LineData(dataSets);
+
+                activity.chart.setDrawBorders(true);
                 activity.chart.setData(data);
                 activity.chart.invalidate();
             }
@@ -322,13 +337,17 @@ public class MPAAndroidAsync extends AsyncTask<String, Void, List<XyTimePlot>> {
 
         //for (Number a : xList) {
         //getXList();
-
-        for(int i=0; i<12; i++){
+int listsize= xList.size();
+        for(int i=0; i<listsize; i++){
             String format;
-
             String pattern = "#.##########";
             DecimalFormat decimalFormat = new DecimalFormat(pattern);
             format = decimalFormat.format(xList.get(i));
+
+            //System.out.println(format.length());
+            if(format.length()<14){
+                format=format+"00";
+            }
             String subString= format.substring(7,13);
             float f=Float.parseFloat(subString);
 
@@ -337,37 +356,31 @@ public class MPAAndroidAsync extends AsyncTask<String, Void, List<XyTimePlot>> {
             String patternY = "#.##########";
             DecimalFormat decimalFormatY = new DecimalFormat(patternY);
             formatY = decimalFormatY.format(yList.get(i));
+            if(formatY.length()<14){
+                formatY=formatY+"00";
+            }
             String subStringY= formatY.substring(6,13);
             float fY=Float.parseFloat(subStringY);
 
             xEntryList.add(new Entry(fY, f));
-            // xEntryList.add(new Entry(a.floatValue(), i));
-//            xEntryList.add(new Entry((float) 2.0, (float) getXList()+1));
-//            xEntryList.add(new Entry((float) 3.0, (float) getXList()+2));
+
         }
-        // }
-//        xEntryList.add(new Entry((float) 1.0, (float) 20.0004));
-//        xEntryList.add(new Entry((float) 2.0, (float) 20.0084));
-//        xEntryList.add(new Entry((float) 3.0, (float) 20.0074));
-//        xEntryList.add(new Entry((float) 4.0, (float) 20.0052));
-//        xEntryList.add(new Entry((float) 5.0, (float) 20.0041));
-//        xEntryList.add(new Entry((float) 6.0, (float) 20.0092));
 
         return xEntryList;
     }
 
-    public float getXList() {
-        String format = null;
-        for (Number i : xList) {
-            String pattern = "#.#####";
-            DecimalFormat decimalFormat = new DecimalFormat(pattern);
-
-            format = decimalFormat.format(i);
-            System.out.println(format);
-        }
-        return Float.parseFloat(format);
-
-    }
+//    public float getXList() {
+//        String format = null;
+//        for (Number i : xList) {
+//            String pattern = "#.#####";
+//            DecimalFormat decimalFormat = new DecimalFormat(pattern);
+//
+//            format = decimalFormat.format(i);
+//            System.out.println(format);
+//        }
+//        return Float.parseFloat(format);
+//
+//    }
 //    public double getXList() {
 //        Number[] c = null;
 //        String stringValue = null;
@@ -399,16 +412,16 @@ public class MPAAndroidAsync extends AsyncTask<String, Void, List<XyTimePlot>> {
 
 
 
-    private ArrayList<Entry> yValues(){
-        ArrayList<Entry> yEntryList = new ArrayList<Entry>();
-        //for
-        yEntryList.add(new Entry((float) 1.0, (float) 20.0401));
-        yEntryList.add(new Entry((float) 2.0, (float) 20.0062));
-        yEntryList.add(new Entry((float) 3.0, (float) 20.0043));
-        yEntryList.add(new Entry((float) 4.0, (float) 20.0094));
-        yEntryList.add(new Entry((float) 5.0, (float) 20.0021));
-        yEntryList.add(new Entry((float) 6.0, (float) 20.0013));
-
-        return yEntryList;
-    }
+//    private ArrayList<Entry> yValues(){
+//        ArrayList<Entry> yEntryList = new ArrayList<Entry>();
+//        //for
+//        yEntryList.add(new Entry((float) 1.0, (float) 20.0401));
+//        yEntryList.add(new Entry((float) 2.0, (float) 20.0062));
+//        yEntryList.add(new Entry((float) 3.0, (float) 20.0043));
+//        yEntryList.add(new Entry((float) 4.0, (float) 20.0094));
+//        yEntryList.add(new Entry((float) 5.0, (float) 20.0021));
+//        yEntryList.add(new Entry((float) 6.0, (float) 20.0013));
+//
+//        return yEntryList;
+//    }
 }
