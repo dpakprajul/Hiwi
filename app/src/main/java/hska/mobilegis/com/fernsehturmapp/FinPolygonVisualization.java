@@ -174,13 +174,13 @@ String outData(String minsecout){
 
 
 
-        double[] inc_range = new double[]{0000000.09,0.1,0.1,1,5,10};
-        double[] inc_domain = new double[]{0.09,0.1,0.1,1,5,10};
-        plot.setDomainStepModel(new StepModelFit(plot.getBounds().getxRegion(),inc_domain,20));
-        plot.setRangeStepModel(new StepModelFit(plot.getBounds().getyRegion(), inc_range, 20));
-        PanZoom.attach(plot, PanZoom.Pan.BOTH, PanZoom.Zoom.STRETCH_BOTH, PanZoom.ZoomLimit.MIN_TICKS);
-        plot.setUserDomainOrigin(32513977.00);
-        plot.setUserRangeOrigin(5401318.70);
+        double[] inc_range = new double[]{0.01, 6, 9, 15, 20};
+        double[] inc_domain = new double[]{0.01, 6, 9, 15, 20};
+        plot.setDomainStepModel(new StepModelFit(plot.getBounds().getxRegion(),inc_domain,200));
+        plot.setRangeStepModel(new StepModelFit(plot.getBounds().getyRegion(), inc_range, 200));
+        PanZoom.attach(plot, PanZoom.Pan.BOTH, PanZoom.Zoom.STRETCH_BOTH, PanZoom.ZoomLimit.OUTER);
+        //plot.setUserDomainOrigin(32513977.00);
+        //plot.setUserRangeOrigin(5401318.70);
 
         plot.redraw();
 // PanZoom.attach(plot);
@@ -188,8 +188,8 @@ String outData(String minsecout){
 // plot.setDomainStep(StepMode.INCREMENT_BY_VAL, 1);
 
 
-//plot.setDomainBoundaries(0, 3000000, BoundaryMode.FIXED);
-//plot.setRangeBoundaries(0,300000, BoundaryMode.FIXED);
+plot.setDomainBoundaries(8, 9, BoundaryMode.AUTO);
+plot.setRangeBoundaries(8,9, BoundaryMode.AUTO);
 
 
 

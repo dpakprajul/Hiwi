@@ -54,7 +54,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         motionGraph.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent = new Intent(MainActivity.this, MPAAndroid.class);
+                //changed here
+                intent = new Intent(MainActivity.this, FinPolygonVisualization.class);
                 startActivity(intent);
             }
         });

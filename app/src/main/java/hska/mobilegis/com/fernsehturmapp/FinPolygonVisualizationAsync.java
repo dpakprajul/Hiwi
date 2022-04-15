@@ -203,10 +203,17 @@ public class FinPolygonVisualizationAsync extends AsyncTask<String, Void, List<X
             Double startT = Double.valueOf(sHrs) * 3600 + Double.valueOf(sMins) * 60 + Double.valueOf(sSecs); //Double startT
             Double endT = Double.valueOf(eHrs) * 3600 + Double.valueOf(eMins) * 60 + Double.valueOf(eSecs);
 
+            DecimalFormat df = new DecimalFormat("#");
+            df.setMaximumFractionDigits(5);
+
             for (XyTimePlot xyT : xyTimePlots) {
                 if((Double.valueOf(xyT.getTime())>=startT) && (Double.valueOf(xyT.getTime())<=endT)){
-                    xList.add(Double.valueOf(xyT.getX()));
-                    yList.add(Double.valueOf(xyT.getY()));
+                    String x = df.format(Double.valueOf(xyT.getX()));
+                    String y = df.format(Double.valueOf(xyT.getY()));
+                    String xValue = x.substring(7, x.indexOf("."))+ x.substring(x.indexOf("."));
+                    String yValue = y.substring(6, y.indexOf("."))+ y.substring(y.indexOf("."));
+                    xList.add(Double.valueOf(xValue));
+                    yList.add(Double.valueOf(yValue));
                 }
                 //activity.series1 = new SimpleXYSeries(xList, yList, " ");
 
@@ -274,10 +281,17 @@ public class FinPolygonVisualizationAsync extends AsyncTask<String, Void, List<X
             Double startT = Double.valueOf(sHrs) * 3600 + Double.valueOf(sMins) * 60 + Double.valueOf(sSecs); //Double startT
             Double endT = Double.valueOf(eHrs) * 3600 + Double.valueOf(eMins) * 60 + Double.valueOf(eSecs);
 
+            DecimalFormat df = new DecimalFormat("#");
+            df.setMaximumFractionDigits(5);
+
             for (XyTimePlot xyT : xyTimePlots) {
                 if((Double.valueOf(xyT.getTime())>=startT) && (Double.valueOf(xyT.getTime())<=endT)){
-                    xList.add(Double.valueOf(xyT.getX()));
-                    yList.add(Double.valueOf(xyT.getY()));
+                    String x = df.format(Double.valueOf(xyT.getX()));
+                    String y = df.format(Double.valueOf(xyT.getY()));
+                    String xValue = x.substring(7, x.indexOf("."))+ x.substring(x.indexOf("."));
+                    String yValue = y.substring(6, y.indexOf("."))+ y.substring(y.indexOf("."));
+                    xList.add(Double.valueOf(xValue));
+                    yList.add(Double.valueOf(yValue));
                     //activityMP.valueLists(xList);
                 }
 
@@ -323,8 +337,9 @@ public class FinPolygonVisualizationAsync extends AsyncTask<String, Void, List<X
         series1Format.setInterpolationParams(
                 new CatmullRomInterpolator.Params(20, CatmullRomInterpolator.Type.Centripetal)); // configure interpolation on the formatter, for line smoothening
 
-        activity.plot.getGraph().getLineLabelStyle(XYGraphWidget.Edge.TOP).setFormat(new DecimalFormat("#.##"));
-        activity.plot.getGraph().getLineLabelStyle(XYGraphWidget.Edge.RIGHT).setFormat(new DecimalFormat("#.##"));
+        activity.plot.getGraph().getLineLabelStyle(XYGraphWidget.Edge.TOP).setFormat(new DecimalFormat("#.###"));
+        activity.plot.getGraph().getLineLabelStyle(XYGraphWidget.Edge.RIGHT).setFormat(new DecimalFormat("#.###"));
+
 
         activity.plot.clear();
         activity.plot.addSeries(activity.series1, series1Format);
