@@ -186,7 +186,7 @@ String outData(String minsecout){
 // PanZoom.attach(plot);
 // plot.setRangeStep(StepMode.INCREMENT_BY_VAL, 1);
 // plot.setDomainStep(StepMode.INCREMENT_BY_VAL, 1);
-
+//
 
 plot.setDomainBoundaries(8, 9, BoundaryMode.AUTO);
 plot.setRangeBoundaries(8,9, BoundaryMode.AUTO);
