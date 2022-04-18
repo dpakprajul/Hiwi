@@ -4,8 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,21 +16,6 @@
         android:textStyle="bold"
         android:typeface="sans"/>
 
-
-    <TextView
-        android:id="@+id/time_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginStart="300dp"
-        android:layout_marginLeft="300dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:text="Start Time"
-        android:textSize="24sp" />
 
     <EditText
         android:id="@+id/start_time_input"
@@ -47,14 +30,16 @@
         android:typeface="sans" />
 
 
+
+
     <EditText
         android:id="@+id/end_time_input"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_dateSelection"
-        android:layout_marginStart="-187dp"
-        android:layout_marginLeft="-187dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginStart="19dp"
+        android:layout_marginLeft="19dp"
+        android:layout_marginTop="1dp"
         android:layout_toEndOf="@+id/start_time_input"
         android:layout_toRightOf="@+id/start_time_input"
         android:ems="10"
@@ -84,6 +69,37 @@
         android:layout_below="@+id/tv_objectSelection"
         android:layout_marginLeft="50dp"/>
 
+    <TextView
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
+        android:id="@+id/time_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_objectSelection"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_toRightOf="@+id/objects_filter"
+        android:text="Start Time"
+        android:textSize="16sp" />
+
+    <TextView
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
+        android:id="@+id/time_text_view_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_objectSelection"
+        android:layout_alignBottom="@+id/et_currentDateTime"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="26dp"
+        android:layout_marginRight="26dp"
+        android:layout_marginBottom="18dp"
+        android:text="End Time"
+        android:textSize="16sp" />
+
     <Button
         android:id="@+id/load_file_from_server"
         style="?android:attr/buttonBarStyle"
@@ -92,13 +108,12 @@
         android:layout_below="@+id/objects_filter"
         android:layout_marginLeft="2dp"
         android:fontFamily="@font/coda"
-        android:text="Update Graph"
+        android:text="MPA Graph"
         android:textAllCaps="false"
         android:textColor="#009688"
         android:textSize="16sp"
         android:textStyle="bold"
         android:typeface="sans" />
-
 
     <EditText
         android:id="@+id/et_currentDateTime"
@@ -118,6 +133,7 @@
         android:textSize="16sp"
         android:textStyle="bold"
         android:typeface="sans"/>
+
 
     <RelativeLayout
         android:layout_width="match_parent"

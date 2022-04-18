@@ -35,6 +35,7 @@ public class FinPolygonVisualizationAsync extends AsyncTask<String, Void, List<X
     String eHrs, eMins, eSecs;
     private MPAAndroid activityMP;
     private FinPolygonVisualization activity;
+    private FinPolygonVisualization activity2;
     public ProgressDialog dialog;
 
     List<Number> xList = new ArrayList<>();
@@ -184,10 +185,12 @@ public class FinPolygonVisualizationAsync extends AsyncTask<String, Void, List<X
 
         String checkValue=activity.objectType;
 
+
         String minsec=activity.outData();
 
-        if ((minsec != null && !minsec.isEmpty())
-                && (activity.endTime != null && !activity.endTime.isEmpty())) {
+        String endTime1=activity.endTimeValue();
+
+        if ((minsec != null && !minsec.isEmpty()) && (endTime1 != null && !endTime1.isEmpty())) {
 
             // Parse given start time (String) hr, mins and secs    10:11:29
             sHrs = activity.minsec.substring(0, 2);
@@ -196,9 +199,9 @@ public class FinPolygonVisualizationAsync extends AsyncTask<String, Void, List<X
 
 
             // Parse given end time (String) hr, mins and secs
-            eHrs = activity.endTime.substring(0, 2);
-            eMins = activity.endTime.substring(3, 5);
-            eSecs = activity.endTime.substring(6);
+            eHrs = activity.endTime1.substring(0, 2);
+            eMins = activity.endTime1.substring(3, 5);
+            eSecs = activity.endTime1.substring(6);
 
             Double startT = Double.valueOf(sHrs) * 3600 + Double.valueOf(sMins) * 60 + Double.valueOf(sSecs); //Double startT
             Double endT = Double.valueOf(eHrs) * 3600 + Double.valueOf(eMins) * 60 + Double.valueOf(eSecs);
@@ -266,7 +269,7 @@ public class FinPolygonVisualizationAsync extends AsyncTask<String, Void, List<X
             sdf_time.setTimeZone(TimeZone.getTimeZone("GMT"));
 
             activity.minsec = sdf_time.format(new Date(System.currentTimeMillis()- (5)*1000));
-            activity.endTime = sdf_time.format(new Date(System.currentTimeMillis()));
+            activity.endTime1 = sdf_time.format(new Date(System.currentTimeMillis()));
 
             // Parse given start time (String) hr, mins and secs    10:11:29
             sHrs = activity.minsec.substring(0, 2);
@@ -274,9 +277,9 @@ public class FinPolygonVisualizationAsync extends AsyncTask<String, Void, List<X
             sSecs = activity.minsec.substring(6);
 
             // Parse given end time (String) hr, mins and secs
-            eHrs = activity.endTime.substring(0, 2);
-            eMins = activity.endTime.substring(3, 5);
-            eSecs = activity.endTime.substring(6);
+            eHrs = activity.endTime1.substring(0, 2);
+            eMins = activity.endTime1.substring(3, 5);
+            eSecs = activity.endTime1.substring(6);
 
             Double startT = Double.valueOf(sHrs) * 3600 + Double.valueOf(sMins) * 60 + Double.valueOf(sSecs); //Double startT
             Double endT = Double.valueOf(eHrs) * 3600 + Double.valueOf(eMins) * 60 + Double.valueOf(eSecs);
@@ -324,7 +327,7 @@ public class FinPolygonVisualizationAsync extends AsyncTask<String, Void, List<X
                 activity.series1 = new SimpleXYSeries(xList, yList, "");
             }
             activity.minsec = null;
-            activity.endTime = null;
+            activity.endTime1 = null;
         }
         System.out.println("The value of x list"+xList);
        // activityMP.valueLists(xList);
