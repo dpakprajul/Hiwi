@@ -30,18 +30,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv_option = findViewById(R.id.tv_select);
         timeSeries = findViewById(R.id.btn_timeSeries);
         motionGraph = findViewById(R.id.btn_motionGraph);
-        newMPAGraph = findViewById(R.id.newMPAGraph);
+       // newMPAGraph = findViewById(R.id.newMPAGraph);
         weather = findViewById(R.id.btn_weather);
         mapView = findViewById(R.id.btn_map);
         aboutProj = findViewById(R.id.btn_aboutProject);
 
-        newMPAGraph.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent = new Intent(MainActivity.this, MPAAndroid.class);
-                startActivity(intent);
-            }
-        });
+//        newMPAGraph.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                intent = new Intent(MainActivity.this, MPAAndroid.class);
+//                startActivity(intent);
+//            }
+//        });
 
         timeSeries.setOnClickListener(new View.OnClickListener() {
             @Override

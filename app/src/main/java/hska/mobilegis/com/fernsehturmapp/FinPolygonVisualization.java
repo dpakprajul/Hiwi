@@ -18,6 +18,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.BreakIterator;
+import java.util.Calendar;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -27,9 +30,14 @@ import com.androidplot.xy.StepModelFit;
 import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYSeries;
 import com.androidplot.xy.ZoomEstimator;
+import com.niwattep.materialslidedatepicker.SlideDatePickerDialog;
+import com.niwattep.materialslidedatepicker.SlideDatePickerDialogCallback;
+
+import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -38,7 +46,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
-public class FinPolygonVisualization extends AppCompatActivity {
+public class FinPolygonVisualization extends AppCompatActivity implements SlideDatePickerDialogCallback {
 
     public String objectType;
     public String startTime;
@@ -48,6 +56,7 @@ public class FinPolygonVisualization extends AppCompatActivity {
     SimpleDateFormat sdf_date, sdf_time;
     Button load_file_from_server;
     EditText current_time;
+    Button button;
 
 
 
@@ -62,6 +71,9 @@ public class FinPolygonVisualization extends AppCompatActivity {
     PanZoomCustomization panZoom1;
     FinPolygonVisualizationAsync finPolygonVisualizationAsync;
     private Object a;
+    public TextView selectDate;
+    public String sCertDate;
+
     //MPAAndroid activita = new MPAAndroid();
 //    public FinPolygonVisualization() {
 //        this.activita = activita;
@@ -80,6 +92,26 @@ public class FinPolygonVisualization extends AppCompatActivity {
 
         final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         final TextView timeTV = findViewById(R.id.time_text_view);
+        selectDate = findViewById(R.id.dateselection);
+        // button and text view called using id
+        final Button button = findViewById(R.id.button);
+
+
+        button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Calendar endDate = Calendar.getInstance();
+                    endDate.set(Calendar.YEAR, 2100);
+                    SlideDatePickerDialog.Builder builder = new SlideDatePickerDialog.Builder();
+                    builder.setEndDate(endDate);
+                    SlideDatePickerDialog dialog = builder.build();
+                    dialog.show(getSupportFragmentManager(), "Dialog");
+                }
+            });
+
+
+
+
         timeTV.setOnClickListener(new View.OnClickListener() {
             private String minsecout;
 
@@ -296,6 +328,8 @@ plot.setRangeBoundaries(8,9, BoundaryMode.AUTO);
         //startTimer();
     }
 
+
+
     //###############################################################
     private void updateScreenDateAndTime(){
         sdf_time = new SimpleDateFormat("dd.MM.yyyy  HH:mm:ss", Locale.GERMANY); //hh:mm:ss
@@ -322,9 +356,9 @@ plot.setRangeBoundaries(8,9, BoundaryMode.AUTO);
 
     public void finFileDataRecordReader() {
         String day, month, year, fileName;
-        day = this.dateTime.substring(0,2);
-        month = this.dateTime.substring(3,5);
-        year = this.dateTime.substring(8);
+        day = this.sCertDate.substring(0,2);
+        month = this.sCertDate.substring(3,5);
+        year = this.sCertDate.substring(8);
         fileName = year+month+day+".fin";
         //System.out.println("date time: "+fileName);
         new FinPolygonVisualizationAsync(this).execute(fileName);
@@ -381,5 +415,16 @@ plot.setRangeBoundaries(8,9, BoundaryMode.AUTO);
 
     public String outData() {
         return minsec;
+    }
+
+
+    @Override
+    public void onPositiveClick(int i, int i1, int i2, Calendar calendar) {
+        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+        selectDate.setText(format.format(calendar.getTime()));
+        selectDate.setTextColor(Color.parseColor("#009688"));
+        sCertDate = format.format(calendar.getTime());
+
+
     }
 }

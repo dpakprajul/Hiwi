@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "hska.mobilegis.com.fernsehturmapp"
-        minSdkVersion 15
+        minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -57,4 +57,5 @@ dependencies {
     //implementation 'com.jcraft:jsch:0.1.55'
 
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    implementation 'com.github.niwattep:material-slide-date-picker:v2.0.0'
 }
