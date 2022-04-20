@@ -56,7 +56,7 @@ public class FinPolygonVisualization extends AppCompatActivity implements SlideD
     SimpleDateFormat sdf_date, sdf_time;
     Button load_file_from_server;
     EditText current_time;
-    Button button;
+    TextView button;
 
 
 
@@ -92,18 +92,28 @@ public class FinPolygonVisualization extends AppCompatActivity implements SlideD
 
         final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         final TextView timeTV = findViewById(R.id.time_text_view);
-        selectDate = findViewById(R.id.dateselection);
+        selectDate = (TextView) findViewById(R.id.dateselection);
         // button and text view called using id
-        final Button button = findViewById(R.id.button);
+        button = (TextView) findViewById(R.id.button);
 
 
         button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Calendar endDate = Calendar.getInstance();
-                    endDate.set(Calendar.YEAR, 2100);
+                    Calendar startDate= Calendar.getInstance();
+                    SimpleDateFormat formatter = new SimpleDateFormat("MM");
+                    String dateString = formatter.format(new Date());
+                    System.out.println(dateString);
+                    startDate.set(Calendar.MONTH, Integer.parseInt(dateString)-2);
+
+                    long time= System.currentTimeMillis();
+
+                    //endDate.set(Calendar.YEAR, 2040);
                     SlideDatePickerDialog.Builder builder = new SlideDatePickerDialog.Builder();
-                    builder.setEndDate(endDate);
+                    //builder.setEndDate(endDate);
+                    builder.setStartDate(startDate);
+
                     SlideDatePickerDialog dialog = builder.build();
                     dialog.show(getSupportFragmentManager(), "Dialog");
                 }
@@ -420,9 +430,26 @@ plot.setRangeBoundaries(8,9, BoundaryMode.AUTO);
 
     @Override
     public void onPositiveClick(int i, int i1, int i2, Calendar calendar) {
+        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
-        selectDate.setText(format.format(calendar.getTime()));
-        selectDate.setTextColor(Color.parseColor("#009688"));
+
+
+        String date = format.format(Calendar.getInstance().getTime());
+        System.out.println(date);
+        //button.setText((CharSequence) format);
+//        timeTV.setText(String.format("%1$02d:%2$02d:%3$02d", numberPickerHour.getValue(), numberPickerMinutes.getValue(), numberPickerSeconds.getValue()));
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        editor.putInt("Hours", numberPickerHour.getValue());
+//        editor.putInt("Minutes", numberPickerMinutes.getValue());
+//        editor.putInt("Seconds", numberPickerSeconds.getValue());
+//        editor.apply();
+//        alertDialog.dismiss();
+        //button.setText(date);
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        editor.putInt("Hours", Integer.parseInt(date));
+
+       button.setText(format.format(calendar.getTime()));
+        //button.setTextColor(Color.parseColor("#009688"));
         sCertDate = format.format(calendar.getTime());
 
 

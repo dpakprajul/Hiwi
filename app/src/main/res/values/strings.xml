@@ -23,6 +23,8 @@
     <string name="progress_dialog">Please wait...</string>
     <string name="response_dialog">Ok</string>
     <string name="file_not_found_title">No Data Found!</string>
+    <string name="ic_happy_font">Date  "\u25bc"</string>
+
     <string name="file_not_found">No monitoring data is available for today!</string>
     <string name="file_not_found_Turm">No monitoring data is available today for Turm!</string>
     <string name="file_not_found_Turm_Ubx">No monitoring data is available today for Turm_ubx!</string>

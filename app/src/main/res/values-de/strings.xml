@@ -11,6 +11,7 @@
     <string name="series_northing"> Nord</string>
     <string name="starttime_hint">Startzeit hh:mm:ss</string>
     <string name="endtime_hint">Endzeit hh:mm:ss</string>
+    <string name="ic_happy_font">&#xe902;</string>
     <string name="progress_dialog"> Bitte warten Sie ... </string>
     <string name="response_dialog">Ok</string>
 
