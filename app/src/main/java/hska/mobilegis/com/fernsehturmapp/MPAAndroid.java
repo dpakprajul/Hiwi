@@ -1,20 +1,14 @@
 package hska.mobilegis.com.fernsehturmapp;
 
-import android.Manifest;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -24,30 +18,36 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.content.ContextCompat;
+import java.text.BreakIterator;
+import java.text.DateFormat;
+import java.util.Calendar;
 
-import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.highlight.Highlight;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
-import com.github.mikephil.charting.utils.ColorTemplate;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.androidplot.xy.BoundaryMode;
+import com.androidplot.xy.StepMode;
+import com.androidplot.xy.StepModelFit;
+import com.androidplot.xy.XYPlot;
+import com.androidplot.xy.XYSeries;
+import com.androidplot.xy.ZoomEstimator;
+import com.niwattep.materialslidedatepicker.SlideDatePickerDialog;
+import com.niwattep.materialslidedatepicker.SlideDatePickerDialogCallback;
+
+import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
+import java.util.Timer;
+import java.util.TimerTask;
 
-public class MPAAndroid extends DemoBase implements OnChartValueSelectedListener {
-    public LineChart chart;
-    public List<Number> xLists;
-    public List<Number> yLists;
+
+public class MPAAndroid extends AppCompatActivity implements SlideDatePickerDialogCallback {
 
     public String objectType;
     public String startTime;
@@ -57,14 +57,41 @@ public class MPAAndroid extends DemoBase implements OnChartValueSelectedListener
     SimpleDateFormat sdf_date, sdf_time;
     Button load_file_from_server;
     EditText current_time;
-    private MPAAndroid activityMP;
+    TextView button;
+
+
+
+    Timer timer;
+    TimerTask timerTask;
+    final Handler myHandler = new Handler();
+
+    public List<XyTimePlot> list = new ArrayList<XyTimePlot>();
+    public XYPlot plot;
+    XYSeries series1 = null;
+    //PanZoom panZoom;
+    PanZoomCustomization panZoom1;
+    FinPolygonVisualizationAsync finPolygonVisualizationAsync;
+    private Object a;
+    public TextView selectDate;
+    public String sCertDate;
+   //public String rtDate= "23.04.2022";
+
+    DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+    Date date = new Date();
+    String rtDate = dateFormat.format(date);
+
+
+
+    //MPAAndroid activita = new MPAAndroid();
+//    public FinPolygonVisualization() {
+//        this.activita = activita;
+//    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_linechart_noseekbar);
+        setContentView(R.layout.activity_fin_polygon_visualization);
 
         load_file_from_server = (Button) findViewById(R.id.load_file_from_server);
         current_time = findViewById(R.id.et_currentDateTime);
@@ -73,6 +100,36 @@ public class MPAAndroid extends DemoBase implements OnChartValueSelectedListener
 
         final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         final TextView timeTV = findViewById(R.id.time_text_view);
+        selectDate = (TextView) findViewById(R.id.dateselection);
+        // button and text view called using id
+        button = (TextView) findViewById(R.id.button);
+
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar endDate = Calendar.getInstance();
+                Calendar startDate= Calendar.getInstance();
+                SimpleDateFormat formatter = new SimpleDateFormat("MM");
+                String dateString = formatter.format(new Date());
+                System.out.println(dateString);
+                startDate.set(Calendar.MONTH, Integer.parseInt(dateString)-2);
+
+                long time= System.currentTimeMillis();
+
+                //endDate.set(Calendar.YEAR, 2040);
+                SlideDatePickerDialog.Builder builder = new SlideDatePickerDialog.Builder();
+                //builder.setEndDate(endDate);
+                builder.setStartDate(startDate);
+
+                SlideDatePickerDialog dialog = builder.build();
+                dialog.show(getSupportFragmentManager(), "Dialog");
+            }
+        });
+
+
+
+
         timeTV.setOnClickListener(new View.OnClickListener() {
             private String minsecout;
 
@@ -80,6 +137,7 @@ public class MPAAndroid extends DemoBase implements OnChartValueSelectedListener
             public void onClick(View v) {
                 View view = View.inflate(MPAAndroid.this, R.layout.timedialog, null);
                 final NumberPicker numberPickerHour = view.findViewById(R.id.numpicker_hours);
+
 
                 numberPickerHour.setMaxValue(23);
                 numberPickerHour.setValue(sharedPreferences.getInt("Hours", 0));
@@ -92,6 +150,8 @@ public class MPAAndroid extends DemoBase implements OnChartValueSelectedListener
                 Button cancel = view.findViewById(R.id.cancel);
                 Button ok = view.findViewById(R.id.ok);
                 minsec = String.format("%1$02d:%2$02d:%3$02d",numberPickerHour.getValue(),numberPickerMinutes.getValue(),numberPickerSeconds.getValue());
+
+
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(MPAAndroid.this);
                 builder.setView(view);
@@ -123,8 +183,65 @@ public class MPAAndroid extends DemoBase implements OnChartValueSelectedListener
 
             }
 
+            String outData(String minsecout){
+                return minsec;
+
+            }
+
         });
 //Log.d("output1",minsec);
+
+
+        // initialize XYPlot reference:
+        plot = (XYPlot) findViewById(R.id.plot);
+
+        /*Pan Zoom Enable/Disable
+        //panZoom1.attach(plot);
+        plot.setDomainBoundaries(32513977.95, 32513978.12, BoundaryMode.FIXED);
+        plot.setRangeBoundaries(5400318.30, 5400318.42, BoundaryMode.FIXED);
+
+
+        plot.getOuterLimits().set(32513978.00, 32513978.12, 5400318.30, 5400319.42);
+        plot.getInnerLimits().set(32513978.00,32513978.12, 5400318.30, 5400318.45);
+        //plot.getRegistry().setEstimator(new ZoomEstimator());
+         */
+//
+//        plot.setDomainBoundaries(32513977.00, 32513977.42, BoundaryMode.FIXED);
+//        plot.setRangeBoundaries(5401318.30, 5401318.42, BoundaryMode.FIXED);
+//        plot.getOuterLimits().set(32513977.00, 32513990.12, 5400322.30, 5400330.42);
+//        plot.getInnerLimits().set(32513976.00,32513981.12, 5400320.30, 540032.45);
+        plot.getRegistry().setEstimator(new ZoomEstimator());
+
+        plot.getGraph().getDomainOriginLinePaint().setColor(Color.LTGRAY);
+        plot.getGraph().getRangeOriginLinePaint().setColor(Color.LTGRAY);
+        plot.getGraph().setMarginBottom(10);
+        plot.getGraph().setMarginTop(205);
+        plot.getGraph().setMarginLeft(10);
+        plot.getGraph().setMarginRight(230);
+        plot.getLegend().setVisible(false);
+
+
+
+
+
+        double[] inc_range = new double[]{0.01, 6, 9, 15, 20};
+        double[] inc_domain = new double[]{0.01, 6, 9, 15, 20};
+        plot.setDomainStepModel(new StepModelFit(plot.getBounds().getxRegion(),inc_domain,200));
+        plot.setRangeStepModel(new StepModelFit(plot.getBounds().getyRegion(), inc_range, 200));
+        PanZoom.attach(plot, PanZoom.Pan.BOTH, PanZoom.Zoom.STRETCH_BOTH, PanZoom.ZoomLimit.OUTER);
+        //plot.setUserDomainOrigin(32513977.00);
+        //plot.setUserRangeOrigin(5401318.70);
+
+        plot.redraw();
+// PanZoom.attach(plot);
+// plot.setRangeStep(StepMode.INCREMENT_BY_VAL, 1);
+// plot.setDomainStep(StepMode.INCREMENT_BY_VAL, 1);
+//
+
+        plot.setDomainBoundaries(8, 9, BoundaryMode.AUTO);
+        plot.setRangeBoundaries(8,9, BoundaryMode.AUTO);
+
+
 
         //Object Type Spinner
         Spinner objectSpinner = (Spinner) findViewById(R.id.objects_filter);
@@ -225,24 +342,13 @@ public class MPAAndroid extends DemoBase implements OnChartValueSelectedListener
             }
         });
 
-
-
-        setTitle("DynamicalAddingActivity");
-        chart = findViewById(R.id.chart1);
-        chart.setOnChartValueSelectedListener(this);
-        chart.setDrawGridBackground(false);
-        chart.getDescription().setEnabled(false);
-        chart.setNoDataText("No chart data available. Use the menu to add entries and data sets!");
-
-//        chart.getXAxis().setDrawLabels(false);
-//        chart.getXAxis().setDrawGridLines(false);
-
+        //Timer for continuous data loading on the screen
+        //startTimer();
     }
 
-    String outData(String minsecout){
-        return minsec;
-    }
 
+
+    //###############################################################
     private void updateScreenDateAndTime(){
         sdf_time = new SimpleDateFormat("dd.MM.yyyy  HH:mm:ss", Locale.GERMANY); //hh:mm:ss
         sdf_time.setTimeZone(TimeZone.getTimeZone("Europe/Berlin"));
@@ -262,221 +368,104 @@ public class MPAAndroid extends DemoBase implements OnChartValueSelectedListener
         }
     }
 
+    public void setList(List<XyTimePlot> list) {
+        this.list = list;
+    }
+
     public void finFileDataRecordReader() {
         String day, month, year, fileName;
-        day = this.dateTime.substring(0,2);
-        month = this.dateTime.substring(3,5);
-        year = this.dateTime.substring(8);
+        day = this.rtDate.substring(0,2);
+        month = this.rtDate.substring(3,5);
+        year = this.rtDate.substring(8);
         fileName = year+month+day+".fin";
         //System.out.println("date time: "+fileName);
         new MPAAndroidAsync(this).execute(fileName);
     }
 
-    public List<Number> setXValueLists(List<Number> xValues) {
-        xLists = xValues;
-        System.out.println("X List values inside finVisualize " +xLists.size());
-        return xLists;
+    //Timer implementation for continuous data loading on the screen
+    public void startTimer(){
+        timer=new Timer();
+        initializeTimerTask();
+        timer.schedule(timerTask, 1000, 10000);
     }
-    public List<Number> setYValueLists(List<Number> yValues) {
-        yLists = yValues;
-        System.out.println("Y List values inside finVisualize " +yLists.size());
-        return yLists;
+    private void initializeTimerTask(){
+        timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                myHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        finFileDataRecordReader();
+                    }
+                });
+            }
+        };
     }
 
-    private final int[] colors = ColorTemplate.COLORFUL_COLORS;
-
-    public void addEntry() {
-
-        LineData data = chart.getData();
-
-        if (data == null) {
-            data = new LineData();
-            chart.setData(data);
-        }
-
-        ILineDataSet set = data.getDataSetByIndex(0);
-        // set.addEntry(...); // can be called as well
-
-        if (set == null) {
-            set = createSet();
-            data.addDataSet(set);
-        }
-
-        // choose a random dataSet
-        System.out.println("X List values" +xLists);
-        System.out.println("Y List values" +yLists);
-
-        //TODO getting the list until the length of the list and import it into the randomDataSetIndex
-
-        int randomDataSetIndex = (int) (Math.random() * data.getDataSetCount());
-        ILineDataSet randomSet = data.getDataSetByIndex(randomDataSetIndex);
-        float value = (float) (Math.random() * 0.05) + 0.005f * (randomDataSetIndex + 1);
-
-
-        data.addEntry(new Entry(randomSet.getEntryCount(), value), randomDataSetIndex);
-        data.notifyDataChanged();
-
-
-        // let the chart know it's data has changed
-        chart.notifyDataSetChanged();
-
-        chart.setVisibleXRangeMaximum(2);
-        //chart.setVisibleYRangeMaximum(15, AxisDependency.LEFT);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        plot.refreshDrawableState();
 //
-//            // this automatically refreshes the chart (calls invalidate())
-        chart.moveViewTo(data.getEntryCount() - 7, 50f, YAxis.AxisDependency.LEFT);
+        startTimer();
+        System.out.println("I am Deepak");
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                for (int i=0; i<100; i++){
+//                    runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//
+//
+//                        }
+//                    });
+//                }
+//            }
+//        });
 
-    }
 
-    private void removeLastEntry() {
+        /*
+        String day, month, year, fileName;
+        day = dateTime.substring(0,2);
+        month = dateTime.substring(3,5);
+        year = dateTime.substring(8);
+        fileName = year+month+day+".fin";
+        //new FinPolygonVisualizationAsync(this).execute(fileName);
+        */
 
-        LineData data = chart.getData();
-
-        if (data != null) {
-
-            ILineDataSet set = data.getDataSetByIndex(0);
-
-            if (set != null) {
-
-                Entry e = set.getEntryForXValue(set.getEntryCount() - 1, Float.NaN);
-
-                data.removeEntry(e, 0);
-                // or remove by index
-                // mData.removeEntryByXValue(xIndex, dataSetIndex);
-                data.notifyDataChanged();
-                chart.notifyDataSetChanged();
-                chart.invalidate();
-            }
-        }
-    }
-
-    private void addDataSet() {
-
-        LineData data = chart.getData();
-
-        if (data == null) {
-            chart.setData(new LineData());
-        } else {
-
-            int count = (data.getDataSetCount() + 1);
-            int amount = data.getDataSetByIndex(0).getEntryCount();
-
-            ArrayList<Entry> values = new ArrayList<>();
-
-            for (int i = 0; i < amount; i++) {
-                values.add(new Entry(i, (float) (Math.random() * 50f) + 50f * count));
-            }
-
-            LineDataSet set = new LineDataSet(values, "DataSet " + count);
-            set.setLineWidth(2.5f);
-            set.setCircleRadius(4.5f);
-
-            int color = colors[count % colors.length];
-
-            set.setColor(color);
-            set.setCircleColor(color);
-            set.setHighLightColor(color);
-            set.setValueTextSize(10f);
-            set.setValueTextColor(color);
-
-            data.addDataSet(set);
-            data.notifyDataChanged();
-            chart.notifyDataSetChanged();
-            chart.invalidate();
-        }
-    }
-
-    private void removeDataSet() {
-
-        LineData data = chart.getData();
-
-        if (data != null) {
-
-            data.removeDataSet(data.getDataSetByIndex(data.getDataSetCount() - 1));
-
-            chart.notifyDataSetChanged();
-            chart.invalidate();
-        }
-    }
-
-    private LineDataSet createSet() {
-
-        LineDataSet set = new LineDataSet(null, "DataSet 1");
-        set.setLineWidth(2.5f);
-        set.setCircleRadius(4.5f);
-        set.setColor(Color.rgb(240, 99, 99));
-        set.setCircleColor(Color.rgb(240, 99, 99));
-        set.setHighLightColor(Color.rgb(190, 190, 190));
-        set.setAxisDependency(YAxis.AxisDependency.LEFT);
-        set.setValueTextSize(10f);
-
-        return set;
     }
 
     @Override
-    public void onValueSelected(Entry e, Highlight h) {
-        Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
+    public void onSaveInstanceState(Bundle bundle) {
+        super.onSaveInstanceState(bundle);
+        bundle.putSerializable("todo", panZoom1.getState());
     }
 
     @Override
-    public void onNothingSelected() {}
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.dynamical, menu);
-        return true;
+    public void onRestoreInstanceState(Bundle bundle) {
+        // PanZoomCustomization.State state = (PanZoomCustomization.State) bundle.getSerializable("todo");
+        //panZoom1.setState(state);
+        plot.redraw();
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-            case R.id.viewGithub: {
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse("https://www.facebook.com/deepusanta"));
-                startActivity(i);
-                break;
-            }
-            case R.id.actionAddEntry: {
-                addEntry();
-                Toast.makeText(this, "Entry added!", Toast.LENGTH_SHORT).show();
-                break;
-            }
-            case R.id.actionRemoveEntry: {
-                removeLastEntry();
-                Toast.makeText(this, "Entry removed!", Toast.LENGTH_SHORT).show();
-                break;
-            }
-            case R.id.actionAddDataSet: {
-                addDataSet();
-                Toast.makeText(this, "DataSet added!", Toast.LENGTH_SHORT).show();
-                break;
-            }
-            case R.id.actionRemoveDataSet: {
-                removeDataSet();
-                Toast.makeText(this, "DataSet removed!", Toast.LENGTH_SHORT).show();
-                break;
-            }
-            case R.id.actionClear: {
-                chart.clear();
-                Toast.makeText(this, "Chart cleared!", Toast.LENGTH_SHORT).show();
-                break;
-            }
-            case R.id.actionSave: {
-                if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                    saveToGallery();
-                } else {
-                    requestStoragePermission(chart);
-                }
-                break;
-            }
-        }
-
-        return true;
+    public String outData() {
+        return minsec;
     }
 
+
     @Override
-    protected void saveToGallery() {
-        saveToGallery(chart, "DynamicalAddingActivity");
+    public void onPositiveClick(int i, int i1, int i2, Calendar calendar) {
+        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+
+
+        String date = format.format(Calendar.getInstance().getTime());
+        System.out.println(date);
+        button.setText(format.format(calendar.getTime()));
+        //button.setTextColor(Color.parseColor("#009688"));
+        sCertDate = format.format(calendar.getTime());
+
+
     }
 }

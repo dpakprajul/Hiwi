@@ -53,11 +53,30 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/btn_timeSeries"
+            android:id="@+id/btn_position_real_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_select"
-            android:layout_marginTop="10dp"
+            android:text="@string/rt_position_of_tower"
+            android:textAllCaps="false"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btn_motionGraph_real_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_position_real_time"
+            android:text="@string/rt_circular_motion_of_tower"
+            android:textAllCaps="false"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btn_timeSeries"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_motionGraph_real_time"
             android:text="@string/spectral_visualization"
             android:textAllCaps="false"
             android:textSize="20sp"

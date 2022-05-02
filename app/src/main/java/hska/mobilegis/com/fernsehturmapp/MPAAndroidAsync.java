@@ -4,11 +4,13 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.util.Log;
 
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.androidplot.ui.Insets;
+import com.androidplot.xy.CatmullRomInterpolator;
+import com.androidplot.xy.LineAndPointFormatter;
+import com.androidplot.xy.SimpleXYSeries;
+import com.androidplot.xy.XYGraphWidget;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
@@ -27,12 +29,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
-public class MPAAndroidAsync extends AsyncTask<String, Void, List<XyTimePlot>> {
+public class MPAAndroidAsync extends AsyncTask<String, Void, List<XyTimePlot>>{
 
     String sHrs, sMins, sSecs;
     String eHrs, eMins, eSecs;
-
     private MPAAndroid activity;
+
     public ProgressDialog dialog;
 
     List<Number> xList = new ArrayList<>();
@@ -40,17 +42,36 @@ public class MPAAndroidAsync extends AsyncTask<String, Void, List<XyTimePlot>> {
 
 
 
+
+
     public MPAAndroidAsync(MPAAndroid activity) {
         this.activity = activity;
+    }
+
+
+
+    public MPAAndroidAsync() {
+        this.activity=activity;
     }
 
     @Override
     protected void onPreExecute() {
         dialog = new ProgressDialog(this.activity);
-        dialog.setMessage("Please wait...");
+        dialog.setTitle("Real Time Graph of Tower Motion");
+        dialog.setMessage("Updating Real Time Graph...");
+
         dialog.setIndeterminate(true);
-        dialog.show();
+        dialog.setMax(100);
+        //dialog.setCancelable(true);
+
+      dialog.show();
+
+
+
+
         super.onPreExecute();
+
+
     }
 
     @Override
@@ -135,8 +156,8 @@ public class MPAAndroidAsync extends AsyncTask<String, Void, List<XyTimePlot>> {
         }
         super.onPostExecute(str);
         if(str==null || str.size()==0){
-            //activity.plot.clear();
-            //activity.plot.redraw();
+            activity.plot.clear();
+            activity.plot.redraw();
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this.activity);
             builder.setCancelable(false);
@@ -160,7 +181,10 @@ public class MPAAndroidAsync extends AsyncTask<String, Void, List<XyTimePlot>> {
             AlertDialog alert = builder.create();
             alert.show();
         }else if(str.size()!=0){
+            activity.setList(str);
             finFileDataRecord(str);
+//            activityMP.valueLists(xList);
+
         }
     }
 
@@ -169,7 +193,7 @@ public class MPAAndroidAsync extends AsyncTask<String, Void, List<XyTimePlot>> {
 
         String checkValue=activity.objectType;
 
-        String minsec = activity.minsec;
+        String minsec=activity.outData();
 
         if ((minsec != null && !minsec.isEmpty())
                 && (activity.endTime != null && !activity.endTime.isEmpty())) {
@@ -188,28 +212,25 @@ public class MPAAndroidAsync extends AsyncTask<String, Void, List<XyTimePlot>> {
             Double startT = Double.valueOf(sHrs) * 3600 + Double.valueOf(sMins) * 60 + Double.valueOf(sSecs); //Double startT
             Double endT = Double.valueOf(eHrs) * 3600 + Double.valueOf(eMins) * 60 + Double.valueOf(eSecs);
 
+            DecimalFormat df = new DecimalFormat("#");
+            df.setMaximumFractionDigits(5);
+
             for (XyTimePlot xyT : xyTimePlots) {
                 if((Double.valueOf(xyT.getTime())>=startT) && (Double.valueOf(xyT.getTime())<=endT)){
-                    xList.add(Double.valueOf(xyT.getX()));
-                    yList.add(Double.valueOf(xyT.getY()));
+                    String x = df.format(Double.valueOf(xyT.getX()));
+                    String y = df.format(Double.valueOf(xyT.getY()));
+                    String xValue = x.substring(7, x.indexOf("."))+ x.substring(x.indexOf("."));
+                    String yValue = y.substring(6, y.indexOf("."))+ y.substring(y.indexOf("."));
+                    xList.add(Double.valueOf(xValue));
+                    yList.add(Double.valueOf(yValue));
                 }
                 //activity.series1 = new SimpleXYSeries(xList, yList, " ");
-                LineDataSet data1 = new LineDataSet(xValues(),"");
-                //LineDataSet data2 = new LineDataSet(yValues(),"");
-                ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-                data1.setLineWidth(3);
-                dataSets.add(data1);
-                //dataSets.add(data2);
-                LineData data = new LineData(dataSets);
-
-                activity.chart.setDrawBorders(true);
-                activity.chart.setData(data);
-                activity.chart.invalidate();
 
             }
 
+
             if(xList.size()<=2 || yList.size()<=2){
-                //activity.series1 = new SimpleXYSeries(xList, yList, " ");
+                activity.series1 = new SimpleXYSeries(xList, yList, " ");
                 AlertDialog.Builder builder = new AlertDialog.Builder(this.activity);
                 builder.setCancelable(false);
                 builder.setTitle(R.string.no_datapoints_title);
@@ -238,25 +259,14 @@ public class MPAAndroidAsync extends AsyncTask<String, Void, List<XyTimePlot>> {
                 /*
                 for (XyTimePlot xyT : xyTimePlots) {
                     if((Double.valueOf(xyT.getTime())>=startT) && (Double.valueOf(xyT.getTime())<=endT)){
+
                         xList.add(Double.valueOf(xyT.getX()));
                         yList.add(Double.valueOf(xyT.getY()));
                     }
                     activity.series1 = new SimpleXYSeries(xList, yList, " ");
                 }
                 */
-                //#################################################################################################
-                //Add code to make the input of your line chart
-                // Use xList and yList data to make a your entry list
-                LineDataSet data1 = new LineDataSet(xValues(),"");
-                //LineDataSet data2 = new LineDataSet(yValues(),"");
-                ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-                dataSets.add(data1);
-                //dataSets.add(data2);
-                LineData data = new LineData(dataSets);
-                activity.chart.setData(data);
-                activity.chart.setDrawBorders(true);
-                activity.chart.invalidate();
-
+                activity.series1 = new SimpleXYSeries(xList, yList, " ");
 
             }
         }else {
@@ -280,15 +290,24 @@ public class MPAAndroidAsync extends AsyncTask<String, Void, List<XyTimePlot>> {
             Double startT = Double.valueOf(sHrs) * 3600 + Double.valueOf(sMins) * 60 + Double.valueOf(sSecs); //Double startT
             Double endT = Double.valueOf(eHrs) * 3600 + Double.valueOf(eMins) * 60 + Double.valueOf(eSecs);
 
+            DecimalFormat df = new DecimalFormat("#");
+            df.setMaximumFractionDigits(5);
+
             for (XyTimePlot xyT : xyTimePlots) {
                 if((Double.valueOf(xyT.getTime())>=startT) && (Double.valueOf(xyT.getTime())<=endT)){
-                    xList.add(Double.valueOf(xyT.getX()));
-                    yList.add(Double.valueOf(xyT.getY()));
+                    String x = df.format(Double.valueOf(xyT.getX()));
+                    String y = df.format(Double.valueOf(xyT.getY()));
+                    String xValue = x.substring(7, x.indexOf("."))+ x.substring(x.indexOf("."));
+                    String yValue = y.substring(6, y.indexOf("."))+ y.substring(y.indexOf("."));
+                    xList.add(Double.valueOf(xValue));
+                    yList.add(Double.valueOf(yValue));
+                    //activityMP.valueLists(xList);
                 }
+
             }
 
             if(xList.size()<=2 || yList.size()<=2){
-                //activity.series1 = new SimpleXYSeries(xList, yList, " ");
+                activity.series1 = new SimpleXYSeries(xList, yList, " ");
                 AlertDialog.Builder builder = new AlertDialog.Builder(this.activity);
                 builder.setCancelable(false);
                 builder.setTitle(R.string.file_not_found_title);
@@ -311,116 +330,41 @@ public class MPAAndroidAsync extends AsyncTask<String, Void, List<XyTimePlot>> {
                 AlertDialog alert = builder.create();
                 alert.show();
             }else{
-
-                //#################################################################################################
-                //Add code to make the input of your line chart
-                // Use xList(Easting) and yList(Northing) data to make a your entry list
-                LineDataSet data1 = new LineDataSet(xValues(),"");
-                //LineDataSet data2 = new LineDataSet(yValues(),"");
-                ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-                data1.setLineWidth(3);
-                dataSets.add(data1);
-                //dataSets.add(data2);
-                LineData data = new LineData(dataSets);
-
-                activity.chart.setDrawBorders(true);
-                activity.chart.setData(data);
-                activity.chart.invalidate();
+                activity.series1 = new SimpleXYSeries(xList, yList, "");
             }
             activity.minsec = null;
             activity.endTime = null;
         }
+        System.out.println("The value of x list"+xList);
+        // activityMP.valueLists(xList);
+
+
+
+
+        LineAndPointFormatter series1Format = new LineAndPointFormatter(activity, R.xml.point_formatter);
+
+        series1Format.setInterpolationParams(
+                new CatmullRomInterpolator.Params(20, CatmullRomInterpolator.Type.Centripetal)); // configure interpolation on the formatter, for line smoothening
+
+        activity.plot.getGraph().getLineLabelStyle(XYGraphWidget.Edge.TOP).setFormat(new DecimalFormat("#.###"));
+        activity.plot.getGraph().getLineLabelStyle(XYGraphWidget.Edge.RIGHT).setFormat(new DecimalFormat("#.###"));
+
+
+        //activity.plot.clear();
+        activity.plot.addSeries(activity.series1, series1Format);
+        activity.plot.getGraph().setGridInsets(new Insets(20, 20, 20, 20)); //new Insets(120, 120, 120, 120) 25, 25, 25, 25
+        activity.plot.redraw();
     }
 
-    private ArrayList<Entry> xValues(){
-        ArrayList<Entry> xEntryList = new ArrayList<Entry>();
-
-
-int listsize= xList.size();
-        for(int i=0; i<listsize; i++){
-            String format;
-            String pattern = "#.##########";
-            DecimalFormat decimalFormat = new DecimalFormat(pattern);
-            format = decimalFormat.format(xList.get(i));
-
-            //System.out.println(format.length());
-            if(format.length()<14){
-                format=format+"00";
-            }
-            String subString= format.substring(7,13);
-            float f=Float.parseFloat(subString);
-
-            String formatY;
-
-            String patternY = "#.##########";
-            DecimalFormat decimalFormatY = new DecimalFormat(patternY);
-            formatY = decimalFormatY.format(yList.get(i));
-            if(formatY.length()<14){
-                formatY=formatY+"00";
-            }
-            String subStringY= formatY.substring(6,13);
-            float fY=Float.parseFloat(subStringY);
-
-            xEntryList.add(new Entry(fY, f));
-
-        }
-
-        return xEntryList;
+    public String values() {
+        return "hello";
     }
 
-//    public float getXList() {
-//        String format = null;
-//        for (Number i : xList) {
-//            String pattern = "#.#####";
-//            DecimalFormat decimalFormat = new DecimalFormat(pattern);
-//
-//            format = decimalFormat.format(i);
-//            System.out.println(format);
-//        }
-//        return Float.parseFloat(format);
-//
-//    }
-//    public double getXList() {
-//        Number[] c = null;
-//        String stringValue = null;
-//        double xListFinal = 0;
-//        int i = 0;
-//        if (i < 10) {
-//            xListFinal = (double) xList.get(i);
-//        }
-//
-//        return (double) xList.get(i);
-//    }
-
-//        for (Number a : xList) {
-//            c = a;     //copied the value of a to c
-//            // stringValue= c.toString();     //convert c to string
-//            // c =Double.parseDouble(new DecimalFormat(".####").format(c));
-//            //String.format("%000000.000f", c);
-//            // String.format("%.0f", b);
-//            // String ab=stringValue.substring(8, 14);  //clipping data to just show in the axis  //
-//            // double abc = Double.parseDouble(ab);     //not important
-//            //System.out.println(abc);
-//            return c.doubleValue();
-//
-//
-//        }
-//        return c.doubleValue();
 
 
+    public List <Number> listValue(){
+        return xList;
 
+    }
 
-
-//    private ArrayList<Entry> yValues(){
-//        ArrayList<Entry> yEntryList = new ArrayList<Entry>();
-//        //for
-//        yEntryList.add(new Entry((float) 1.0, (float) 20.0401));
-//        yEntryList.add(new Entry((float) 2.0, (float) 20.0062));
-//        yEntryList.add(new Entry((float) 3.0, (float) 20.0043));
-//        yEntryList.add(new Entry((float) 4.0, (float) 20.0094));
-//        yEntryList.add(new Entry((float) 5.0, (float) 20.0021));
-//        yEntryList.add(new Entry((float) 6.0, (float) 20.0013));
-//
-//        return yEntryList;
-//    }
 }

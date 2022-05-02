@@ -16,7 +16,7 @@ import java.util.Locale;
 import hska.mobilegis.com.fernsehturmapp.weather.WeatherMainActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    Button timeSeries, motionGraph, weather, mapView, aboutProj, newMPAGraph;
+    Button timeSeries, motionGraph, weather, mapView, aboutProj, newMPAGraph, RTTimeSeries;
     Intent intent;
     private Button btn_en, btn_de; //buttons
     private TextView tv_option;
@@ -30,7 +30,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv_option = findViewById(R.id.tv_select);
         timeSeries = findViewById(R.id.btn_timeSeries);
         motionGraph = findViewById(R.id.btn_motionGraph);
-       // newMPAGraph = findViewById(R.id.newMPAGraph);
+        newMPAGraph = findViewById(R.id.btn_motionGraph_real_time);
+        RTTimeSeries = findViewById(R.id.btn_position_real_time);
         weather = findViewById(R.id.btn_weather);
         mapView = findViewById(R.id.btn_map);
         aboutProj = findViewById(R.id.btn_aboutProject);
@@ -43,6 +44,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //            }
 //        });
 
+        RTTimeSeries.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(MainActivity.this, FinRealTimeSeries.class);
+                startActivity(intent);
+            }
+        });
+
+        timeSeries.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(MainActivity.this, FinTimeSeries.class);
+                startActivity(intent);
+            }
+        });
         timeSeries.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,6 +72,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onClick(View view) {
                 //changed here
                 intent = new Intent(MainActivity.this, FinPolygonVisualization.class);
+                startActivity(intent);
+            }
+        });
+
+        newMPAGraph.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //changed here
+                intent = new Intent(MainActivity.this, MPAAndroid.class);
                 startActivity(intent);
             }
         });

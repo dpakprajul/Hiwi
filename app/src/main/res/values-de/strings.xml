@@ -11,10 +11,12 @@
     <string name="series_northing"> Nord</string>
     <string name="starttime_hint">Startzeit hh:mm:ss</string>
     <string name="endtime_hint">Endzeit hh:mm:ss</string>
-    <string name="ic_happy_font">&#xe902;</string>
+    <string name="start_time_view">Start Time  "\u25bc"</string>
+    <string name="ic_happy_font">Date  "\u25bc"</string>
     <string name="progress_dialog"> Bitte warten Sie ... </string>
     <string name="response_dialog">Ok</string>
-
+    <string name="rt_circular_motion_of_tower">Realzeit Diagramm der Turmbewegung</string>
+    <string name="rt_position_of_tower">Real Time Position Time Series</string>
     <string name="file_not_found_title">Keine Daten gefunden!</string>
     <string name="file_not_found">Für heute sind keine Überwachungsdaten verfügbar!</string>
     <string name="file_not_found_Turm">Für Turm sind heute keine Überwachungsdaten verfügbar!</string>

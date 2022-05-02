@@ -47,9 +47,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".SplashActivity" />
+        <activity android:name=".FinRealTimeSeries"/>
         <activity android:name=".MPAAndroid"/>
         <activity android:name=".DatePicker"/>
         <activity android:name=".MainActivity">
+
 
 
             <intent-filter>

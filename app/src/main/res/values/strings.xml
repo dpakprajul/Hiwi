@@ -10,6 +10,8 @@
     <string name="graphplot_title">Graph of Tower Motion(N,E)_T</string>
 
     <string name="circular_motion_of_tower">Graph of Tower Motion</string>
+    <string name="rt_circular_motion_of_tower">Real Time Graph of Tower Motion</string>
+    <string name="rt_position_of_tower">Real Time Position Time Series</string>
     <string name="weather_condition">Check Weather</string>
     <string name="maps">Map</string>
     <string name="about_project">About Project</string>
@@ -23,7 +25,8 @@
     <string name="progress_dialog">Please wait...</string>
     <string name="response_dialog">Ok</string>
     <string name="file_not_found_title">No Data Found!</string>
-    <string name="ic_happy_font">Date  "\u25bc"</string>
+    <string name="ic_happy_font">Date        "  \u25bc"</string>
+    <string name="start_time_view">Start Time     "  \u25bc"</string>
 
     <string name="file_not_found">No monitoring data is available for today!</string>
     <string name="file_not_found_Turm">No monitoring data is available today for Turm!</string>

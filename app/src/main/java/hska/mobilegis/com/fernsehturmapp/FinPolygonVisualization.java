@@ -413,7 +413,7 @@ plot.setRangeBoundaries(8,9, BoundaryMode.AUTO);
     @Override
     public void onSaveInstanceState(Bundle bundle) {
         super.onSaveInstanceState(bundle);
-      bundle.putSerializable("todo", panZoom1.getState());
+        bundle.putSerializable("todo", panZoom1.getState());
     }
 
     @Override

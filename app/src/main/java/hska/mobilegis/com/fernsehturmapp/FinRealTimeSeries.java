@@ -1,5 +1,6 @@
 package hska.mobilegis.com.fernsehturmapp;
 
+
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -30,7 +31,7 @@ import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class FinTimeSeries extends AppCompatActivity {
+public class FinRealTimeSeries extends AppCompatActivity {
 
     public String objectType;
     public String date;
@@ -57,7 +58,7 @@ public class FinTimeSeries extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_time_series_visualization);
+        setContentView(R.layout.activity_time_series_real_time);
 
         load_file_from_server = (Button) findViewById(R.id.load_file_from_server);
         positionTimeSeries = (GraphView) findViewById(R.id.positiontimeseries);
@@ -71,7 +72,7 @@ public class FinTimeSeries extends AppCompatActivity {
         Spinner objectSpinner = (Spinner) findViewById(R.id.objects_filter);
 
         //apply font
-        ArrayAdapter<String> objectAdapter= new ArrayAdapter<String>(FinTimeSeries.this, //adapter
+        ArrayAdapter<String> objectAdapter= new ArrayAdapter<String>(FinRealTimeSeries.this, //adapter
                 R.layout.simple_expandable_list_item_1, getResources().getStringArray(R.array.objects)) {
         };
 
@@ -248,14 +249,14 @@ public class FinTimeSeries extends AppCompatActivity {
         year = this.dateTime.substring(8);
         fileName = year+month+day+".fin";
         //System.out.println("Time Series filename: "+fileName);
-        new FinTimeSeriesAsync(this).execute(fileName);
+        new FinRealTimeSeriesAsync(this).execute(fileName);
     }
 
     //Timer implementation for continuous data loading on the screen
     public void startTimer(){
         timer=new Timer();
         initializeTimerTask();
-        timer.schedule(timerTask, 20000, 20000);
+        timer.schedule(timerTask, 1000, 100);
     }
 
     private void initializeTimerTask(){
@@ -275,7 +276,8 @@ public class FinTimeSeries extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-       // startTimer();
+        startTimer();
+
 
 
 

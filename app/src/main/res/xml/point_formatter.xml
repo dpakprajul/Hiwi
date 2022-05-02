@@ -5,6 +5,9 @@
     vertexPaint.color="#0DAF0D"
     vertexPaint.strokeWidth="4dp"
     fillPaint.color="#00000000"
+
+
+
     />
     <!-- linePaint.color="#00AA00"
     linePaint.color="#9DA39D" ash
