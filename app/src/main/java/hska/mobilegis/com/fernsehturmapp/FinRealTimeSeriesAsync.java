@@ -277,7 +277,6 @@ public class FinRealTimeSeriesAsync extends AsyncTask<String, Void, List<DataPoi
             for (DataPoint xyT : list) {
                 if(Double.valueOf(xyT.getX())>=startT && Double.valueOf(xyT.getX())<=endT){
                     filteredDataPoints.add(xyT);
-
                 }
             }
 

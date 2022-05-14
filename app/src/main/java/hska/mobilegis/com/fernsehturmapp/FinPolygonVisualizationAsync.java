@@ -3,6 +3,8 @@ package hska.mobilegis.com.fernsehturmapp;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -35,12 +37,14 @@ public class FinPolygonVisualizationAsync extends AsyncTask<String, Void, List<X
     String eHrs, eMins, eSecs;
     private MPAAndroid activityMP;
     private FinPolygonVisualization activity;
+    FinPolygonVisualization activity1 = new FinPolygonVisualization();
     public ProgressDialog dialog;
+    String endTime;
+    String message;
+
 
     List<Number> xList = new ArrayList<>();
     List<Number> yList = new ArrayList<>();
-
-
 
 
 
@@ -179,15 +183,25 @@ public class FinPolygonVisualizationAsync extends AsyncTask<String, Void, List<X
         }
     }
 
+
     //Get list of datapoints from general datalist and draw the graph
     public void finFileDataRecord(List<XyTimePlot> xyTimePlots){
 
         String checkValue=activity.objectType;
 
-        String minsec=activity.outData();
+
+
+
+        String minsec= activity.message;
+
+
+        String endTime = activity.message2;
+
+
+
 
         if ((minsec != null && !minsec.isEmpty())
-                && (activity.endTime != null && !activity.endTime.isEmpty())) {
+                && (endTime != null && !endTime.isEmpty())) {
 
             // Parse given start time (String) hr, mins and secs    10:11:29
             sHrs = activity.minsec.substring(0, 2);
@@ -196,9 +210,9 @@ public class FinPolygonVisualizationAsync extends AsyncTask<String, Void, List<X
 
 
             // Parse given end time (String) hr, mins and secs
-            eHrs = activity.endTime.substring(0, 2);
-            eMins = activity.endTime.substring(3, 5);
-            eSecs = activity.endTime.substring(6);
+            eHrs = endTime.substring(0, 2);
+            eMins = endTime.substring(3, 5);
+            eSecs = endTime.substring(6);
 
             Double startT = Double.valueOf(sHrs) * 3600 + Double.valueOf(sMins) * 60 + Double.valueOf(sSecs); //Double startT
             Double endT = Double.valueOf(eHrs) * 3600 + Double.valueOf(eMins) * 60 + Double.valueOf(eSecs);
@@ -357,5 +371,8 @@ public class FinPolygonVisualizationAsync extends AsyncTask<String, Void, List<X
         return xList;
 
     }
+
+
+
 
 }

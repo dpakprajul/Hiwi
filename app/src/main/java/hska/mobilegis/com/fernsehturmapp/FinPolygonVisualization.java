@@ -1,5 +1,6 @@
 package hska.mobilegis.com.fernsehturmapp;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -52,7 +53,10 @@ public class FinPolygonVisualization extends AppCompatActivity implements SlideD
     public String startTime;
     public String endTime;
     public String dateTime,time;
-    public String minsec;
+    public String minsec=null;
+    public String endTime1;
+    public String message;
+    public String message2;
     SimpleDateFormat sdf_date, sdf_time;
     Button load_file_from_server;
     EditText current_time;
@@ -88,10 +92,13 @@ public class FinPolygonVisualization extends AppCompatActivity implements SlideD
         load_file_from_server = (Button) findViewById(R.id.load_file_from_server);
         current_time = findViewById(R.id.et_currentDateTime);
         EditText startTime = findViewById(R.id.start_time_input);
-        EditText endTime = findViewById(R.id.end_time_input);
+        //EditText endTime = findViewById(R.id.end_time_input);
 
-        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences sharedPreferences1 = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         final TextView timeTV = findViewById(R.id.time_text_view);
+        final TextView timeTVend = findViewById(R.id.time_text_view_end);
         selectDate = (TextView) findViewById(R.id.dateselection);
         // button and text view called using id
         button = (TextView) findViewById(R.id.button);
@@ -123,26 +130,31 @@ public class FinPolygonVisualization extends AppCompatActivity implements SlideD
 
 
         timeTV.setOnClickListener(new View.OnClickListener() {
-            private String minsecout;
+
+
 
             @Override
             public void onClick(View v) {
+
                 View view = View.inflate(FinPolygonVisualization.this, R.layout.timedialog, null);
-                final NumberPicker numberPickerHour = view.findViewById(R.id.numpicker_hours);
+                NumberPicker numberPickerHour = view.findViewById(R.id.numpicker_hours);
 
-
+                //numberPickerHour.setDisplayedValues(null);
                 numberPickerHour.setMaxValue(23);
                 numberPickerHour.setValue(sharedPreferences.getInt("Hours", 0));
-                final NumberPicker numberPickerMinutes = view.findViewById(R.id.numpicker_minutes);
+                NumberPicker numberPickerMinutes = view.findViewById(R.id.numpicker_minutes);
                 numberPickerMinutes.setMaxValue(59);
+                //numberPickerMinutes.setDisplayedValues(null);
                 numberPickerMinutes.setValue(sharedPreferences.getInt("Minutes", 0));
-                final NumberPicker numberPickerSeconds = view.findViewById(R.id.numpicker_seconds);
+                NumberPicker numberPickerSeconds = view.findViewById(R.id.numpicker_seconds);
                 numberPickerSeconds.setMaxValue(59);
+                //numberPickerSeconds.setDisplayedValues(null);
                 numberPickerSeconds.setValue(sharedPreferences.getInt("Seconds", 0));
                 Button cancel = view.findViewById(R.id.cancel);
                 Button ok = view.findViewById(R.id.ok);
+                Button ok1 = view.findViewById(R.id.ok);
                 minsec = String.format("%1$02d:%2$02d:%3$02d",numberPickerHour.getValue(),numberPickerMinutes.getValue(),numberPickerSeconds.getValue());
-
+                Log.d("output1", minsec);
 
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(FinPolygonVisualization.this);
@@ -154,31 +166,86 @@ public class FinPolygonVisualization extends AppCompatActivity implements SlideD
                         alertDialog.dismiss();
                     }
                 });
-                ok.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        timeTV.setText(numberPickerHour.getValue() + ":" + numberPickerMinutes.getValue() + ":" + numberPickerSeconds.getValue());
-                        timeTV.setText(String.format("%1$02d:%2$02d:%3$02d", numberPickerHour.getValue(), numberPickerMinutes.getValue(), numberPickerSeconds.getValue()));
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putInt("Hours", numberPickerHour.getValue());
-                        editor.putInt("Minutes", numberPickerMinutes.getValue());
-                        editor.putInt("Seconds", numberPickerSeconds.getValue());
-                        editor.apply();
-                        alertDialog.dismiss();
-                    }
+                ok.setOnClickListener(v1 -> {
+                    timeTV.setText(numberPickerHour.getValue() + ":" + numberPickerMinutes.getValue() + ":" + numberPickerSeconds.getValue());
+                    timeTV.setText(String.format("%1$02d:%2$02d:%3$02d", numberPickerHour.getValue(), numberPickerMinutes.getValue(), numberPickerSeconds.getValue()));
+                    message= timeTV.getText().toString().trim();
+                    Log.d("message", message);
+                    outData(message);
+                    //startActivity(i);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putInt("Hours", numberPickerHour.getValue());
+                    editor.putInt("Minutes", numberPickerMinutes.getValue());
+                    editor.putInt("Seconds", numberPickerSeconds.getValue());
+                    editor.apply();
+                    alertDialog.dismiss();
                 });
-                Log.d("output", minsec);
+               // Log.d("output", minsec);
 
-
+              // Log.d("message", message);
                 alertDialog.show();
 
             }
 
-String outData(String minsecout){
-    return minsec;
 
-}
+
+        });
+//Log.d("output1",minsec);
+
+        //@Override
+        timeTVend.setOnClickListener(v -> {
+
+            View viewend = View.inflate(FinPolygonVisualization.this, R.layout.timedialog_end, null);
+
+            NumberPicker numberPickerHourend = viewend.findViewById(R.id.numpicker_hours);
+            numberPickerHourend.setDisplayedValues(null);
+            numberPickerHourend.setMaxValue(23);
+            numberPickerHourend.setValue(sharedPreferences1.getInt("Hours", 0));
+            NumberPicker numberPickerMinutesend = viewend.findViewById(R.id.numpicker_minutes);
+            numberPickerMinutesend.setDisplayedValues(null);
+            numberPickerMinutesend.setMaxValue(59);
+            numberPickerMinutesend.setValue(sharedPreferences1.getInt("Minutes", 0));
+            NumberPicker numberPickerSecondsend = viewend.findViewById(R.id.numpicker_seconds);
+            numberPickerMinutesend.setDisplayedValues(null);
+            numberPickerSecondsend.setMaxValue(59);
+            numberPickerSecondsend.setValue(sharedPreferences1.getInt("Seconds", 0));
+            Button cancel = viewend.findViewById(R.id.cancel);
+            Button ok1 = viewend.findViewById(R.id.ok);
+            endTime1 = String.format("%1$02d:%2$02d:%3$02d",numberPickerHourend.getValue(),numberPickerMinutesend.getValue(),numberPickerSecondsend.getValue());
+            //System.out.println(endTime1);
+
+
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(FinPolygonVisualization.this);
+            builder1.setView(viewend);
+            final AlertDialog alertDialog1 = builder1.create();
+            cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v2) {
+                    alertDialog1.dismiss();
+                }
+            });
+            ok1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v2) {
+
+                    timeTVend.setText(numberPickerHourend.getValue() + ":" + numberPickerMinutesend.getValue() + ":" + numberPickerSecondsend.getValue());
+                    timeTVend.setText(String.format("%1$02d:%2$02d:%3$02d", numberPickerHourend.getValue(), numberPickerMinutesend.getValue(), numberPickerSecondsend.getValue()));
+                    message2= timeTVend.getText().toString().trim();
+                    System.out.println("message2"+ message2);
+
+                    SharedPreferences.Editor editorend = sharedPreferences1.edit();
+                    editorend.putInt("Hours", numberPickerHourend.getValue());
+                    editorend.putInt("Minutes", numberPickerMinutesend.getValue());
+                    editorend.putInt("Seconds", numberPickerSecondsend.getValue());
+                    editorend.apply();
+                    alertDialog1.dismiss();
+                    Log.d("output2", endTime1);
+                }
+            });
+
+
+
+            alertDialog1.show();
 
         });
 //Log.d("output1",minsec);
@@ -258,40 +325,40 @@ plot.setRangeBoundaries(8,9, BoundaryMode.AUTO);
         });
 
         //Start Time
-        startTime.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//        startTime.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//            }
 
-            }
+//            @Override
+//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//                handleTimeInput(startTime, startTime.getText());
+//            }
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                handleTimeInput(startTime, startTime.getText());
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-
-        //End Time
-        endTime.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                handleTimeInput(endTime, endTime.getText());
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
+//            @Override
+//            public void afterTextChanged(Editable editable) {
+//
+//            }
+//        });
+//
+//        //End Time
+//        endTime.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//                handleTimeInput(endTime, endTime.getText());
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable editable) {
+//
+//            }
+//        });
 
         //On screen date and time
         sdf_date = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMANY); //dd-MM-yyyy
@@ -423,8 +490,19 @@ plot.setRangeBoundaries(8,9, BoundaryMode.AUTO);
         plot.redraw();
     }
 
-    public String outData() {
-        return minsec;
+//    FinPolygonVisualization fin = new FinPolygonVisualization();
+
+    public String outData(String message) {
+
+        return message;
+    }
+
+
+
+
+    public String endTimeValue(){
+        return endTime1;
+
     }
 
 
@@ -454,4 +532,6 @@ plot.setRangeBoundaries(8,9, BoundaryMode.AUTO);
 
 
     }
+
+
 }

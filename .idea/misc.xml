@@ -10,13 +10,15 @@
         <entry key="..\:/work hochschule/FernsehturmApp/FernsehturmApp/app/src/main/res/layout/activity_main.xml" value="0.27291666666666664" />
         <entry key="..\:/work hochschule/FernsehturmApp/FernsehturmApp/app/src/main/res/layout/activity_map.xml" value="0.10520833333333333" />
         <entry key="..\:/work hochschule/FernsehturmApp/FernsehturmApp/app/src/main/res/layout/activity_scrolling.xml" value="0.14322916666666666" />
-        <entry key="..\:/work hochschule/FernsehturmApp/FernsehturmApp/app/src/main/res/layout/activity_time_series_real_time.xml" value="0.9" />
+        <entry key="..\:/work hochschule/FernsehturmApp/FernsehturmApp/app/src/main/res/layout/activity_time_series_real_time.xml" value="0.4433164128595601" />
         <entry key="..\:/work hochschule/FernsehturmApp/FernsehturmApp/app/src/main/res/layout/activity_time_series_visualization.xml" value="0.22" />
         <entry key="..\:/work hochschule/FernsehturmApp/FernsehturmApp/app/src/main/res/layout/settings_toolbar.xml" value="0.14322916666666666" />
         <entry key="..\:/work hochschule/FernsehturmApp/FernsehturmApp/app/src/main/res/layout/simple_expandable_list_item_1.xml" value="0.10520833333333333" />
+        <entry key="..\:/work hochschule/FernsehturmApp/FernsehturmApp/app/src/main/res/layout/simple_widget.xml" value="0.27291666666666664" />
         <entry key="..\:/work hochschule/FernsehturmApp/FernsehturmApp/app/src/main/res/layout/splash.xml" value="0.14322916666666666" />
         <entry key="..\:/work hochschule/FernsehturmApp/FernsehturmApp/app/src/main/res/layout/time_widget.xml" value="0.25" />
         <entry key="..\:/work hochschule/FernsehturmApp/FernsehturmApp/app/src/main/res/layout/timedialog.xml" value="0.14270833333333333" />
+        <entry key="..\:/work hochschule/FernsehturmApp/FernsehturmApp/app/src/main/res/layout/timedialog_end.xml" value="0.2109375" />
         <entry key="..\:/work hochschule/FernsehturmApp/FernsehturmApp/app/src/main/res/menu/dynamical.xml" value="0.27291666666666664" />
         <entry key="..\:/work hochschule/FernsehturmApp/FernsehturmApp/app/src/main/res/xml/prefs.xml" value="0.33" />
       </map>
