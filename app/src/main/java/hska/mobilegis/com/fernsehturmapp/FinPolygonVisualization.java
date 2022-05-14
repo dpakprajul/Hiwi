@@ -3,8 +3,11 @@ package hska.mobilegis.com.fernsehturmapp;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -61,6 +64,7 @@ public class FinPolygonVisualization extends AppCompatActivity implements SlideD
     Button load_file_from_server;
     EditText current_time;
     TextView button;
+    Vibrator vibrator;
 
 
 
@@ -93,6 +97,9 @@ public class FinPolygonVisualization extends AppCompatActivity implements SlideD
         current_time = findViewById(R.id.et_currentDateTime);
         EditText startTime = findViewById(R.id.start_time_input);
         //EditText endTime = findViewById(R.id.end_time_input);
+        vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+
+
 
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -123,6 +130,8 @@ public class FinPolygonVisualization extends AppCompatActivity implements SlideD
 
                     SlideDatePickerDialog dialog = builder.build();
                     dialog.show(getSupportFragmentManager(), "Dialog");
+
+
                 }
             });
 
@@ -398,6 +407,13 @@ plot.setRangeBoundaries(8,9, BoundaryMode.AUTO);
                 finFileDataRecordReader();
               // activita.addEntry();
                //TODO also execute addEntry on Update Graph
+
+                //for vibration when click update graph
+                if (Build.VERSION.SDK_INT >= 26) {
+                    vibrator.vibrate(VibrationEffect.createOneShot(10, VibrationEffect.DEFAULT_AMPLITUDE));
+                } else {
+                    vibrator.vibrate(10);
+                }
             }
         });
 
@@ -514,18 +530,6 @@ plot.setRangeBoundaries(8,9, BoundaryMode.AUTO);
 
         String date = format.format(Calendar.getInstance().getTime());
         System.out.println(date);
-        //button.setText((CharSequence) format);
-//        timeTV.setText(String.format("%1$02d:%2$02d:%3$02d", numberPickerHour.getValue(), numberPickerMinutes.getValue(), numberPickerSeconds.getValue()));
-//        SharedPreferences.Editor editor = sharedPreferences.edit();
-//        editor.putInt("Hours", numberPickerHour.getValue());
-//        editor.putInt("Minutes", numberPickerMinutes.getValue());
-//        editor.putInt("Seconds", numberPickerSeconds.getValue());
-//        editor.apply();
-//        alertDialog.dismiss();
-        //button.setText(date);
-//        SharedPreferences.Editor editor = sharedPreferences.edit();
-//        editor.putInt("Hours", Integer.parseInt(date));
-
        button.setText(format.format(calendar.getTime()));
         //button.setTextColor(Color.parseColor("#009688"));
         sCertDate = format.format(calendar.getTime());

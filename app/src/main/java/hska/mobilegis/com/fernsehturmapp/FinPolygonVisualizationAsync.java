@@ -204,9 +204,9 @@ public class FinPolygonVisualizationAsync extends AsyncTask<String, Void, List<X
                 && (endTime != null && !endTime.isEmpty())) {
 
             // Parse given start time (String) hr, mins and secs    10:11:29
-            sHrs = activity.minsec.substring(0, 2);
-            sMins = activity.minsec.substring(3, 5);
-            sSecs = activity.minsec.substring(6);
+            sHrs = minsec.substring(0, 2);
+            sMins = minsec.substring(3, 5);
+            sSecs = minsec.substring(6);
 
 
             // Parse given end time (String) hr, mins and secs
