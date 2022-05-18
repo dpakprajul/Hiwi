@@ -58,4 +58,12 @@ dependencies {
 
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     implementation 'com.github.niwattep:material-slide-date-picker:v2.0.0'
+
+    implementation 'com.github.AppIntro:AppIntro:6.1.0'
+
+        // *** OR ***
+
+        // Latest version compatible with the old Support Library
+    implementation 'com.github.AppIntro:AppIntro:4.2.3'
+
 }

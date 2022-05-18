@@ -162,11 +162,11 @@ public class MPAAndroidAsync extends AsyncTask<String, Void, List<XyTimePlot>>{
             AlertDialog.Builder builder = new AlertDialog.Builder(this.activity);
             builder.setCancelable(false);
             builder.setTitle(R.string.file_not_found_title);
-            if(activity.objectType.equals("Turm")){
+
                 builder.setMessage(R.string.file_not_found_Turm);
-            }else{
-                builder.setMessage(R.string.file_not_found_Turm_Ubx);
-            }
+
+                //builder.setMessage(R.string.file_not_found_Turm_Ubx);
+
             builder.setInverseBackgroundForced(true);
             builder.setNegativeButton(
                     R.string.response_dialog,

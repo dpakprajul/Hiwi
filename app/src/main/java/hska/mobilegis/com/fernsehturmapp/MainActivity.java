@@ -22,10 +22,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tv_option;
     private Locale myLocale; //Current local application
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
         setContentView(R.layout.activity_main);
+
+        SharedPreferences preferencesintro = getSharedPreferences("PREFERENCE", MODE_PRIVATE);
+        String FirstTime = preferencesintro.getString("FirstTimeInstall","");
+
+        if(FirstTime.equals("YES")){
+
+        }else{
+            SharedPreferences.Editor editorintro= preferencesintro.edit();
+            editorintro.putString("FirstTimeInstall", "YES");
+            editorintro.apply();
+            Intent intent1 = new Intent(MainActivity.this, MyCustomAppIntro.class);
+            startActivity(intent1);
+        }
+
+
+
 
         tv_option = findViewById(R.id.tv_select);
         timeSeries = findViewById(R.id.btn_timeSeries);
@@ -96,9 +117,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mapView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Uri location = Uri.parse("geo:48.755882,9.190184?z=16");
-                Intent location_intent = new Intent(Intent.ACTION_VIEW, location);
-                startActivity(location_intent);
+//                String uri = String.format(Locale.ENGLISH, "https://www.google.com/maps/place/Stuttgart+TV+Tower/@48.755857,9.1879146,17z/data=!4m5!3m4!1s0x4799c4a78c941ea5:0xee74d8b131b9a572!8m2!3d48.755857!4d9.1901086", 12f, 2f, "");
+//                //Uri location = Uri.parse("geo:48.755882,9.190184?z=16");
+//                Intent location_intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+//                //location_intent.setPackage("com.google.android.apps.maps");
+//                startActivity(location_intent);
+                Uri.Builder builder = new Uri.Builder();
+                builder.scheme("https")
+                        .authority("www.google.com")
+                        .appendPath("maps")
+                        .appendPath("dir")
+                        .appendPath("")
+                        .appendQueryParameter("api", "1")
+                        .appendQueryParameter("destination", 48.755882 + "," + 9.1879146);
+                String url = builder.build().toString();
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
             }
         });
 
