@@ -317,5 +317,6 @@ corrections as well as the B.W. IT service provider LF .NET.</string>
     <string name="widget_label_simple">Forecastie Simple</string>
     <string name="widget_label_classic">Forecastie Classic</string>
     <string name="start_time_hh_mm_ss" translatable="false">Start Time hh:mm:ss "  \u25bc"</string>
+    <string name="help">Help</string>
 
 </resources>

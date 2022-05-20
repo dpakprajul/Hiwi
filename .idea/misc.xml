@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/work hochschule/FernsehturmApp/FernsehturmApp/app/src/main/res/drawable/ic_baseline_contact_support_24.xml" value="0.12395833333333334" />
+        <entry key="..\:/work hochschule/FernsehturmApp/FernsehturmApp/app/src/main/res/drawable/ic_baseline_info_24.xml" value="0.12395833333333334" />
+        <entry key="..\:/work hochschule/FernsehturmApp/FernsehturmApp/app/src/main/res/drawable/ic_baseline_map_24.xml" value="0.12864583333333332" />
+        <entry key="..\:/work hochschule/FernsehturmApp/FernsehturmApp/app/src/main/res/drawable/ic_baseline_more_vert_24.xml" value="0.12864583333333332" />
         <entry key="..\:/work hochschule/FernsehturmApp/FernsehturmApp/app/src/main/res/layout/activity_about_project.xml" value="0.27291666666666664" />
         <entry key="..\:/work hochschule/FernsehturmApp/FernsehturmApp/app/src/main/res/layout/activity_fin_polygon_visualization.xml" value="0.2984749455337691" />
         <entry key="..\:/work hochschule/FernsehturmApp/FernsehturmApp/app/src/main/res/layout/activity_fin_rt_polygon_visualization.xml" value="0.13489583333333333" />
@@ -21,6 +25,8 @@
         <entry key="..\:/work hochschule/FernsehturmApp/FernsehturmApp/app/src/main/res/layout/timedialog.xml" value="0.14270833333333333" />
         <entry key="..\:/work hochschule/FernsehturmApp/FernsehturmApp/app/src/main/res/layout/timedialog_end.xml" value="0.2109375" />
         <entry key="..\:/work hochschule/FernsehturmApp/FernsehturmApp/app/src/main/res/menu/dynamical.xml" value="0.27291666666666664" />
+        <entry key="..\:/work hochschule/FernsehturmApp/FernsehturmApp/app/src/main/res/menu/menu_main.xml" value="0.2453125" />
+        <entry key="..\:/work hochschule/FernsehturmApp/FernsehturmApp/app/src/main/res/menu/menu_map_bottom.xml" value="0.2453125" />
         <entry key="..\:/work hochschule/FernsehturmApp/FernsehturmApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.15092592592592594" />
         <entry key="..\:/work hochschule/FernsehturmApp/FernsehturmApp/app/src/main/res/xml/prefs.xml" value="0.33" />
       </map>

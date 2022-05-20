@@ -236,5 +236,6 @@ Korrekturen sowie die B.W. IT-Dienstleister LF .NET.</string>
     <string name = "widget_label_time">  Forecastie zeit </string>
     <string name = "widget_label_simple"> Forecastie Simple </string>
     <string name = "widget_label_classic"> Forecastie Classic </string>
+    <string name="help">Hilfe</string>
 
 </resources>

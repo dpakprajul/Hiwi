@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/viewGithub"
-        android:title="ViewGIT">
-    </item>
+        android:id="@+id/checkWeather"
+        android:title="@string/weather_condition"
+        android:icon="@drawable/ic_baseline_wb_sunny_24"
+        app:showAsAction="collapseActionView"
+        />
+
+
     <item
-        android:id="@+id/actionAddEntry"
-        android:title="Add Entry">
-    </item>
+        android:id="@+id/map"
+        android:title="@string/maps"
+        android:icon="@drawable/ic_baseline_map_24"
+        app:showAsAction="always"/>
+
     <item
-        android:id="@+id/actionRemoveEntry"
-        android:title="Remove Entry">
-    </item>
+        android:id="@+id/about"
+        android:title="@string/about_project"
+        android:icon="@drawable/ic_baseline_info_24"
+        app:showAsAction="always"/>
+
     <item
-        android:id="@+id/actionAddDataSet"
-        android:title="AddDataSet">
-    </item>
-    <item
-        android:id="@+id/actionRemoveDataSet"
-        android:title="RemoveDataSet">
-    </item>
-    <item
-        android:id="@+id/actionClear"
-        android:title="ClearChart">
-    </item>
-    <item
-        android:id="@+id/actionSave"
-        android:title="Save">
-    </item>
+        android:id="@+id/help"
+        android:title="@string/help"
+        android:icon="@drawable/ic_baseline_contact_support_24"
+        app:showAsAction="always"/>
+
+
 
 </menu>
