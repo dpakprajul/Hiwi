@@ -25,20 +25,29 @@ public class MyCustomAppIntro extends AppIntro {
         super.onCreate(savedInstanceState);
 
         //add slide1
-        addSlide(AppIntroFragment.newInstance("Slide 1", "This is the first slide",
-                R.mipmap.ic_launcher, R.font.allerta, R.font.allerta, ContextCompat.getColor(getApplicationContext(), R.color.slide1)));
+        addSlide(AppIntroFragment.newInstance("Stuttgart TV Tower Monitoring App", "Structural Health Monitoring of Stuttgart TV Tower. \n By continuing, you agree to the privacy policy",
+                R.mipmap.ic_launcher_tvtower_round, ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary)));
 
         //add slide2
-        addSlide(AppIntroFragment.newInstance("Slide 2", "This is the second slide",
-                R.mipmap.ic_launcher, ContextCompat.getColor(getApplicationContext(), R.color.slide2)));
+        addSlide(AppIntroFragment.newInstance("Real Time Position Times Series", "Press the Real Time Position Times Series button to see the real time position time series of the Tower",
+                R.mipmap.ic_launcher_tvtower_round, ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary)));
 
         //add slide3
-        addSlide(AppIntroFragment.newInstance("Slide 3", "This is the third slide",
-                R.mipmap.ic_launcher, ContextCompat.getColor(getApplicationContext(), R.color.slide3)));
+        addSlide(AppIntroFragment.newInstance("Real Time Graph of Tower Motion", "Press the Real Time Graph of Tower Motion button to see the real time graph of the Tower",
+                R.mipmap.ic_launcher_tvtower_round, ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary)));
+
+        addSlide(AppIntroFragment.newInstance("Position Time Series", "Press the Position Time Series button to see the position time series of the Tower \n \n Enter the start time, end time, and the desired date and finally hit Update Graph to visualize the graph. More data would make an app a little unresponsive",
+                R.mipmap.ic_launcher_tvtower_round, ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary)));
+
+        addSlide(AppIntroFragment.newInstance("Graph of Tower Motion", "Press the Graph of Tower Motion button to see the desired time graph of the Tower \n \n Enter the start time, end time, and the desired date and finally hit Update Graph to visualize the graph. More data would make an app a little unresponsive",
+                R.drawable.tutorial, ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary)));
+
+        addSlide(AppIntroFragment.newInstance("Enjoy the Monitoring", " ",
+                R.mipmap.ic_launcher_tvtower_round, ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary)));
 
         setTransformer(AppIntroPageTransformerType.Fade.INSTANCE);
         showStatusBar(true);
-        setScrollDurationFactor(3);
+        setScrollDurationFactor(1);
 
         //Enable the color "fade" animation between two slides (make sure the slide implements SlideBackgroundColorHolder)
         setColorTransitionsEnabled(true);

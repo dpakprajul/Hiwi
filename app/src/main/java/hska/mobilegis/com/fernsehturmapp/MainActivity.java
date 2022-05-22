@@ -72,6 +72,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent(MainActivity.this, MyCustomAppIntro.class);
             startActivity(intent);
         }
+        else if(item_id==R.id.contact_us){
+            Intent intent = new Intent(MainActivity.this, Contactus.class);
+            startActivity(intent);
+        }
 
         return true;
     }

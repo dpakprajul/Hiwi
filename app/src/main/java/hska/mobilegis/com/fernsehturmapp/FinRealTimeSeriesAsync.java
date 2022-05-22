@@ -206,9 +206,7 @@ public class FinRealTimeSeriesAsync extends AsyncTask<String, Void, List<DataPoi
                 LocalDateTime date = LocalDateTime.now();
                 int seconds = date.toLocalTime().toSecondOfDay();
                 Double gpsTime = Double.valueOf(xyT.getX());
-
                 //System.out.println("Difference of time: "+ (seconds-gpsTime)/3600);
-
                 Double yVal = Double.valueOf(xyT.getY());
                 if(gpsTime>=startT && gpsTime<=endT){
                     DataPoint changedDatapoint = new DataPoint(gpsTime, yVal);
@@ -319,33 +317,26 @@ public class FinRealTimeSeriesAsync extends AsyncTask<String, Void, List<DataPoi
     //For multiLine graph
 /*
     public void finFileDataRecordEN(List<DataPoint>list) {
-
         if ((activity.startTime != null && !activity.startTime.isEmpty()) && (activity.endTime != null && !activity.endTime.isEmpty())) {
             String sHrs, sMins, sSecs;
             String eHrs, eMins, eSecs;
-
             // Parse given start time (String) hr, mins and secs    10:11:29
             sHrs = activity.startTime.substring(0,2);
             sMins = activity.startTime.substring(3,5);
             sSecs = activity.startTime.substring(6);
-
             // Parse given end time (String) hr, mins and secs
             eHrs = activity.endTime.substring(0,2);
             eMins = activity.endTime.substring(3,5);
             eSecs = activity.endTime.substring(6);
-
             Double startT = Double.valueOf(sHrs) * 3600 + Double.valueOf(sMins) * 60 + Double.valueOf(sSecs);
             Double endT = Double.valueOf(eHrs) * 3600 + Double.valueOf(eMins) * 60 + Double.valueOf(eSecs);
-
             List<DataPoint> filteredDataPoints = new ArrayList<>();
-
             for (DataPoint xyT : list) {
                 if(Double.valueOf(xyT.getX())>=startT && Double.valueOf(xyT.getX())<=endT){
                     filteredDataPoints.add(xyT);
                 }
             }
             DataPoint[] resetDataPoints = (DataPoint[]) filteredDataPoints.toArray(new DataPoint[filteredDataPoints.size()]);
-
             for(DataPoint dp:filteredDataPoints){
                 activity.series1.resetData(resetDataPoints);
                 //activity.series3.resetData(resetDataPoints);
@@ -356,7 +347,6 @@ public class FinRealTimeSeriesAsync extends AsyncTask<String, Void, List<DataPoi
             activity.positionTimeSeries.addSeries(activity.series3);
         } else {
             DataPoint[] resetDataPoints = (DataPoint[]) list.toArray(new DataPoint[list.size()]);
-
             for(DataPoint dp:list){
                 activity.series1.resetData(resetDataPoints);
                 //activity.series3.resetData(resetDataPoints);
@@ -366,9 +356,7 @@ public class FinRealTimeSeriesAsync extends AsyncTask<String, Void, List<DataPoi
             activity.positionTimeSeries.addSeries(activity.series1);
             activity.positionTimeSeries.addSeries(activity.series3);
         }
-
     }
-
  */
 
 }

@@ -230,7 +230,7 @@
 
     <string name="project_architecture">Project Architecture</string>
     <string name="btn_readmore">Read More</string>
-    <string name="about_monitoring_app">This R and D project is developing by Naznin Akter based on the thesis work of Mr. Sylvester Tabi Kyei-Amponsah is realized as part of the GOCA and NAVKA projects of the Laboratory for GNSS
+    <string name="about_monitoring_app">This R and D project is developing by Naznin Akter along with Deepak Parajuli based on the thesis work of Mr. Sylvester Tabi Kyei-Amponsah is realized as part of the GOCA and NAVKA projects of the Laboratory for GNSS
 and Navigation at the Hochschule Karlsruhe, also in conjunction with the Ingenieurbüro für
 Angewandte Geodäsie, Photogrammetrie und Geoinformatik E. Messmer, SWR B.W. (BadenWürttemberg) as the owner of the television tower, the Landesamt für Geobasisinformation
 und Landentwicklung (LGL) Karlsruhe as service provider for spatial reference via SAPOS GNSS
@@ -318,5 +318,6 @@ corrections as well as the B.W. IT service provider LF .NET.</string>
     <string name="widget_label_classic">Forecastie Classic</string>
     <string name="start_time_hh_mm_ss" translatable="false">Start Time hh:mm:ss "  \u25bc"</string>
     <string name="help">Help</string>
+    <string name="connectwithus">Connect with US</string>
 
 </resources>

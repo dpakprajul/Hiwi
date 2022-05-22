@@ -28,6 +28,15 @@
         android:icon="@drawable/ic_baseline_contact_support_24"
         app:showAsAction="always"/>
 
+    <item
+        android:id="@+id/contact_us"
+        android:title="@string/connectwithus"
+        android:icon="@drawable/ic_baseline_contact_mail_24"
+        app:showAsAction="always"/>
+
+
+
+
 
 
 </menu>
