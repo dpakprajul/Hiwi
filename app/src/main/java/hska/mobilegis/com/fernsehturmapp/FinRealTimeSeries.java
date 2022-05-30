@@ -256,7 +256,7 @@ public class FinRealTimeSeries extends AppCompatActivity {
     public void startTimer(){
         timer=new Timer();
         initializeTimerTask();
-        timer.schedule(timerTask, 1000, 100);
+        timer.schedule(timerTask, 1000, 10000);
     }
 
     private void initializeTimerTask(){
@@ -266,7 +266,11 @@ public class FinRealTimeSeries extends AppCompatActivity {
                 myHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        finFileDataRecordReader();
+                        try{
+                            finFileDataRecordReader();}
+                        catch(Exception e){
+                            System.out.println("I am Deepak Parajuli");
+                        }
                     }
                 });
             }

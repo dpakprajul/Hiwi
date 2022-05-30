@@ -34,6 +34,8 @@ public class Contactus extends AppCompatActivity {
                 .setDescription("Stuttgart TV Tower Monitoring app SHM Stuttgart TV Tower was developed  under Android with interface to the GOCA time series (FIN files). For the visualization of the Tower, the App accesses via TCP/IP communication to the server-side GOCA deformation analysis software Object point time series (FIN files) Tourists who download the app can also thus\n" +
                         "view the tower's current motion history on their Android smartphones. The app is currently\n" +
                         "bilingual (English, German)")
+
+
                 .addItem(new Element().setTitle("Beta Version"))
 //                .addItem(new Element().setIconDrawable(R.drawable.ic_baseline_bug_report_24).setTitle("Report bug in Contact us section"))
                 .addGroup("CONNECT WITH US!")
@@ -67,7 +69,7 @@ public class Contactus extends AppCompatActivity {
     {
         Element debug = new Element();
 
-        debug.setTitle("Report your bug here");
+        debug.setTitle("Report the bug here");
         debug.setIconDrawable(R.drawable.ic_baseline_bug_report_24);
         // copyright.setIcon(R.mipmap.ic_launcher);
         debug.setGravity(Gravity.LEFT);

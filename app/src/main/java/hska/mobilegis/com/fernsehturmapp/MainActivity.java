@@ -301,6 +301,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //mapView.setText(R.string.maps);
         //aboutProj.setText(R.string.about_project);
         tv_option.setText(R.string.select_option);
+        newMPAGraph.setText(R.string.rt_circular_motion_of_tower);
+        RTTimeSeries.setText(R.string.rt_position_of_tower);
+
+
     }
 
     /*Add events to the buttons. For this implement OnClickListener interface for our Activity (implements OnClickListener).

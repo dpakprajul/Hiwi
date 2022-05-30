@@ -62,9 +62,9 @@ public class MPAAndroidAsync extends AsyncTask<String, Void, List<XyTimePlot>>{
 
         dialog.setIndeterminate(true);
         dialog.setMax(100);
-        //dialog.setCancelable(true);
+        dialog.setCancelable(true);
 
-      dialog.show();
+        //dialog.show();
 
 
 
@@ -356,9 +356,7 @@ public class MPAAndroidAsync extends AsyncTask<String, Void, List<XyTimePlot>>{
         activity.plot.redraw();
     }
 
-    public String values() {
-        return "hello";
-    }
+
 
 
 

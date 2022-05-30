@@ -372,30 +372,43 @@ public class MPAAndroid extends AppCompatActivity implements SlideDatePickerDial
         this.list = list;
     }
 
+
     public void finFileDataRecordReader() {
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
         String day, month, year, fileName;
         day = this.rtDate.substring(0,2);
         month = this.rtDate.substring(3,5);
         year = this.rtDate.substring(8);
         fileName = year+month+day+".fin";
         //System.out.println("date time: "+fileName);
-        new MPAAndroidAsync(this).execute(fileName);
+        if(fileName==null){
+            System.out.println("No fileName found");
+            builder.setMessage(R.string.no_datapoints_Turm);
+        }else {
+            new MPAAndroidAsync(this).execute(fileName);
+        }
     }
+
 
     //Timer implementation for continuous data loading on the screen
     public void startTimer(){
         timer=new Timer();
         initializeTimerTask();
-        timer.schedule(timerTask, 1000, 10000);
+        timer.schedule(timerTask, 100, 10000);
     }
     private void initializeTimerTask(){
         timerTask = new TimerTask() {
             @Override
             public void run() {
                 myHandler.post(new Runnable() {
+
                     @Override
                     public void run() {
-                        finFileDataRecordReader();
+                        try{
+                        finFileDataRecordReader();}
+                        catch(Exception e){
+                            System.out.println("Error in finFile DataRecordReader");
+                        }
                     }
                 });
             }
@@ -408,7 +421,7 @@ public class MPAAndroid extends AppCompatActivity implements SlideDatePickerDial
         plot.refreshDrawableState();
 //
         startTimer();
-        System.out.println("I am Deepak");
+
 //        new Thread(new Runnable() {
 //            @Override
 //            public void run() {
@@ -439,7 +452,7 @@ public class MPAAndroid extends AppCompatActivity implements SlideDatePickerDial
     @Override
     public void onSaveInstanceState(Bundle bundle) {
         super.onSaveInstanceState(bundle);
-        bundle.putSerializable("todo", panZoom1.getState());
+        //bundle.putSerializable("todo", panZoom1.getState());
     }
 
     @Override

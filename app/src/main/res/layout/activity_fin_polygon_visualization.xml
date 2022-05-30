@@ -209,7 +209,7 @@
             android:layout_below="@+id/tv_graphTitle"
             android:fontFamily="@font/coda"
             android:typeface="sans"
-            ap:domainTitle="East (m)"
+            ap:domainTitle="East (m)    540031"
             ap:domainTitleTextSize="14sp"
             ap:lineLabelTextColorBottom="@color/ap_transparent"
             ap:lineLabelTextColorLeft="@color/ap_transparent"
@@ -217,7 +217,7 @@
             ap:paddingBottom="2dp"
             ap:paddingLeft="2dp"
             ap:paddingRight="2dp"
-            ap:rangeTitle="North (m)"
+            ap:rangeTitle="North (m)    3251397"
             ap:rangeTitleTextSize="14sp" />
 
     </RelativeLayout>

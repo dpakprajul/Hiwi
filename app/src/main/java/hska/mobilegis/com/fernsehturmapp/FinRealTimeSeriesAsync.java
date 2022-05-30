@@ -39,8 +39,12 @@ public class FinRealTimeSeriesAsync extends AsyncTask<String, Void, List<DataPoi
     @Override
     protected void onPreExecute() {
         dialog = new ProgressDialog(this.activity);
-        dialog.setMessage("Please wait...");
+
+        dialog.setTitle("Real Time Position Series of Tower Motion");
+        dialog.setMessage("Updating Real Time Graph...");
+
         dialog.setIndeterminate(true);
+        dialog.setMax(100);
         //dialog.show();
         super.onPreExecute();
     }
