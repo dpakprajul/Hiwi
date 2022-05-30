@@ -126,7 +126,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/time_text_view_end"
         android:layout_marginStart="300dp"
-        android:layout_marginLeft="100dp"
+        android:layout_marginLeft="96dp"
         android:layout_marginTop="-10dp"
         android:gravity="center"
         android:text="" />
@@ -140,7 +140,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/dateselection"
         android:layout_marginStart="310dp"
-        android:layout_marginLeft="100dp"
+        android:layout_marginLeft="96dp"
         android:typeface="sans"
 
         android:gravity="right"

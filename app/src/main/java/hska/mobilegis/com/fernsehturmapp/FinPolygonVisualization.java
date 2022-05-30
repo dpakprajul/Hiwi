@@ -460,7 +460,7 @@ public class FinPolygonVisualization extends AppCompatActivity implements SlideD
     public void startTimer() {
         timer = new Timer();
         initializeTimerTask();
-        timer.schedule(timerTask, 10000, 10000);
+        timer.schedule(timerTask, 1000, 10000);
     }
 
     private void initializeTimerTask() {

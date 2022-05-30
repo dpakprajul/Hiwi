@@ -175,18 +175,23 @@ public class FinTimeSeriesAsync extends AsyncTask<String, Void, List<DataPoint>>
     public void finFileDataRecord(List<DataPoint>list) {
 
         String checkValue=activity.objectType;
-        if ((activity.startTime != null && !activity.startTime.isEmpty())
-                && (activity.endTime != null && !activity.endTime.isEmpty())) {
+
+        String minsec= activity.message;
+        String endTime = activity.message2;
+
+        if ((minsec != null && !minsec.isEmpty())
+                && (endTime != null && !endTime.isEmpty())) {
 
             // Parse given start time (String) hr, mins and secs    10:11:29
-            sHrs = activity.startTime.substring(0,2);
-            sMins = activity.startTime.substring(3,5);
-            sSecs = activity.startTime.substring(6);
+            sHrs = minsec.substring(0, 2);
+            sMins = minsec.substring(3, 5);
+            sSecs = minsec.substring(6);
+
 
             // Parse given end time (String) hr, mins and secs
-            eHrs = activity.endTime.substring(0,2);
-            eMins = activity.endTime.substring(3,5);
-            eSecs = activity.endTime.substring(6);
+            eHrs = endTime.substring(0, 2);
+            eMins = endTime.substring(3, 5);
+            eSecs = endTime.substring(6);
 
             Double startT = Double.valueOf(sHrs) * 3600 + Double.valueOf(sMins) * 60 + Double.valueOf(sSecs);
             Double endT = Double.valueOf(eHrs) * 3600 + Double.valueOf(eMins) * 60 + Double.valueOf(eSecs);
@@ -252,17 +257,17 @@ public class FinTimeSeriesAsync extends AsyncTask<String, Void, List<DataPoint>>
             SimpleDateFormat sdf_time = new SimpleDateFormat("HH:mm:ss"); //hh:mm:ss
             sdf_time.setTimeZone(TimeZone.getTimeZone("GMT"));;
 
-            activity.startTime = sdf_time.format(new Date(System.currentTimeMillis()- (60)*1000));
+            activity.minsec = sdf_time.format(new Date(System.currentTimeMillis()- (60)*1000));
             activity.endTime = sdf_time.format(new Date(System.currentTimeMillis()));
 
             // Parse given start time (String) hr, mins and secs
-            sHrs = activity.startTime.substring(0,2);
-            sMins = activity.startTime.substring(3,5);
-            sSecs = activity.startTime.substring(6);
+            sHrs = activity.minsec.substring(0, 2);
+            sMins = activity.minsec.substring(3, 5);
+            sSecs = activity.minsec.substring(6);
 
             // Parse given end time (String) hr, mins and secs
-            eHrs = activity.endTime.substring(0,2);
-            eMins = activity.endTime.substring(3,5);
+            eHrs = activity.endTime.substring(0, 2);
+            eMins = activity.endTime.substring(3, 5);
             eSecs = activity.endTime.substring(6);
 
             //Calculate start and end time interval from user input
@@ -310,7 +315,7 @@ public class FinTimeSeriesAsync extends AsyncTask<String, Void, List<DataPoint>>
                 activity.positionTimeSeries.refreshDrawableState();
                 activity.positionTimeSeries.addSeries(activity.series1);
             }
-            activity.startTime = null;
+            activity.minsec = null;
             activity.endTime = null;
         }
     }

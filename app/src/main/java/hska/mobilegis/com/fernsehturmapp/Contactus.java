@@ -36,7 +36,7 @@ public class Contactus extends AppCompatActivity {
                         "bilingual (English, German)")
 
 
-                .addItem(new Element().setTitle("Beta Version"))
+                .addItem(new Element().setTitle("Version 2.0.0 Beta"))
 //                .addItem(new Element().setIconDrawable(R.drawable.ic_baseline_bug_report_24).setTitle("Report bug in Contact us section"))
                 .addGroup("CONNECT WITH US!")
                 .addEmail("reiner.jaeger@web.de")
