@@ -135,7 +135,6 @@ public class FinTimeSeries extends AppCompatActivity {
         sdf_time = new SimpleDateFormat("dd.MM.yyyy  HH:mm:ss"); //hh:mm:ss
         sdf_time.setTimeZone(TimeZone.getTimeZone("GMT"));
         time = sdf_time.format(new Date());
-        //current_date.setText(dateTime);
         current_time.setText(time);
 
         Thread t = new Thread() {
