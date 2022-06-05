@@ -1,17 +1,17 @@
 <resources>
     <string name="app_name">   Stuttgart TV Tower Monitoring App   </string>
-    <string name="welcome_text">Welcome to the Stuttgart TV Tower Monitoring App</string>
-    <string name="select_option">Select From Options</string>
+    <string name="welcome_text">Welcome to the Geo and Structural Health Monitoring (SHM) Fernsehturm Stuttgart</string>
+    <string name="select_option">Options</string>
     <string name="starttime_hint">Start Time hh:mm:ss</string>
     <string name="endtime_hint">End Time hh:mm:ss</string>
-    <string name="spectral_visualization">Position Time Series</string>
+    <string name="spectral_visualization">2D Movement in Time Interval</string>
 
     <string name="graphview_title">Position Time Series(E/N)_T</string>
     <string name="graphplot_title">Graph of Tower Motion(N,E)_T</string>
 
-    <string name="circular_motion_of_tower">Graph of Tower Motion</string>
-    <string name="rt_circular_motion_of_tower">Real Time Graph of Tower Motion</string>
-    <string name="rt_position_of_tower">Real Time Position Time Series</string>
+    <string name="circular_motion_of_tower">(N,E) Time Series in Time Interval</string>
+    <string name="rt_circular_motion_of_tower">Present (N,E) Time Series Graphics</string>
+    <string name="rt_position_of_tower">Present 2D Movement Graphics</string>
     <string name="weather_condition">Check Weather</string>
     <string name="maps">Map</string>
     <string name="about_project">About Project</string>
@@ -319,7 +319,7 @@ corrections as well as the B.W. IT service provider LF .NET.</string>
     <string name="start_time_hh_mm_ss" translatable="false">Start Time hh:mm:ss "  \u25bc"</string>
     <string name="help">Help</string>
     <string name="connectwithus">Connect with US</string>
-
+    <string name="infotext" translatable="false">Please wait for the current Time Series Graph to load</string>
 
 
 </resources>

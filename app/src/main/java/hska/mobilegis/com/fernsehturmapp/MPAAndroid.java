@@ -47,7 +47,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
-public class MPAAndroid extends AppCompatActivity implements SlideDatePickerDialogCallback {
+public class MPAAndroid extends AppCompatActivity{
 
     public String objectType;
     public String startTime;
@@ -91,7 +91,7 @@ public class MPAAndroid extends AppCompatActivity implements SlideDatePickerDial
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fin_polygon_visualization);
+        setContentView(R.layout.activity_fin_rt_polygon_visualization);
 
         load_file_from_server = (Button) findViewById(R.id.load_file_from_server);
         current_time = findViewById(R.id.et_currentDateTime);
@@ -105,90 +105,90 @@ public class MPAAndroid extends AppCompatActivity implements SlideDatePickerDial
         button = (TextView) findViewById(R.id.button);
 
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Calendar endDate = Calendar.getInstance();
-                Calendar startDate= Calendar.getInstance();
-                SimpleDateFormat formatter = new SimpleDateFormat("MM");
-                String dateString = formatter.format(new Date());
-                System.out.println(dateString);
-                startDate.set(Calendar.MONTH, Integer.parseInt(dateString)-2);
-
-                long time= System.currentTimeMillis();
-
-                //endDate.set(Calendar.YEAR, 2040);
-                SlideDatePickerDialog.Builder builder = new SlideDatePickerDialog.Builder();
-                //builder.setEndDate(endDate);
-                builder.setStartDate(startDate);
-
-                SlideDatePickerDialog dialog = builder.build();
-                dialog.show(getSupportFragmentManager(), "Dialog");
-            }
-        });
-
-
-
-
-        timeTV.setOnClickListener(new View.OnClickListener() {
-            private String minsecout;
-
-            @Override
-            public void onClick(View v) {
-                View view = View.inflate(MPAAndroid.this, R.layout.timedialog, null);
-                final NumberPicker numberPickerHour = view.findViewById(R.id.numpicker_hours);
-
-
-                numberPickerHour.setMaxValue(23);
-                numberPickerHour.setValue(sharedPreferences.getInt("Hours", 0));
-                final NumberPicker numberPickerMinutes = view.findViewById(R.id.numpicker_minutes);
-                numberPickerMinutes.setMaxValue(59);
-                numberPickerMinutes.setValue(sharedPreferences.getInt("Minutes", 0));
-                final NumberPicker numberPickerSeconds = view.findViewById(R.id.numpicker_seconds);
-                numberPickerSeconds.setMaxValue(59);
-                numberPickerSeconds.setValue(sharedPreferences.getInt("Seconds", 0));
-                Button cancel = view.findViewById(R.id.cancel);
-                Button ok = view.findViewById(R.id.ok);
-                minsec = String.format("%1$02d:%2$02d:%3$02d",numberPickerHour.getValue(),numberPickerMinutes.getValue(),numberPickerSeconds.getValue());
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Calendar endDate = Calendar.getInstance();
+//                Calendar startDate= Calendar.getInstance();
+//                SimpleDateFormat formatter = new SimpleDateFormat("MM");
+//                String dateString = formatter.format(new Date());
+//                System.out.println(dateString);
+//                startDate.set(Calendar.MONTH, Integer.parseInt(dateString)-2);
+//
+//                long time= System.currentTimeMillis();
+//
+//                //endDate.set(Calendar.YEAR, 2040);
+//                SlideDatePickerDialog.Builder builder = new SlideDatePickerDialog.Builder();
+//                //builder.setEndDate(endDate);
+//                builder.setStartDate(startDate);
+//
+//                SlideDatePickerDialog dialog = builder.build();
+//                dialog.show(getSupportFragmentManager(), "Dialog");
+//            }
+//        });
 
 
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(MPAAndroid.this);
-                builder.setView(view);
-                final AlertDialog alertDialog = builder.create();
-                cancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        alertDialog.dismiss();
-                    }
-                });
-                ok.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
 
-                        timeTV.setText(numberPickerHour.getValue() + ":" + numberPickerMinutes.getValue() + ":" + numberPickerSeconds.getValue());
-                        timeTV.setText(String.format("%1$02d:%2$02d:%3$02d", numberPickerHour.getValue(), numberPickerMinutes.getValue(), numberPickerSeconds.getValue()));
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putInt("Hours", numberPickerHour.getValue());
-                        editor.putInt("Minutes", numberPickerMinutes.getValue());
-                        editor.putInt("Seconds", numberPickerSeconds.getValue());
-                        editor.apply();
-                        alertDialog.dismiss();
-                    }
-                });
-                Log.d("output", minsec);
-
-
-                alertDialog.show();
-
-            }
-
-            String outData(String minsecout){
-                return minsec;
-
-            }
-
-        });
+//        timeTV.setOnClickListener(new View.OnClickListener() {
+//            private String minsecout;
+//
+//            @Override
+//            public void onClick(View v) {
+//                View view = View.inflate(MPAAndroid.this, R.layout.timedialog, null);
+//                final NumberPicker numberPickerHour = view.findViewById(R.id.numpicker_hours);
+//
+//
+//                numberPickerHour.setMaxValue(23);
+//                numberPickerHour.setValue(sharedPreferences.getInt("Hours", 0));
+//                final NumberPicker numberPickerMinutes = view.findViewById(R.id.numpicker_minutes);
+//                numberPickerMinutes.setMaxValue(59);
+//                numberPickerMinutes.setValue(sharedPreferences.getInt("Minutes", 0));
+//                final NumberPicker numberPickerSeconds = view.findViewById(R.id.numpicker_seconds);
+//                numberPickerSeconds.setMaxValue(59);
+//                numberPickerSeconds.setValue(sharedPreferences.getInt("Seconds", 0));
+//                Button cancel = view.findViewById(R.id.cancel);
+//                Button ok = view.findViewById(R.id.ok);
+//                minsec = String.format("%1$02d:%2$02d:%3$02d",numberPickerHour.getValue(),numberPickerMinutes.getValue(),numberPickerSeconds.getValue());
+//
+//
+//
+//                AlertDialog.Builder builder = new AlertDialog.Builder(MPAAndroid.this);
+//                builder.setView(view);
+//                final AlertDialog alertDialog = builder.create();
+//                cancel.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        alertDialog.dismiss();
+//                    }
+//                });
+//                ok.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//
+//                        timeTV.setText(numberPickerHour.getValue() + ":" + numberPickerMinutes.getValue() + ":" + numberPickerSeconds.getValue());
+//                        timeTV.setText(String.format("%1$02d:%2$02d:%3$02d", numberPickerHour.getValue(), numberPickerMinutes.getValue(), numberPickerSeconds.getValue()));
+//                        SharedPreferences.Editor editor = sharedPreferences.edit();
+//                        editor.putInt("Hours", numberPickerHour.getValue());
+//                        editor.putInt("Minutes", numberPickerMinutes.getValue());
+//                        editor.putInt("Seconds", numberPickerSeconds.getValue());
+//                        editor.apply();
+//                        alertDialog.dismiss();
+//                    }
+//                });
+//                Log.d("output", minsec);
+//
+//
+//                alertDialog.show();
+//
+//            }
+//
+//            String outData(String minsecout){
+//                return minsec;
+//
+//            }
+//
+//        });
 //Log.d("output1",minsec);
 
 
@@ -333,14 +333,14 @@ public class MPAAndroid extends AppCompatActivity implements SlideDatePickerDial
         t.start();
 
         //Button onClickListener
-        load_file_from_server.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finFileDataRecordReader();
-                // activita.addEntry();
-                //TODO also execute addEntry on Update Graph
-            }
-        });
+//        load_file_from_server.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                finFileDataRecordReader();
+//                // activita.addEntry();
+//                //TODO also execute addEntry on Update Graph
+//            }
+//        });
 
         //Timer for continuous data loading on the screen
         //startTimer();
@@ -467,18 +467,16 @@ public class MPAAndroid extends AppCompatActivity implements SlideDatePickerDial
     }
 
 
-    @Override
-    public void onPositiveClick(int i, int i1, int i2, Calendar calendar) {
-        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
-
-
-        String date = format.format(Calendar.getInstance().getTime());
-        System.out.println(date);
-        button.setText(format.format(calendar.getTime()));
-        //button.setTextColor(Color.parseColor("#009688"));
-        sCertDate = format.format(calendar.getTime());
-
-
-    }
+//    @Override
+//    public void onPositiveClick(int i, int i1, int i2, Calendar calendar) {
+//        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+//        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+//
+//
+//        String date = format.format(Calendar.getInstance().getTime());
+//        System.out.println(date);
+//        button.setText(format.format(calendar.getTime()));
+//        //button.setTextColor(Color.parseColor("#009688"));
+//        sCertDate = format.format(calendar.getTime());
+//
 }

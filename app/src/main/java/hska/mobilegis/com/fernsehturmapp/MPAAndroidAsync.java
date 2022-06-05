@@ -179,7 +179,11 @@ public class MPAAndroidAsync extends AsyncTask<String, Void, List<XyTimePlot>>{
                         }
                     });
             AlertDialog alert = builder.create();
-            alert.show();
+            try {
+                alert.show();
+            }catch(Exception e){
+                e.printStackTrace();
+            }
         }else if(str.size()!=0){
             activity.setList(str);
             finFileDataRecord(str);
@@ -219,10 +223,18 @@ public class MPAAndroidAsync extends AsyncTask<String, Void, List<XyTimePlot>>{
                 if((Double.valueOf(xyT.getTime())>=startT) && (Double.valueOf(xyT.getTime())<=endT)){
                     String x = df.format(Double.valueOf(xyT.getX()));
                     String y = df.format(Double.valueOf(xyT.getY()));
-                    String xValue = x.substring(7, x.indexOf("."))+ x.substring(x.indexOf("."));
-                    String yValue = y.substring(6, y.indexOf("."))+ y.substring(y.indexOf("."));
-                    xList.add(Double.valueOf(xValue));
-                    yList.add(Double.valueOf(yValue));
+                    if (x.contains(",")&&y.contains(",")){
+                        String xValue = x.substring(7, x.indexOf(","))+ x.substring(x.indexOf(","));
+                        String yValue = y.substring(6, y.indexOf(","))+ y.substring(y.indexOf(","));
+                        xValue = xValue.replace(',','.');
+                        yValue=yValue.replace(',', '.');
+                        xList.add(Double.valueOf(xValue));
+                        yList.add(Double.valueOf(yValue));
+                    }else
+                    {String xValue = x.substring(7, x.indexOf("."))+ x.substring(x.indexOf("."));
+                        String yValue = y.substring(6, y.indexOf("."))+ y.substring(y.indexOf("."));
+                        xList.add(Double.valueOf(xValue));
+                        yList.add(Double.valueOf(yValue));}
                 }
                 //activity.series1 = new SimpleXYSeries(xList, yList, " ");
 
@@ -297,10 +309,18 @@ public class MPAAndroidAsync extends AsyncTask<String, Void, List<XyTimePlot>>{
                 if((Double.valueOf(xyT.getTime())>=startT) && (Double.valueOf(xyT.getTime())<=endT)){
                     String x = df.format(Double.valueOf(xyT.getX()));
                     String y = df.format(Double.valueOf(xyT.getY()));
-                    String xValue = x.substring(7, x.indexOf("."))+ x.substring(x.indexOf("."));
-                    String yValue = y.substring(6, y.indexOf("."))+ y.substring(y.indexOf("."));
-                    xList.add(Double.valueOf(xValue));
-                    yList.add(Double.valueOf(yValue));
+                    if (x.contains(",")&&y.contains(",")){
+                        String xValue = x.substring(7, x.indexOf(","))+ x.substring(x.indexOf(","));
+                        String yValue = y.substring(6, y.indexOf(","))+ y.substring(y.indexOf(","));
+                        xValue = xValue.replace(',','.');
+                        yValue=yValue.replace(',', '.');
+                        xList.add(Double.valueOf(xValue));
+                        yList.add(Double.valueOf(yValue));
+                    }else
+                    {String xValue = x.substring(7, x.indexOf("."))+ x.substring(x.indexOf("."));
+                        String yValue = y.substring(6, y.indexOf("."))+ y.substring(y.indexOf("."));
+                        xList.add(Double.valueOf(xValue));
+                        yList.add(Double.valueOf(yValue));}
                     //activityMP.valueLists(xList);
                 }
 

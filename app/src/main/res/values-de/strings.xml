@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Stuttgarter Fernsehturmüberwachung App</string>
-    <string name="welcome_text">Willkommen zum Überwachungs-App des Stuttgarter Fernsehturm</string>
+    <string name="welcome_text">Willkommen zum Geo and Structural Health Monitoring (SHM) Fernsehturm Stuttgart</string>
     <string name="btn_en">EN</string>
     <string name="btn_de">DE</string>
-    <string name="select_option">Wählen Sie Aus Optionen</string>
+    <string name="select_option">Optionen</string>
     <string name="object_selection">Wählen Sie Objektpunkt</string>
     <string name="series_selection"> Wählen Sie Zeitreihen</string>
     <string name="series_eastern"> Ost</string>
@@ -15,8 +15,8 @@
     <string name="ic_happy_font">Date  "\u25bc"</string>
     <string name="progress_dialog"> Bitte warten Sie ... </string>
     <string name="response_dialog">Ok</string>
-    <string name="rt_circular_motion_of_tower">Realzeit Diagramm der Turmbewegung</string>
-    <string name="rt_position_of_tower">Echtzeit-Positionszeitreihen</string>
+    <string name="rt_circular_motion_of_tower">Aktuelle (N,E)-Zeitreihen Graphik</string>
+    <string name="rt_position_of_tower">Aktuelle (N,E)-Zeitreihen Graphik</string>
     <string name="file_not_found_title">Keine Daten gefunden!</string>
     <string name="file_not_found">Für heute sind keine Überwachungsdaten verfügbar!</string>
     <string name="file_not_found_Turm">Für Turm sind heute keine Überwachungsdaten verfügbar!</string>
@@ -47,11 +47,11 @@
         tatsächliche Zeit ist (die Startzeit sollte kürzer als die Endzeit sein). Die tatsächliche Zeit ist
         die GPS-Zeit (Bildschirmzeit)!</string>
 
-    <string name="spectral_visualization">Positionszeitreihen anzeigen</string>
+    <string name="spectral_visualization">Grundrissbewegung in Zeitintervall</string>
     <string name="graphview_title">Positionszeitreihen(E/N)_T"</string>
     <string name="graphplot_title">Diagramm der Turmbewegung(N,E)_T</string>
 
-    <string name="circular_motion_of_tower">Echtzeit-Diagramm der Turmbewegung</string>
+    <string name="circular_motion_of_tower">Zeitreihen in Zeitinvervall</string>
     <string name="maps">Karte</string>
     <string name="weather_condition">Überprüfen Sie das Wetter</string>
     <string name="about_project">Über das Projekt</string>
@@ -238,6 +238,7 @@ Korrekturen sowie die B.W. IT-Dienstleister LF .NET.</string>
     <string name = "widget_label_classic"> Forecastie Classic </string>
     <string name="help">Hilfe</string>
     <string name="connectwithus">Mit US verbinden</string>
+    <string name="infotext">Bitte warten Sie auf die aktuelle Zeitreihengrafik</string>
 
 
 

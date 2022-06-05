@@ -170,7 +170,11 @@ public class FinRealTimeSeriesAsync extends AsyncTask<String, Void, List<DataPoi
                         }
                     });
             AlertDialog alert = builder.create();
-            alert.show();
+            try {
+                alert.show();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }else {
             activity.setList(str);
             finFileDataRecord(str);
