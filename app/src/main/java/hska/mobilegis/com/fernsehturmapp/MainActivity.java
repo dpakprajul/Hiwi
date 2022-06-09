@@ -93,18 +93,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        //to remove the action bar (title bar)
 //        getSupportActionBar().hide();
 
-        SharedPreferences preferencesintro = getSharedPreferences("PREFERENCE", MODE_PRIVATE);
-        String FirstTime = preferencesintro.getString("FirstTimeInstall","");
-
-        if(FirstTime.equals("YES")){
-
-        }else{
-            SharedPreferences.Editor editorintro= preferencesintro.edit();
-            editorintro.putString("FirstTimeInstall", "YES");
-            editorintro.apply();
-            Intent intent1 = new Intent(MainActivity.this, MyCustomAppIntro.class);
-            startActivity(intent1);
-        }
+//        SharedPreferences preferencesintro = getSharedPreferences("PREFERENCE", MODE_PRIVATE);
+//        String FirstTime = preferencesintro.getString("FirstTimeInstall","");
+//
+//        if(FirstTime.equals("YES")){
+//
+//        }else{
+//            SharedPreferences.Editor editorintro= preferencesintro.edit();
+//            editorintro.putString("FirstTimeInstall", "YES");
+//            editorintro.apply();
+//            Intent intent1 = new Intent(MainActivity.this, MyCustomAppIntro.class);
+//            startActivity(intent1);
+//        }
 
 
 

@@ -16,7 +16,7 @@
     <string name="progress_dialog"> Bitte warten Sie ... </string>
     <string name="response_dialog">Ok</string>
     <string name="rt_circular_motion_of_tower">Aktuelle (N,E)-Zeitreihen Graphik</string>
-    <string name="rt_position_of_tower">Aktuelle (N,E)-Zeitreihen Graphik</string>
+    <string name="rt_position_of_tower">Aktuelle Grundrissbewegung Graphik</string>
     <string name="file_not_found_title">Keine Daten gefunden!</string>
     <string name="file_not_found">Für heute sind keine Überwachungsdaten verfügbar!</string>
     <string name="file_not_found_Turm">Für Turm sind heute keine Überwachungsdaten verfügbar!</string>

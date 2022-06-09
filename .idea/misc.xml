@@ -3,13 +3,49 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/FernsehturmApp/FernsehturmApp/app/src/main/res/layout-hdpi/activity_fin_polygon_visualization.xml" value="0.5543237250554324" />
+        <entry key="..\:/FernsehturmApp/FernsehturmApp/app/src/main/res/layout-hdpi/activity_time_series_visualization.xml" value="0.6" />
+        <entry key="..\:/FernsehturmApp/FernsehturmApp/app/src/main/res/layout-land/activity_fin_polygon_visualization.xml" value="0.264" />
+        <entry key="..\:/FernsehturmApp/FernsehturmApp/app/src/main/res/layout-large/activity_fin_polygon_visualization.xml" value="0.176" />
+        <entry key="..\:/FernsehturmApp/FernsehturmApp/app/src/main/res/layout-large/activity_fin_rt_polygon_visualization.xml" value="0.264" />
+        <entry key="..\:/FernsehturmApp/FernsehturmApp/app/src/main/res/layout-large/activity_time_series_real_time.xml" value="0.35394126738794435" />
+        <entry key="..\:/FernsehturmApp/FernsehturmApp/app/src/main/res/layout-large/activity_time_series_visualization.xml" value="0.264" />
+        <entry key="..\:/FernsehturmApp/FernsehturmApp/app/src/main/res/layout-normal/activity_fin_polygon_visualization.xml" value="0.536" />
+        <entry key="..\:/FernsehturmApp/FernsehturmApp/app/src/main/res/layout-normal/activity_fin_rt_polygon_visualization.xml" value="0.264" />
+        <entry key="..\:/FernsehturmApp/FernsehturmApp/app/src/main/res/layout-normal/activity_time_series_real_time.xml" value="0.264" />
+        <entry key="..\:/FernsehturmApp/FernsehturmApp/app/src/main/res/layout-normal/activity_time_series_visualization.xml" value="0.2" />
+        <entry key="..\:/FernsehturmApp/FernsehturmApp/app/src/main/res/layout-small/activity_fin_polygon_visualization.xml" value="0.8" />
+        <entry key="..\:/FernsehturmApp/FernsehturmApp/app/src/main/res/layout-small/activity_time_series_visualization.xml" value="0.7713815789473685" />
+        <entry key="..\:/FernsehturmApp/FernsehturmApp/app/src/main/res/layout-v29/activity_fin_polygon_visualization.xml" value="0.20833333333333334" />
+        <entry key="..\:/FernsehturmApp/FernsehturmApp/app/src/main/res/layout-w1080dp-h2280dp/activity_fin_polygon_visualization.xml" value="0.4" />
+        <entry key="..\:/FernsehturmApp/FernsehturmApp/app/src/main/res/layout-w1080dp-h2280dp/activity_time_series_visualization.xml" value="0.4" />
+        <entry key="..\:/FernsehturmApp/FernsehturmApp/app/src/main/res/layout-w1080dp/activity_fin_polygon_visualization.xml" value="0.15327978580990628" />
+        <entry key="..\:/FernsehturmApp/FernsehturmApp/app/src/main/res/layout-w1800dp-h2560dp/activity_fin_polygon_visualization.xml" value="0.264" />
+        <entry key="..\:/FernsehturmApp/FernsehturmApp/app/src/main/res/layout-w1800dp-h2560dp/activity_time_series_visualization.xml" value="0.4" />
+        <entry key="..\:/FernsehturmApp/FernsehturmApp/app/src/main/res/layout-w409dp/activity_fin_polygon_visualization.xml" value="0.20833333333333334" />
+        <entry key="..\:/FernsehturmApp/FernsehturmApp/app/src/main/res/layout-w600dp/activity_fin_polygon_visualization.xml" value="0.2019400352733686" />
+        <entry key="..\:/FernsehturmApp/FernsehturmApp/app/src/main/res/layout-xhdpi/activity_fin_polygon_visualization.xml" value="0.4" />
+        <entry key="..\:/FernsehturmApp/FernsehturmApp/app/src/main/res/layout-xhdpi/activity_fin_rt_polygon_visualization.xml" value="0.2" />
+        <entry key="..\:/FernsehturmApp/FernsehturmApp/app/src/main/res/layout-xhdpi/activity_time_series_visualization.xml" value="0.12" />
+        <entry key="..\:/FernsehturmApp/FernsehturmApp/app/src/main/res/layout-xlarge/activity_fin_polygon_visualization.xml" value="0.264" />
+        <entry key="..\:/FernsehturmApp/FernsehturmApp/app/src/main/res/layout-xxhdpi/activity_about_project.xml" value="0.13802083333333334" />
+        <entry key="..\:/FernsehturmApp/FernsehturmApp/app/src/main/res/layout-xxhdpi/activity_fin_polygon_visualization.xml" value="0.2" />
+        <entry key="..\:/FernsehturmApp/FernsehturmApp/app/src/main/res/layout-xxhdpi/activity_fin_rt_polygon_visualization.xml" value="0.264" />
+        <entry key="..\:/FernsehturmApp/FernsehturmApp/app/src/main/res/layout-xxhdpi/activity_time_series_real_time.xml" value="0.264" />
+        <entry key="..\:/FernsehturmApp/FernsehturmApp/app/src/main/res/layout-xxhdpi/activity_time_series_visualization.xml" value="0.264" />
+        <entry key="..\:/FernsehturmApp/FernsehturmApp/app/src/main/res/layout/activity_fin_polygon_visualization.xml" value="0.264" />
+        <entry key="..\:/FernsehturmApp/FernsehturmApp/app/src/main/res/layout/activity_fin_rt_polygon_visualization.xml" value="0.13020833333333334" />
+        <entry key="..\:/FernsehturmApp/FernsehturmApp/app/src/main/res/layout/activity_main.xml" value="0.13802083333333334" />
+        <entry key="..\:/FernsehturmApp/FernsehturmApp/app/src/main/res/layout/activity_time_series_real_time.xml" value="0.13020833333333334" />
+        <entry key="..\:/FernsehturmApp/FernsehturmApp/app/src/main/res/layout/activity_time_series_visualization.xml" value="0.4" />
+        <entry key="..\:/FernsehturmApp/FernsehturmApp/app/src/main/res/menu/dynamical.xml" value="0.1" />
         <entry key="..\:/work hochschule/FernsehturmApp/FernsehturmApp/app/src/main/res/drawable/ic_baseline_contact_support_24.xml" value="0.12395833333333334" />
         <entry key="..\:/work hochschule/FernsehturmApp/FernsehturmApp/app/src/main/res/drawable/ic_baseline_info_24.xml" value="0.12395833333333334" />
         <entry key="..\:/work hochschule/FernsehturmApp/FernsehturmApp/app/src/main/res/drawable/ic_baseline_map_24.xml" value="0.12864583333333332" />
         <entry key="..\:/work hochschule/FernsehturmApp/FernsehturmApp/app/src/main/res/drawable/ic_baseline_more_vert_24.xml" value="0.12864583333333332" />
         <entry key="..\:/work hochschule/FernsehturmApp/FernsehturmApp/app/src/main/res/layout/activity_about_project.xml" value="0.27291666666666664" />
         <entry key="..\:/work hochschule/FernsehturmApp/FernsehturmApp/app/src/main/res/layout/activity_fin_polygon_visualization.xml" value="0.2984749455337691" />
-        <entry key="..\:/work hochschule/FernsehturmApp/FernsehturmApp/app/src/main/res/layout/activity_fin_rt_polygon_visualization.xml" value="0.25" />
+        <entry key="..\:/work hochschule/FernsehturmApp/FernsehturmApp/app/src/main/res/layout/activity_fin_rt_polygon_visualization.xml" value="0.13489583333333333" />
         <entry key="..\:/work hochschule/FernsehturmApp/FernsehturmApp/app/src/main/res/layout/activity_graph.xml" value="0.10520833333333333" />
         <entry key="..\:/work hochschule/FernsehturmApp/FernsehturmApp/app/src/main/res/layout/activity_linechart_noseekbar.xml" value="0.33" />
         <entry key="..\:/work hochschule/FernsehturmApp/FernsehturmApp/app/src/main/res/layout/activity_main.xml" value="0.27291666666666664" />
