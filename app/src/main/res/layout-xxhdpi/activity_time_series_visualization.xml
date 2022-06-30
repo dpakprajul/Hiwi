@@ -5,7 +5,7 @@
 
     <TextView
         android:id="@+id/tv_dateSelection"
-        android:layout_width="wrap_content"
+        android:layout_width="232dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="2dp"
         android:layout_marginTop="1dp"
@@ -113,7 +113,7 @@
 
     <TextView
         android:id="@+id/tv_objectSelection"
-        android:layout_width="161dp"
+        android:layout_width="183dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/button"
         android:layout_alignParentEnd="true"

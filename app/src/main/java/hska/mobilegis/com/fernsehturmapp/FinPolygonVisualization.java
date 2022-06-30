@@ -1,6 +1,5 @@
 package hska.mobilegis.com.fernsehturmapp;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
@@ -10,7 +9,6 @@ import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,16 +18,12 @@ import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.text.BreakIterator;
 import java.util.Calendar;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.androidplot.xy.BoundaryMode;
-import com.androidplot.xy.StepMode;
 import com.androidplot.xy.StepModelFit;
 import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYSeries;
@@ -37,11 +31,9 @@ import com.androidplot.xy.ZoomEstimator;
 import com.niwattep.materialslidedatepicker.SlideDatePickerDialog;
 import com.niwattep.materialslidedatepicker.SlideDatePickerDialogCallback;
 
-import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -53,17 +45,16 @@ import java.util.TimerTask;
 public class FinPolygonVisualization extends AppCompatActivity implements SlideDatePickerDialogCallback {
 
     public String objectType;
-    public String startTime;
     public String endTime;
     public String dateTime, time;
-    public String minsec = null;
+    public String initialTime = null;
     public String endTime1;
-    public String message;
-    public String message2;
+    public String initialtimeMessage;
+    public String endtimeMessage;
     SimpleDateFormat sdf_date, sdf_time;
     Button load_file_from_server;
     EditText current_time;
-    TextView button;
+    TextView selectDateButton;
     Vibrator vibrator;
 
 
@@ -74,19 +65,10 @@ public class FinPolygonVisualization extends AppCompatActivity implements SlideD
     public List<XyTimePlot> list = new ArrayList<XyTimePlot>();
     public XYPlot plot;
     XYSeries series1 = null;
-    //PanZoom panZoom;
     PanZoomCustomization panZoom1;
-    FinPolygonVisualizationAsync finPolygonVisualizationAsync;
-    private Object a;
     public TextView selectDate;
     public String sCertDate;
-    public String sDefaultDate;
     private SimpleDateFormat defaultDate;
-
-    //MPAAndroid activita = new MPAAndroid();
-//    public FinPolygonVisualization() {
-//        this.activita = activita;
-//    }
 
 
 
@@ -95,20 +77,26 @@ public class FinPolygonVisualization extends AppCompatActivity implements SlideD
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fin_polygon_visualization);
 
+        //load_fole_from_server: button Update graph, current_time is the current GPS time, and vibrator is
+        //optional
         load_file_from_server = (Button) findViewById(R.id.load_file_from_server);
         current_time = findViewById(R.id.et_currentDateTime);
-        EditText startTime = findViewById(R.id.start_time_input);
-        //EditText endTime = findViewById(R.id.end_time_input);
         vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
 
-
+        //SharedPreferences is for sharing data within an application
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences sharedPreferences1 = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        final TextView timeTV = findViewById(R.id.time_text_view);
-        final TextView timeTVend = findViewById(R.id.time_text_view_end);
+
+        //starttimeView and endtimeView is a TextView for the customer input start time and end time
+        //selectDate is date selection option in a similar way as start time and end time
+        final TextView starttimeView = findViewById(R.id.time_text_view);
+        final TextView endtimeView = findViewById(R.id.time_text_view_end);
+
+        //Text View
         selectDate = (TextView) findViewById(R.id.dateselection);
+
         // button and text view called using id
-        button = (TextView) findViewById(R.id.button);
+        selectDateButton = (TextView) findViewById(R.id.button);
 
         //when the date is not selected, send the current date by default
         defaultDate = new SimpleDateFormat("dd.MM.yyyy"); //dd-MM-yyyy
@@ -116,17 +104,17 @@ public class FinPolygonVisualization extends AppCompatActivity implements SlideD
         sCertDate = defaultDate.format(new Date());
 
         //getting data from the user and limited only to the past 30 days
-        button.setOnClickListener(new View.OnClickListener() {
+        selectDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Calendar endDate = Calendar.getInstance();
+                //Calendar endDate = Calendar.getInstance();
                 Calendar startDate = Calendar.getInstance();
                 SimpleDateFormat formatter = new SimpleDateFormat("MM");
                 String dateString = formatter.format(new Date());
                 System.out.println(dateString);
                 startDate.set(Calendar.MONTH, Integer.parseInt(dateString) - 2);
 
-                long time = System.currentTimeMillis();
+                //long time = System.currentTimeMillis();
 
                 //endDate.set(Calendar.YEAR, 2040);
                 SlideDatePickerDialog.Builder builder = new SlideDatePickerDialog.Builder();
@@ -142,8 +130,7 @@ public class FinPolygonVisualization extends AppCompatActivity implements SlideD
 
 
         //take the starttime from the user
-        //TODO change the name of timeTV to a good name (for example startdate)
-        timeTV.setOnClickListener(new View.OnClickListener() {
+        starttimeView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -164,8 +151,8 @@ public class FinPolygonVisualization extends AppCompatActivity implements SlideD
                 Button cancel = view.findViewById(R.id.cancel);
                 Button ok = view.findViewById(R.id.ok);
                 Button ok1 = view.findViewById(R.id.ok);
-                minsec = String.format("%1$02d:%2$02d:%3$02d", numberPickerHour.getValue(), numberPickerMinutes.getValue(), numberPickerSeconds.getValue());
-                Log.d("output1", minsec);
+                initialTime = String.format("%1$02d:%2$02d:%3$02d", numberPickerHour.getValue(), numberPickerMinutes.getValue(), numberPickerSeconds.getValue());
+                Log.d("output1", initialTime);
 
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(FinPolygonVisualization.this);
@@ -178,11 +165,10 @@ public class FinPolygonVisualization extends AppCompatActivity implements SlideD
                     }
                 });
                 ok.setOnClickListener(v1 -> {
-                    timeTV.setText(numberPickerHour.getValue() + ":" + numberPickerMinutes.getValue() + ":" + numberPickerSeconds.getValue());
-                    timeTV.setText(String.format("%1$02d:%2$02d:%3$02d", numberPickerHour.getValue(), numberPickerMinutes.getValue(), numberPickerSeconds.getValue()));
-                    message = timeTV.getText().toString().trim();
-                    Log.d("message", message);
-                    outData(message);
+                    starttimeView.setText(numberPickerHour.getValue() + ":" + numberPickerMinutes.getValue() + ":" + numberPickerSeconds.getValue());
+                    starttimeView.setText(String.format("%1$02d:%2$02d:%3$02d", numberPickerHour.getValue(), numberPickerMinutes.getValue(), numberPickerSeconds.getValue()));
+                    initialtimeMessage= starttimeView.getText().toString().trim();
+                    outData(initialtimeMessage);
                     //startActivity(i);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putInt("Hours", numberPickerHour.getValue());
@@ -191,21 +177,14 @@ public class FinPolygonVisualization extends AppCompatActivity implements SlideD
                     editor.apply();
                     alertDialog.dismiss();
                 });
-                // Log.d("output", minsec);
-
-                // Log.d("message", message);
                 alertDialog.show();
-
             }
-
-
         });
-//Log.d("output1",minsec);
 
         //@Override
         //Here replace with lambda has been implemented. No differences with the timeTV (change name later)
         //takes the end time from the user
-        timeTVend.setOnClickListener(v -> {
+        endtimeView.setOnClickListener(v -> {
 
             View viewend = View.inflate(FinPolygonVisualization.this, R.layout.timedialog_end, null);
 
@@ -240,10 +219,10 @@ public class FinPolygonVisualization extends AppCompatActivity implements SlideD
                 @Override
                 public void onClick(View v2) {
 
-                    timeTVend.setText(numberPickerHourend.getValue() + ":" + numberPickerMinutesend.getValue() + ":" + numberPickerSecondsend.getValue());
-                    timeTVend.setText(String.format("%1$02d:%2$02d:%3$02d", numberPickerHourend.getValue(), numberPickerMinutesend.getValue(), numberPickerSecondsend.getValue()));
-                    message2 = timeTVend.getText().toString().trim();
-                    System.out.println("message2" + message2);
+                    endtimeView.setText(numberPickerHourend.getValue() + ":" + numberPickerMinutesend.getValue() + ":" + numberPickerSecondsend.getValue());
+                    endtimeView.setText(String.format("%1$02d:%2$02d:%3$02d", numberPickerHourend.getValue(), numberPickerMinutesend.getValue(), numberPickerSecondsend.getValue()));
+                    endtimeMessage = endtimeView.getText().toString().trim();
+                    //System.out.println("message2" + endtimeMessage);
 
                     SharedPreferences.Editor editorend = sharedPreferences1.edit();
                     editorend.putInt("Hours", numberPickerHourend.getValue());
@@ -251,7 +230,7 @@ public class FinPolygonVisualization extends AppCompatActivity implements SlideD
                     editorend.putInt("Seconds", numberPickerSecondsend.getValue());
                     editorend.apply();
                     alertDialog1.dismiss();
-                    Log.d("output2", endTime1);
+
                 }
             });
 
@@ -259,8 +238,6 @@ public class FinPolygonVisualization extends AppCompatActivity implements SlideD
             alertDialog1.show();
 
         });
-//Log.d("output1",minsec);
-
 
         // initialize XYPlot reference:
         plot = (XYPlot) findViewById(R.id.plot);
@@ -331,50 +308,15 @@ public class FinPolygonVisualization extends AppCompatActivity implements SlideD
             }
         });
 
-        //Start Time
-//        startTime.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//
-//            }
-
-//            @Override
-//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//                handleTimeInput(startTime, startTime.getText());
-//            }
-
-//            @Override
-//            public void afterTextChanged(Editable editable) {
-//
-//            }
-//        });
-//
-//        //End Time
-//        endTime.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//                handleTimeInput(endTime, endTime.getText());
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable editable) {
-//
-//            }
-//        });
 
         //On screen date and time
         //TODO convert the user time to GPS time and get data
         sdf_date = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMANY); //dd-MM-yyyy
-        sdf_date.setTimeZone(TimeZone.getTimeZone("Europe/Berlin"));
+        sdf_date.setTimeZone(TimeZone.getTimeZone("GMT"));
         dateTime = sdf_date.format(new Date());
 
         sdf_time = new SimpleDateFormat("dd.MM.yyyy  HH:mm:ss", Locale.GERMANY); //hh:mm:ss
-        sdf_time.setTimeZone(TimeZone.getTimeZone("Europe/Berlin"));
+        sdf_time.setTimeZone(TimeZone.getTimeZone("GMT"));
         time = sdf_time.format(new Date());
         //current_date.setText(dateTime);
         current_time.setText(time);
@@ -405,9 +347,6 @@ public class FinPolygonVisualization extends AppCompatActivity implements SlideD
             @Override
             public void onClick(View view) {
                 finFileDataRecordReader();
-                // activita.addEntry();
-                //TODO also execute addEntry on Update Graph
-
                 //for vibration when click update graph
                 if (Build.VERSION.SDK_INT >= 26) {
                     vibrator.vibrate(VibrationEffect.createOneShot(10, VibrationEffect.DEFAULT_AMPLITUDE));
@@ -425,7 +364,7 @@ public class FinPolygonVisualization extends AppCompatActivity implements SlideD
     //###############################################################
     private void updateScreenDateAndTime() {
         sdf_time = new SimpleDateFormat("dd.MM.yyyy  HH:mm:ss", Locale.GERMANY); //hh:mm:ss
-        sdf_time.setTimeZone(TimeZone.getTimeZone("Europe/Berlin"));
+        sdf_time.setTimeZone(TimeZone.getTimeZone("GMT"));
         time = sdf_time.format(new Date());
         current_time.setText(time);
     }
@@ -436,7 +375,7 @@ public class FinPolygonVisualization extends AppCompatActivity implements SlideD
 
     private void handleTimeInput(EditText iField, Editable text) {
         if (iField.getHint().toString().equals("Start Time hh:mm:ss")) {
-            this.minsec = text.toString();
+            this.initialTime = text.toString();
         } else if (iField.getHint().toString().equals("End Time hh:mm:ss")) {
             this.endTime = text.toString();
         }
@@ -452,7 +391,6 @@ public class FinPolygonVisualization extends AppCompatActivity implements SlideD
         month = this.sCertDate.substring(3, 5);
         year = this.sCertDate.substring(8);
         fileName = year + month + day + ".fin";
-        //System.out.println("date time: "+fileName);
         new FinPolygonVisualizationAsync(this).execute(fileName);
     }
 
@@ -481,15 +419,6 @@ public class FinPolygonVisualization extends AppCompatActivity implements SlideD
     protected void onResume() {
         super.onResume();
         plot.refreshDrawableState();
-
-        /*
-        String day, month, year, fileName;
-        day = dateTime.substring(0,2);
-        month = dateTime.substring(3,5);
-        year = dateTime.substring(8);
-        fileName = year+month+day+".fin";
-        //new FinPolygonVisualizationAsync(this).execute(fileName);
-        */
 
     }
 
@@ -528,14 +457,9 @@ public class FinPolygonVisualization extends AppCompatActivity implements SlideD
 
         String date = format.format(Calendar.getInstance().getTime());
         System.out.println(date);
-        button.setText(format.format(calendar.getTime()));
-        //button.setTextColor(Color.parseColor("#009688"));
-//        if(sCertDate!=null) {
+        selectDateButton.setText(format.format(calendar.getTime()));
         sCertDate = format.format(calendar.getTime());
-//        }else{
-//           sCertDate= "18.05.2022";
-//
-//        }
+
 
 
     }

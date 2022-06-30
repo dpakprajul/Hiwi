@@ -17,7 +17,7 @@ import com.github.appintro.AppIntro;
 import com.github.appintro.AppIntroFragment;
 import com.github.appintro.AppIntroPageTransformerType;
 
-public class MyCustomAppIntro extends AppIntro {
+public class Help extends AppIntro {
     Vibrator vibrator;
 
     @Override
@@ -25,24 +25,24 @@ public class MyCustomAppIntro extends AppIntro {
         super.onCreate(savedInstanceState);
 
         //add slide1
-        addSlide(AppIntroFragment.newInstance("Stuttgart TV Tower Monitoring App", "Structural Health Monitoring of Stuttgart TV Tower. \n By continuing, you agree to the privacy policy",
+        addSlide(AppIntroFragment.newInstance(getString(R.string.welcome),getString(R.string.welcome_message) ,
                 R.mipmap.ic_launcher_tvtower_round, ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary)));
 
         //add slide2
-        addSlide(AppIntroFragment.newInstance("Real Time Position Times Series", "Press the Real Time Position Times Series button to see the real time position time series of the Tower",
-                R.mipmap.ic_launcher_tvtower_round, ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary)));
+        addSlide(AppIntroFragment.newInstance(getString(R.string.help_present_timeseries), getString(R.string.help_desc_present_timeseries),
+                R.drawable.tutorial2, ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary)));
 
         //add slide3
-        addSlide(AppIntroFragment.newInstance("Real Time Graph of Tower Motion", "Press the Real Time Graph of Tower Motion button to see the real time graph of the Tower",
-                R.mipmap.ic_launcher_tvtower_round, ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary)));
+        addSlide(AppIntroFragment.newInstance(getString(R.string.help_present_movement), getString(R.string.help_desc_present_movement),
+                R.drawable.tutorial3, ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary)));
 
-        addSlide(AppIntroFragment.newInstance("Position Time Series", "Press the Position Time Series button to see the position time series of the Tower \n \n Enter the start time, end time, and the desired date and finally hit Update Graph to visualize the graph. More data would make an app a little unresponsive",
-                R.mipmap.ic_launcher_tvtower_round, ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary)));
+        addSlide(AppIntroFragment.newInstance(getString(R.string.help_timeseries_time_interval), getString(R.string.help_desc_timeseries_time_interval),
+                R.drawable.tutorial4, ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary)));
 
-        addSlide(AppIntroFragment.newInstance("Graph of Tower Motion", "Press the Graph of Tower Motion button to see the desired time graph of the Tower \n \n Enter the start time, end time, and the desired date and finally hit Update Graph to visualize the graph. More data would make an app a little unresponsive",
+        addSlide(AppIntroFragment.newInstance(getString(R.string.help_movement_time_interval), getString(R.string.help_desc_movement_time_interval),
                 R.drawable.tutorial, ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary)));
 
-        addSlide(AppIntroFragment.newInstance("Enjoy the Monitoring", " ",
+        addSlide(AppIntroFragment.newInstance(getString(R.string.enjoy_message), " ",
                 R.mipmap.ic_launcher_tvtower_round, ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary)));
 
         setTransformer(AppIntroPageTransformerType.Fade.INSTANCE);
@@ -65,7 +65,7 @@ public class MyCustomAppIntro extends AppIntro {
         setImmersive(true);
 
         //Enable/disable page indicators
-        //setIndicatorEnabled(true);
+        setIndicatorEnabled(true);
 
         //Dhow/hide ALL buttons
         setButtonsEnabled(true);

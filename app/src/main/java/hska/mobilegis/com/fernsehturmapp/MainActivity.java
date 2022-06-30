@@ -9,10 +9,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,7 +19,6 @@ import androidx.appcompat.view.menu.MenuBuilder;
 import java.util.Locale;
 
 import hska.mobilegis.com.fernsehturmapp.weather.WeatherMainActivity;
-import hska.mobilegis.com.fernsehturmapp.weather.WeatherRecyclerAdapter;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button timeSeries, motionGraph, weather, mapView, aboutProj, newMPAGraph, RTTimeSeries;
@@ -69,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         }
         else if(item_id==R.id.help){
-            Intent intent = new Intent(MainActivity.this, MyCustomAppIntro.class);
+            Intent intent = new Intent(MainActivity.this, Help.class);
             startActivity(intent);
         }
         else if(item_id==R.id.contact_us){
@@ -171,7 +168,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View view) {
                 //changed here
-                intent = new Intent(MainActivity.this, MPAAndroid.class);
+                intent = new Intent(MainActivity.this, FinRealPolygonVisualization.class);
                 startActivity(intent);
             }
         });

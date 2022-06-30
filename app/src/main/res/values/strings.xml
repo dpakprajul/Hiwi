@@ -4,14 +4,14 @@
     <string name="select_option">Options</string>
     <string name="starttime_hint">Start Time hh:mm:ss</string>
     <string name="endtime_hint">End Time hh:mm:ss</string>
-    <string name="spectral_visualization">2D Movement in Time Interval</string>
+    <string name="spectral_visualization">(N,E) Time Series in Time Interval</string>
 
     <string name="graphview_title">Position Time Series(E/N)_T</string>
     <string name="graphplot_title">Graph of Tower Motion(N,E)_T</string>
 
-    <string name="circular_motion_of_tower">(N,E) Time Series in Time Interval</string>
-    <string name="rt_circular_motion_of_tower">Present (N,E) Time Series Graphics</string>
-    <string name="rt_position_of_tower">Present 2D Movement Graphics</string>
+    <string name="circular_motion_of_tower">2D Movement in Time Interval</string>
+    <string name="rt_circular_motion_of_tower">Present 2D Movement Graphics</string>
+    <string name="rt_position_of_tower">Present (N,E) Time Series Graphics</string>
     <string name="weather_condition">Check Weather</string>
     <string name="maps">Map</string>
     <string name="about_project">About Project</string>
@@ -27,7 +27,7 @@
     <string name="file_not_found_title">No Data Found!</string>
     <string name="ic_happy_font">Date        "  \u25bc"</string>
     <string name="start_time_view">Start Time     "  \u25bc"</string>
-    <string name="end_time_hh_mm_ss" translatable="false">End Time hh:mm:ss    "  \u25bc"</string>
+    <string name="end_time_hh_mm_ss">End Time hh:mm:ss    "  \u25bc"</string>
 
     <string name="file_not_found">No monitoring data is available for today!</string>
     <string name="file_not_found_Turm">No monitoring data is available today for Turm!</string>
@@ -316,10 +316,28 @@ corrections as well as the B.W. IT service provider LF .NET.</string>
     <string name="widget_label_time">Forecastie Time</string>
     <string name="widget_label_simple">Forecastie Simple</string>
     <string name="widget_label_classic">Forecastie Classic</string>
-    <string name="start_time_hh_mm_ss" translatable="false">Start Time hh:mm:ss "  \u25bc"</string>
+    <string name="start_time_hh_mm_ss">Start Time hh:mm:ss "  \u25bc"</string>
     <string name="help">Help</string>
     <string name="connectwithus">Connect with US</string>
     <string name="infotext" translatable="false">Please wait for the current Time Series Graph to load</string>
+    <string name="gps_time">Current GPS Time</string>
+    <string name="welcome">Stuttgart TV Tower Monitoring App</string>
+    <string name="welcome_message">Welcome to the Structural Health Monitoring of Stuttgart TV Tower App</string>
+    <string name="help_present_timeseries">Present (N,E) Time Series Graphics</string>
+    <string name="help_desc_present_timeseries">Press the Present (N,E) Time Series Graphics button to see the real time position time series of the Tower</string>
+    <string name="help_present_movement">Present 2D Movement Graphics</string>
+    <string name="help_desc_present_movement">Press the Present 2D Movement Graphics button to see the real time graph of Tower Motion. Please wait until the graph is loaded</string>
+    <string name="help_timeseries_time_interval">(N, E) Time Series in Time Interval</string>
+    <string name="help_desc_timeseries_time_interval">Press the (N, E) Time Series in Time Interval button to see the position time series of the Tower. Enter the start time, end time, and the desired date and finally hit Update Graph to visualize the graph</string>
+    <string name="help_movement_time_interval">2D Movement in Time Interval</string>
+    <string name="help_desc_movement_time_interval">Press the 2D Movement in Time Interval button to see the desired time graph of the Tower. Enter the start time, end time, and the desired date and finally hit Update Graph to visualize the graph</string>
+    <string name="enjoy_message">Enjoy the Tower Monitoring</string>
+    <string name="contactus_descc">Stuttgart TV Tower Monitoring app SHM was developed  under Android with interface to the GOCA time series (FIN files). For the visualization of the Tower, the App accesses via TCP/IP communication to the server-side GOCA deformation analysis software Object point time series (FIN files) Tourists who download the app can also thus\n\view the tower\'s current motion history on their Android smartphones. The app is currently bilingual (English, German)</string>
+    <string name="contact_with_us">Contact US!</string>
+    <string name="copyright">Copyright © %d by Stuttgart TV Tower Monitoring</string>
+    <string name="update_graph">Update Graph</string>
+    <string name="select_date_polygon">Select Date</string>
+    <string name="debug">Report the bug here</string>
 
 
 </resources>

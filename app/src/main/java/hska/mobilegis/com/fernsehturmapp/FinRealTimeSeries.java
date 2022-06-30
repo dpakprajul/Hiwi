@@ -90,43 +90,6 @@ public class FinRealTimeSeries extends AppCompatActivity {
             }
         });
 
-        //Start Time
-//        startTime.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//                handleTimeInput(startTime, startTime.getText());
-//                System.out.println("Start Time:"+startTime);
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable editable) {
-//
-//            }
-//        });
-
-        //End Time
-//        endTime.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//                handleTimeInput(endTime, endTime.getText());
-//                System.out.println("End Time:"+endTime);
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable editable) {
-//
-//            }
-//        });
 
         //On screen date and time
         sdf_date = new SimpleDateFormat("dd.MM.yyyy"); //dd-MM-yyyy
@@ -203,19 +166,9 @@ public class FinRealTimeSeries extends AppCompatActivity {
         positionTimeSeries.getViewport().scrollToEnd();
         positionTimeSeries.addSeries(series1);
 
-        //Button onClickListener
-//        load_file_from_server.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                finFileDataRecordReader();
-//            }
-//        });
 
-        //Timer for continuous data loading on the screen
-        //startTimer();
     }
 
-    //##############################################################################
 
     private void updateScreenDateAndTime(){
         sdf_time = new SimpleDateFormat("dd.MM.yyyy  HH:mm:ss"); //hh:mm:ss
@@ -269,7 +222,7 @@ public class FinRealTimeSeries extends AppCompatActivity {
                         try{
                             finFileDataRecordReader();}
                         catch(Exception e){
-                            System.out.println("I am Deepak Parajuli");
+                            System.out.println("Error in finFileDataRecordReader()");
                         }
                     }
                 });

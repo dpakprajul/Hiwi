@@ -3,11 +3,7 @@ package hska.mobilegis.com.fernsehturmapp;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.util.Log;
-
 import com.androidplot.ui.Insets;
 import com.androidplot.xy.CatmullRomInterpolator;
 import com.androidplot.xy.LineAndPointFormatter;
@@ -35,12 +31,8 @@ public class FinPolygonVisualizationAsync extends AsyncTask<String, Void, List<X
 
     String sHrs, sMins, sSecs;
     String eHrs, eMins, eSecs;
-    private MPAAndroid activityMP;
     private FinPolygonVisualization activity;
-    FinPolygonVisualization activity1 = new FinPolygonVisualization();
     public ProgressDialog dialog;
-    String endTime;
-    String message;
 
 
     List<Number> xList = new ArrayList<>();
@@ -52,13 +44,6 @@ public class FinPolygonVisualizationAsync extends AsyncTask<String, Void, List<X
         this.activity = activity;
     }
 
-    public FinPolygonVisualizationAsync(MPAAndroid activityMP) {
-        this.activityMP = activityMP;
-    }
-
-    public FinPolygonVisualizationAsync() {
-        this.activity=activity;
-    }
 
     @Override
     protected void onPreExecute() {
@@ -178,7 +163,6 @@ public class FinPolygonVisualizationAsync extends AsyncTask<String, Void, List<X
         }else if(str.size()!=0){
             activity.setList(str);
             finFileDataRecord(str);
-//            activityMP.valueLists(xList);
 
         }
     }
@@ -188,25 +172,17 @@ public class FinPolygonVisualizationAsync extends AsyncTask<String, Void, List<X
     public void finFileDataRecord(List<XyTimePlot> xyTimePlots){
 
         String checkValue=activity.objectType;
+        String initialTime= activity.initialtimeMessage;
+        String endTime = activity.endtimeMessage;
 
 
-
-
-        String minsec= activity.message;
-
-
-        String endTime = activity.message2;
-
-
-
-
-        if ((minsec != null && !minsec.isEmpty())
+        if ((initialTime != null && !initialTime.isEmpty())
                 && (endTime != null && !endTime.isEmpty())) {
 
             // Parse given start time (String) hr, mins and secs    10:11:29
-            sHrs = minsec.substring(0, 2);
-            sMins = minsec.substring(3, 5);
-            sSecs = minsec.substring(6);
+            sHrs = initialTime.substring(0, 2);
+            sMins = initialTime.substring(3, 5);
+            sSecs = initialTime.substring(6);
 
 
             // Parse given end time (String) hr, mins and secs
@@ -269,31 +245,20 @@ public class FinPolygonVisualizationAsync extends AsyncTask<String, Void, List<X
                 AlertDialog alert = builder.create();
                 alert.show();
             }else{
-                /*
-                for (XyTimePlot xyT : xyTimePlots) {
-                    if((Double.valueOf(xyT.getTime())>=startT) && (Double.valueOf(xyT.getTime())<=endT)){
-
-                        xList.add(Double.valueOf(xyT.getX()));
-                        yList.add(Double.valueOf(xyT.getY()));
-                    }
-                    activity.series1 = new SimpleXYSeries(xList, yList, " ");
-                }
-                */
                 activity.series1 = new SimpleXYSeries(xList, yList, " ");
-
             }
         }else {
 
             SimpleDateFormat sdf_time = new SimpleDateFormat("HH:mm:ss"); //hh:mm:ss
             sdf_time.setTimeZone(TimeZone.getTimeZone("GMT"));
 
-            activity.minsec = sdf_time.format(new Date(System.currentTimeMillis()- (5)*1000));
+            activity.initialTime = sdf_time.format(new Date(System.currentTimeMillis()- (5)*1000));
             activity.endTime = sdf_time.format(new Date(System.currentTimeMillis()));
 
             // Parse given start time (String) hr, mins and secs    10:11:29
-            sHrs = activity.minsec.substring(0, 2);
-            sMins = activity.minsec.substring(3, 5);
-            sSecs = activity.minsec.substring(6);
+            sHrs = activity.initialTime.substring(0, 2);
+            sMins = activity.initialTime.substring(3, 5);
+            sSecs = activity.initialTime.substring(6);
 
             // Parse given end time (String) hr, mins and secs
             eHrs = activity.endTime.substring(0, 2);
@@ -322,9 +287,6 @@ public class FinPolygonVisualizationAsync extends AsyncTask<String, Void, List<X
                     String yValue = y.substring(6, y.indexOf("."))+ y.substring(y.indexOf("."));
                         xList.add(Double.valueOf(xValue));
                         yList.add(Double.valueOf(yValue));}
-
-
-                    //activityMP.valueLists(xList);
                 }
 
             }
@@ -355,7 +317,7 @@ public class FinPolygonVisualizationAsync extends AsyncTask<String, Void, List<X
             }else{
                 activity.series1 = new SimpleXYSeries(xList, yList, "");
             }
-            activity.minsec = null;
+            activity.initialTime = null;
             activity.endTime = null;
         }
         System.out.println("The value of x list"+xList);
@@ -378,12 +340,6 @@ public class FinPolygonVisualizationAsync extends AsyncTask<String, Void, List<X
         activity.plot.getGraph().setGridInsets(new Insets(20, 20, 20, 20)); //new Insets(120, 120, 120, 120) 25, 25, 25, 25
         activity.plot.redraw();
     }
-
-    public String values() {
-        return "hello";
-    }
-
-
 
     public List <Number> listValue(){
         return xList;

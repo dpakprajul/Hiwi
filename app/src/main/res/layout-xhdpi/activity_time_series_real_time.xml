@@ -39,6 +39,22 @@
 <!--        android:inputType="time"-->
 <!--        android:typeface="sans"-->
 <!--        android:layout_toRightOf="@+id/start_time_input"/>-->
+
+    <TextView
+        android:id="@+id/tv_objectSelection13"
+        android:layout_width="145dp"
+        android:layout_height="32dp"
+        android:layout_below="@+id/objects_filter"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="17dp"
+        android:layout_marginRight="1dp"
+        android:gravity="left"
+        android:text="@string/gps_time"
+        android:textColor="#009688"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:typeface="sans" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -124,8 +140,8 @@
         android:layout_marginEnd="2dp"
         android:layout_marginRight="2dp"
         android:background="@android:color/transparent"
-        android:gravity="right"
         android:cursorVisible="false"
+        android:gravity="right"
         android:inputType="date"
         android:textColor="#009688"
         android:textSize="16sp"

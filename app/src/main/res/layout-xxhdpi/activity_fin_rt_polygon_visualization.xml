@@ -112,15 +112,49 @@
 <!--        android:textStyle="bold"-->
 <!--        android:typeface="sans" />-->
 
+    <!--Text View to display Date-->
+
+    <TextView
+        android:id="@+id/tv_objectSelection7"
+        android:layout_width="192dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginRight="215dp"
+        android:gravity="left"
+        android:text="@string/object_selection"
+        android:textColor="#009688"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:typeface="sans" />
+
+    <TextView
+        android:id="@+id/tv_objectSelection2"
+        android:layout_width="141dp"
+        android:layout_height="34dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="1dp"
+        android:layout_marginRight="10dp"
+        android:gravity="left"
+        android:text="@string/gps_time"
+        android:textColor="#009688"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:typeface="sans" />
+
     <Spinner
         android:id="@+id/objects_filter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_objectSelection2"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="15dp"
         android:layout_marginLeft="50dp"
+        android:layout_marginTop="-3dp"
         android:minHeight="32dp"
         tools:ignore="SpeakableTextPresentCheck" />
-
-    <!--Text View to display Date-->
 
     <TextView
         android:id="@+id/infotext"
@@ -194,19 +228,20 @@
         android:id="@+id/et_currentDateTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginEnd="3dp"
-        android:layout_marginRight="3dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
         android:background="@android:color/transparent"
         android:cursorVisible="false"
         android:gravity="right"
-        android:textColor="#009688"
         android:inputType="datetime"
+        android:textColor="#009688"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:typeface="sans"/>
+        android:typeface="sans" />
 
     <RelativeLayout
         android:layout_width="match_parent"

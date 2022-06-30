@@ -6,39 +6,26 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.text.BreakIterator;
 import java.text.DateFormat;
-import java.util.Calendar;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.androidplot.xy.BoundaryMode;
-import com.androidplot.xy.StepMode;
 import com.androidplot.xy.StepModelFit;
 import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYSeries;
 import com.androidplot.xy.ZoomEstimator;
-import com.niwattep.materialslidedatepicker.SlideDatePickerDialog;
-import com.niwattep.materialslidedatepicker.SlideDatePickerDialogCallback;
-
-import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -47,7 +34,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
-public class MPAAndroid extends AppCompatActivity{
+public class FinRealPolygonVisualization extends AppCompatActivity{
 
     public String objectType;
     public String startTime;
@@ -82,12 +69,6 @@ public class MPAAndroid extends AppCompatActivity{
 
 
 
-    //MPAAndroid activita = new MPAAndroid();
-//    public FinPolygonVisualization() {
-//        this.activita = activita;
-//    }
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,111 +86,8 @@ public class MPAAndroid extends AppCompatActivity{
         button = (TextView) findViewById(R.id.button);
 
 
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Calendar endDate = Calendar.getInstance();
-//                Calendar startDate= Calendar.getInstance();
-//                SimpleDateFormat formatter = new SimpleDateFormat("MM");
-//                String dateString = formatter.format(new Date());
-//                System.out.println(dateString);
-//                startDate.set(Calendar.MONTH, Integer.parseInt(dateString)-2);
-//
-//                long time= System.currentTimeMillis();
-//
-//                //endDate.set(Calendar.YEAR, 2040);
-//                SlideDatePickerDialog.Builder builder = new SlideDatePickerDialog.Builder();
-//                //builder.setEndDate(endDate);
-//                builder.setStartDate(startDate);
-//
-//                SlideDatePickerDialog dialog = builder.build();
-//                dialog.show(getSupportFragmentManager(), "Dialog");
-//            }
-//        });
-
-
-
-
-//        timeTV.setOnClickListener(new View.OnClickListener() {
-//            private String minsecout;
-//
-//            @Override
-//            public void onClick(View v) {
-//                View view = View.inflate(MPAAndroid.this, R.layout.timedialog, null);
-//                final NumberPicker numberPickerHour = view.findViewById(R.id.numpicker_hours);
-//
-//
-//                numberPickerHour.setMaxValue(23);
-//                numberPickerHour.setValue(sharedPreferences.getInt("Hours", 0));
-//                final NumberPicker numberPickerMinutes = view.findViewById(R.id.numpicker_minutes);
-//                numberPickerMinutes.setMaxValue(59);
-//                numberPickerMinutes.setValue(sharedPreferences.getInt("Minutes", 0));
-//                final NumberPicker numberPickerSeconds = view.findViewById(R.id.numpicker_seconds);
-//                numberPickerSeconds.setMaxValue(59);
-//                numberPickerSeconds.setValue(sharedPreferences.getInt("Seconds", 0));
-//                Button cancel = view.findViewById(R.id.cancel);
-//                Button ok = view.findViewById(R.id.ok);
-//                minsec = String.format("%1$02d:%2$02d:%3$02d",numberPickerHour.getValue(),numberPickerMinutes.getValue(),numberPickerSeconds.getValue());
-//
-//
-//
-//                AlertDialog.Builder builder = new AlertDialog.Builder(MPAAndroid.this);
-//                builder.setView(view);
-//                final AlertDialog alertDialog = builder.create();
-//                cancel.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        alertDialog.dismiss();
-//                    }
-//                });
-//                ok.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//
-//                        timeTV.setText(numberPickerHour.getValue() + ":" + numberPickerMinutes.getValue() + ":" + numberPickerSeconds.getValue());
-//                        timeTV.setText(String.format("%1$02d:%2$02d:%3$02d", numberPickerHour.getValue(), numberPickerMinutes.getValue(), numberPickerSeconds.getValue()));
-//                        SharedPreferences.Editor editor = sharedPreferences.edit();
-//                        editor.putInt("Hours", numberPickerHour.getValue());
-//                        editor.putInt("Minutes", numberPickerMinutes.getValue());
-//                        editor.putInt("Seconds", numberPickerSeconds.getValue());
-//                        editor.apply();
-//                        alertDialog.dismiss();
-//                    }
-//                });
-//                Log.d("output", minsec);
-//
-//
-//                alertDialog.show();
-//
-//            }
-//
-//            String outData(String minsecout){
-//                return minsec;
-//
-//            }
-//
-//        });
-//Log.d("output1",minsec);
-
-
         // initialize XYPlot reference:
         plot = (XYPlot) findViewById(R.id.plot);
-
-        /*Pan Zoom Enable/Disable
-        //panZoom1.attach(plot);
-        plot.setDomainBoundaries(32513977.95, 32513978.12, BoundaryMode.FIXED);
-        plot.setRangeBoundaries(5400318.30, 5400318.42, BoundaryMode.FIXED);
-
-
-        plot.getOuterLimits().set(32513978.00, 32513978.12, 5400318.30, 5400319.42);
-        plot.getInnerLimits().set(32513978.00,32513978.12, 5400318.30, 5400318.45);
-        //plot.getRegistry().setEstimator(new ZoomEstimator());
-         */
-//
-//        plot.setDomainBoundaries(32513977.00, 32513977.42, BoundaryMode.FIXED);
-//        plot.setRangeBoundaries(5401318.30, 5401318.42, BoundaryMode.FIXED);
-//        plot.getOuterLimits().set(32513977.00, 32513990.12, 5400322.30, 5400330.42);
-//        plot.getInnerLimits().set(32513976.00,32513981.12, 5400320.30, 540032.45);
         plot.getRegistry().setEstimator(new ZoomEstimator());
 
         plot.getGraph().getDomainOriginLinePaint().setColor(Color.LTGRAY);
@@ -247,7 +125,7 @@ public class MPAAndroid extends AppCompatActivity{
         Spinner objectSpinner = (Spinner) findViewById(R.id.objects_filter);
 
         //apply font
-        ArrayAdapter<String> objectAdapter= new ArrayAdapter<String>(MPAAndroid.this, //adapter
+        ArrayAdapter<String> objectAdapter= new ArrayAdapter<String>(FinRealPolygonVisualization.this, //adapter
                 R.layout.simple_expandable_list_item_1, getResources().getStringArray(R.array.objects)) {
         };
 
@@ -265,49 +143,14 @@ public class MPAAndroid extends AppCompatActivity{
             }
         });
 
-        //Start Time
-//        startTime.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//                handleTimeInput(startTime, startTime.getText());
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable editable) {
-//
-//            }
-//        });
-
-        //End Time
-//        endTime.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//                handleTimeInput(endTime, endTime.getText());
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable editable) {
-//
-//            }
-//        });
 
         //On screen date and time
         sdf_date = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMANY); //dd-MM-yyyy
-        sdf_date.setTimeZone(TimeZone.getTimeZone("Europe/Berlin"));
+        sdf_date.setTimeZone(TimeZone.getTimeZone("GMT"));
         dateTime = sdf_date.format(new Date());
 
         sdf_time = new SimpleDateFormat("dd.MM.yyyy  HH:mm:ss", Locale.GERMANY); //hh:mm:ss
-        sdf_time.setTimeZone(TimeZone.getTimeZone("Europe/Berlin"));
+        sdf_time.setTimeZone(TimeZone.getTimeZone("GMT"));
         time = sdf_time.format(new Date());
         //current_date.setText(dateTime);
         current_time.setText(time);
@@ -331,19 +174,6 @@ public class MPAAndroid extends AppCompatActivity{
             }
         };
         t.start();
-
-        //Button onClickListener
-//        load_file_from_server.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                finFileDataRecordReader();
-//                // activita.addEntry();
-//                //TODO also execute addEntry on Update Graph
-//            }
-//        });
-
-        //Timer for continuous data loading on the screen
-        //startTimer();
     }
 
 
@@ -351,7 +181,7 @@ public class MPAAndroid extends AppCompatActivity{
     //###############################################################
     private void updateScreenDateAndTime(){
         sdf_time = new SimpleDateFormat("dd.MM.yyyy  HH:mm:ss", Locale.GERMANY); //hh:mm:ss
-        sdf_time.setTimeZone(TimeZone.getTimeZone("Europe/Berlin"));
+        sdf_time.setTimeZone(TimeZone.getTimeZone("GMT"));
         time = sdf_time.format(new Date());
         current_time.setText(time);
     }
@@ -385,7 +215,7 @@ public class MPAAndroid extends AppCompatActivity{
             System.out.println("No fileName found");
             builder.setMessage(R.string.no_datapoints_Turm);
         }else {
-            new MPAAndroidAsync(this).execute(fileName);
+            new FinRealPolygonVisualizationAsync(this).execute(fileName);
         }
     }
 
@@ -467,16 +297,5 @@ public class MPAAndroid extends AppCompatActivity{
     }
 
 
-//    @Override
-//    public void onPositiveClick(int i, int i1, int i2, Calendar calendar) {
-//        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-//        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
-//
-//
-//        String date = format.format(Calendar.getInstance().getTime());
-//        System.out.println(date);
-//        button.setText(format.format(calendar.getTime()));
-//        //button.setTextColor(Color.parseColor("#009688"));
-//        sCertDate = format.format(calendar.getTime());
-//
+
 }

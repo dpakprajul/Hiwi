@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.androidplot.ui.Insets;
 import com.androidplot.xy.CatmullRomInterpolator;
@@ -29,11 +28,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
-public class MPAAndroidAsync extends AsyncTask<String, Void, List<XyTimePlot>>{
+public class FinRealPolygonVisualizationAsync extends AsyncTask<String, Void, List<XyTimePlot>>{
 
     String sHrs, sMins, sSecs;
     String eHrs, eMins, eSecs;
-    private MPAAndroid activity;
+    private FinRealPolygonVisualization activity;
 
     public ProgressDialog dialog;
 
@@ -44,13 +43,13 @@ public class MPAAndroidAsync extends AsyncTask<String, Void, List<XyTimePlot>>{
 
 
 
-    public MPAAndroidAsync(MPAAndroid activity) {
+    public FinRealPolygonVisualizationAsync(FinRealPolygonVisualization activity) {
         this.activity = activity;
     }
 
 
 
-    public MPAAndroidAsync() {
+    public FinRealPolygonVisualizationAsync() {
         this.activity=activity;
     }
 

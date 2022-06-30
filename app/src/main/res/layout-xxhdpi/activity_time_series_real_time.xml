@@ -39,17 +39,33 @@
 <!--        android:inputType="time"-->
 <!--        android:typeface="sans"-->
 <!--        android:layout_toRightOf="@+id/start_time_input"/>-->
+
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_seriesSelection"
-        android:text = "@string/series_selection"
-        android:layout_marginTop="1dp"
-        android:layout_marginLeft="2dp"
+        android:id="@+id/tv_objectSelection12"
+        android:layout_width="145dp"
+        android:layout_height="32dp"
+        android:layout_below="@+id/objects_filter"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="17dp"
+        android:layout_marginRight="1dp"
+        android:gravity="left"
+        android:text="@string/gps_time"
         android:textColor="#009688"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:typeface="sans"/>
+        android:typeface="sans" />
+
+    <TextView
+        android:id="@+id/tv_seriesSelection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="1dp"
+        android:text="@string/series_selection"
+        android:textColor="#009688"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:typeface="sans" />
 
     <RadioGroup
         android:layout_width="wrap_content"
@@ -117,12 +133,12 @@
         android:id="@+id/et_currentDateTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/rb_timeSeries"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="17dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginRight="2dp"
+        android:layout_marginTop="85dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginRight="1dp"
         android:background="@android:color/transparent"
         android:cursorVisible="false"
         android:gravity="right"
@@ -144,9 +160,9 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="56dp"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="54dp"
+            android:layout_marginStart="57dp"
+            android:layout_marginTop="52dp"
+            android:layout_marginEnd="53dp"
             android:gravity="center"
             android:text="@string/graphview_title"
             android:textSize="17sp"

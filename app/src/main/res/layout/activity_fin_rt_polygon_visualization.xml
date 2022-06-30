@@ -112,15 +112,47 @@
 <!--        android:textStyle="bold"-->
 <!--        android:typeface="sans" />-->
 
+    <!--Text View to display Date-->
+
+    <TextView
+        android:id="@+id/tv_objectSelection11"
+        android:layout_width="145dp"
+        android:layout_height="32dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="1dp"
+        android:layout_marginRight="10dp"
+        android:gravity="left"
+        android:text="@string/gps_time"
+        android:textColor="#009688"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:typeface="sans" />
+
+    <TextView
+        android:id="@+id/tv_objectSelection3"
+        android:layout_width="148dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="1dp"
+        android:layout_marginRight="172dp"
+        android:gravity="left"
+        android:text="@string/object_selection"
+        android:textColor="#009688"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:typeface="sans" />
+
     <Spinner
         android:id="@+id/objects_filter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="13dp"
         android:layout_marginLeft="50dp"
+        android:layout_marginTop="26dp"
         android:minHeight="32dp"
         tools:ignore="SpeakableTextPresentCheck" />
-
-    <!--Text View to display Date-->
 
     <TextView
         android:id="@+id/infotext"

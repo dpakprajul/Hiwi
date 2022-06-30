@@ -11,12 +11,13 @@
     <string name="series_northing"> Nord</string>
     <string name="starttime_hint">Startzeit hh:mm:ss</string>
     <string name="endtime_hint">Endzeit hh:mm:ss</string>
-    <string name="start_time_view">Start Time  "\u25bc"</string>
-    <string name="ic_happy_font">Date  "\u25bc"</string>
+    <string name="start_time_view">Startzeit  "\u25bc"</string>
+    <string name="end_time_hh_mm_ss">Endzeit hh:mm:ss    "  \u25bc"</string>
+    <string name="ic_happy_font">Datum  "\u25bc"</string>
     <string name="progress_dialog"> Bitte warten Sie ... </string>
     <string name="response_dialog">Ok</string>
-    <string name="rt_circular_motion_of_tower">Aktuelle (N,E)-Zeitreihen Graphik</string>
-    <string name="rt_position_of_tower">Aktuelle Grundrissbewegung Graphik</string>
+    <string name="rt_circular_motion_of_tower">Aktuelle Grundrissbewegung Graphik</string>
+    <string name="rt_position_of_tower">Aktuelle (N,E)-Zeitreihen Graphik</string>
     <string name="file_not_found_title">Keine Daten gefunden!</string>
     <string name="file_not_found">Für heute sind keine Überwachungsdaten verfügbar!</string>
     <string name="file_not_found_Turm">Für Turm sind heute keine Überwachungsdaten verfügbar!</string>
@@ -47,11 +48,11 @@
         tatsächliche Zeit ist (die Startzeit sollte kürzer als die Endzeit sein). Die tatsächliche Zeit ist
         die GPS-Zeit (Bildschirmzeit)!</string>
 
-    <string name="spectral_visualization">Grundrissbewegung in Zeitintervall</string>
+    <string name="spectral_visualization">Zeitreihen in Zeitinvervall</string>
     <string name="graphview_title">Positionszeitreihen(E/N)_T"</string>
     <string name="graphplot_title">Diagramm der Turmbewegung(N,E)_T</string>
 
-    <string name="circular_motion_of_tower">Zeitreihen in Zeitinvervall</string>
+    <string name="circular_motion_of_tower">Grundrissbewegung in Zeitintervall</string>
     <string name="maps">Karte</string>
     <string name="weather_condition">Überprüfen Sie das Wetter</string>
     <string name="about_project">Über das Projekt</string>
@@ -64,7 +65,7 @@
 
     <string name="project_architecture">Die Projektarchitektur</string>
     <string name="btn_readmore">Weiterlesen</string>
-    <string name="about_monitoring_app">Dieses Forschungs- und Entwicklungsprojekt, das von Naznin Akter auf der Grundlage der Abschlussarbeit von Sylvester Tabi Kyei-Amponsah entwickelt wurde, wird im Rahmen der GOCA- und NAVKA-Projekte des Laboratoriums für GNSS realisiert
+    <string name="about_monitoring_app">Dieses Forschungs- und Entwicklungsprojekt, das von Naznin Akter zusammen mit Deepak Parajuli auf der Grundlage der Abschlussarbeit von Sylvester Tabi Kyei-Amponsah entwickelt wurde, wird im Rahmen der GOCA- und NAVKA-Projekte des Laboratoriums für GNSS realisiert
 und Navigation an der Hochschule Karlsruhe, auch in Zusammenarbeit mit dem Ingenieurbüro für
 Angewandte Geodäsie, Photogrammetrie und Geoinformatik E. Messmer, SWR B.W. (Baden-Württemberg) als Eigentümer des Fernsehturms das Landesamt für Geobasisinformation
 und Landentwicklung (LGL) Karlsruhe als Dienstleister für Raumbezug über SAPOS GNSS
@@ -239,8 +240,27 @@ Korrekturen sowie die B.W. IT-Dienstleister LF .NET.</string>
     <string name="help">Hilfe</string>
     <string name="connectwithus">Mit US verbinden</string>
     <string name="infotext">Bitte warten Sie auf die aktuelle Zeitreihengrafik</string>
+    <string name="start_time_hh_mm_ss">Startzeit hh:mm:ss "  \u25bc"</string>
+    <string name="gps_time">Aktuelle GPS-Zeit</string>
+    <string name="welcome">Stuttgart Fernsehturm Monitoring App</string>
+    <string name="welcome_message">Willkommen bei der App zum Structural Health Monitoring des Stuttgarter Fernsehturms</string>
+    <string name="help_present_timeseries">Aktuelle (N,E)-Zeitreihen Graphik</string>
+    <string name="help_desc_present_timeseries">Drücken Sie die Schaltfläche Aktuelle (N,E) Zeitreihen Grafik, um die Echtzeit-Positionszeitreihen des Turms anzuzeigen. Bitte warten Sie, bis das Diagramm geladen ist</string>
+    <string name="help_present_movement">Aktuelle Grundrissbewegung Graphik</string>
+    <string name="help_desc_present_movement">Drücken Sie die Schaltfläche Aktuelle Grundrissbewegung Graphik, um die Echtzeitgrafik der Turmbewegung zu sehen. Bitte warten Sie, bis das Diagramm geladen ist</string>
+    <string name="help_timeseries_time_interval">Zeitreihen in Zeitintervall</string>
+    <string name="help_desc_timeseries_time_interval">Drücken Sie die Schaltfläche Zeitreihe im Zeitintervall, um die Positionszeitreihe des Turms anzuzeigen. Geben Sie die Startzeit, die Endzeit und das gewünschte Datum ein und drücken Sie schließlich auf Grafik aktualisieren, um die Grafik zu visualisieren</string>
+    <string name="help_movement_time_interval">Grundrissbewegung in Zeitintervall</string>
+    <string name="help_desc_movement_time_interval">Drücken Sie die Schaltfläche Grundrissbewegung in Zeitintervall, um das gewünschte Zeitdiagramm des Turms anzuzeigen. Geben Sie die Startzeit, die Endzeit und das gewünschte Datum ein und drücken Sie schließlich auf Grafik aktualisieren, um das Diagramm anzuzeigen</string>
+    <string name="enjoy_message">Genießen Sie die Turmüberwachung</string>
+    <string name="contactus_descc">Stuttgarter Fernsehturm Monitoring App SHM wurde unter Android mit Schnittstelle zu den GOCA-Zeitreihen (FIN-Dateien) entwickelt. Zur Visualisierung des Turms greift die App über TCP/IP-Kommunikation auf die serverseitige GOCA-Deformationsanalyse-Software Objektpunkt-Zeitreihen (FIN-Dateien) zu. Touristen, die die App herunterladen, können so auch den aktuellen Bewegungsverlauf des Turms auf ihren Android-Smartphones einsehen. Die App ist derzeit zweisprachig (Englisch, Deutsch).
 
-
+</string>
+    <string name="contact_with_us">Kontaktieren Sie US!</string>
+    <string name="copyright">Copyright © %d by Stuttgarter Fernsehturmüberwachung</string>
+    <string name="update_graph">Diagramm aktualisieren</string>
+    <string name="select_date_polygon">Datum auswählen</string>
+    <string name="debug">Berichten Sie den Fehler hier</string>
 
 
 </resources>
